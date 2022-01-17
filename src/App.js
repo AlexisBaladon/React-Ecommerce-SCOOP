@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Próximamente: Heladeria e-commerce.
+          Próximamente: Heladería e-commerce.
         </p>
         <a
           className="App-link"
@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Hecha con React
+          Realizada con React
         </a>
       </header>
     </div>
