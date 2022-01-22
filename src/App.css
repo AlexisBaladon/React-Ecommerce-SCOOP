@@ -40,39 +40,29 @@
 /* MOVER ESTO A OTRO ARCHIVO */
 
 #bg-superior-inner {
-  /* 
-   * Por alguna razón esto hace que el fondo
-   * tenga la misma altura en el celular y 
-   * en la pc
-   */
-  padding-top: calc(var(--vh, 1vh) * 15);
+  padding-top:    calc(var(--vh, 1vh) * 15);
   padding-bottom: calc(var(--vh, 1vh) * 15);
 }
 
 #bg-superior {
-  background: url('../public/bgc.jpg')
+  background: url('../public/background.jpg')
     no-repeat center 100% fixed;
-  height: 50%;
   background-size: cover;
+  
+  height: calc(var(--vh, 1vh) * 100);
+  min-height: 250px;
 }
 
 #logo-banner {
   background: url('../public/icon-banner.png')
     no-repeat center center;
-  height: 22.5rem;
+  height: calc(var(--vh, 1vh) * 55);
+  display: block;
 
   /* Para que no se corte la imagen */
   -webkit-background-size: contain;
-  -moz-background-size: contain;
-  -o-background-size: contain;
-  background-size: contain;
+  -moz-background-size:    contain;
+  -o-background-size:      contain;
+  background-size:         contain;
   /*--------------------------------*/
-
-}
-
-/* Mueve el logo solo si el ancho es muy pequeño */
-@media only screen and (max-width: 430px) {
-  #logo-banner {
-    margin-top: 4rem;
-  }
 }

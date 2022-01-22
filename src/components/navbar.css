@@ -3,13 +3,15 @@
         no-repeat center 100% fixed;
 }
 
-#navbarScroll a {
+#navbarScroll a { 
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
     color: #db6b97;
 }
 
-#collapse-items {
-    margin-right: 2rem;
-}
+#collapse-items { margin-right: 2rem; }
+
+#nav-container { max-width: 100%; }
 
 /* Color de icono hamburger de navbar */
 .navbar-light .navbar-toggler-icon {

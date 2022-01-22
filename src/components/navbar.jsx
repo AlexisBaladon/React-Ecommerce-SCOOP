@@ -4,10 +4,9 @@ import logo from './icon.png'
 
 const NavBar = () => {
   return <>
-    <BTNavBar id="navegador" bg="" expand="lg" variant="light">
-      <Container>
+    <BTNavBar id="navegador" bg="" expand="lg" variant="light" >
+      <Container id="nav-container">
         <BTNavBar.Brand href="#home">
-          <div id="logo-nav" className="logo"/>
           <img src={logo} width="100px" height="100px" alt="Scoop" />
         </BTNavBar.Brand>
         <BTNavBar.Toggle id="nav-toggle" bg=""  variant="light" aria-controls="basic-navbar-nav" />
