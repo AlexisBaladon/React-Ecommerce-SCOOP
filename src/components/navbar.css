@@ -7,10 +7,18 @@
     color: #db6b97;
 }
 
-.logo {
-    border-radius: 5px 5px 5px 5px;
-}
-
 #collapse-items {
     margin-right: 2rem;
 }
+
+/* Color de icono hamburger de navbar */
+.navbar-light .navbar-toggler-icon {
+    border-color: rgba(0, 0, 0, 0) !important;
+    border: #db6b97;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(219, 107, 151, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-light .navbar-toggler {
+    color: rgba(0, 0, 0, 0)  !important;
+}
+/*-----------------------------------*/
