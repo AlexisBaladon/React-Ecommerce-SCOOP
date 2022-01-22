@@ -9,19 +9,19 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite 18s linear;
   }
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: rgb(255,203,133);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: black;
 }
 
 .App-link {
@@ -34,5 +34,45 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* MOVER ESTO A OTRO ARCHIVO */
+
+#bg-superior-inner {
+  /* 
+   * Por alguna razón esto hace que el fondo
+   * tenga la misma altura en el celular y 
+   * en la pc
+   */
+  padding-top: calc(var(--vh, 1vh) * 15);
+  padding-bottom: calc(var(--vh, 1vh) * 15);
+}
+
+#bg-superior {
+  background: url('../public/bgc.jpg')
+    no-repeat center 100% fixed;
+  height: 50%;
+  background-size: cover;
+}
+
+#logo-banner {
+  background: url('../public/icon-banner.png')
+    no-repeat center center;
+  height: 22.5rem;
+
+  /* Para que no se corte la imagen */
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+  /*--------------------------------*/
+
+}
+
+/* Mueve el logo solo si el ancho es muy pequeño */
+@media only screen and (max-width: 430px) {
+  #logo-banner {
+    margin-top: 4rem;
   }
 }

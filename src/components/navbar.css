@@ -1,0 +1,16 @@
+#navegador {
+    background: 
+        no-repeat center 100% fixed;
+}
+
+#navbarScroll a {
+    color: #db6b97;
+}
+
+.logo {
+    border-radius: 5px 5px 5px 5px;
+}
+
+#collapse-items {
+    margin-right: 2rem;
+}
