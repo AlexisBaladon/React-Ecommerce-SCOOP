@@ -37,7 +37,7 @@
   }
 }
 
-/* MOVER ESTO A OTRO ARCHIVO */
+/* Algún día esto va a ir en otro archivo */
 
 #bg-superior-inner {
   padding-top:    calc(var(--vh, 1vh) * 15);
