@@ -1,10 +1,36 @@
-#navbarScroll a { 
+#logo:hover {
+    opacity: 87%;
+}
+
+#cart {
+    padding-right: 0;
+    vertical-align:middle;
+    width: 30px; height: 30px;
+}
+
+.navbar-nav a:hover  {
+    opacity: 80%;
+}
+
+#cart:hover {
+    opacity: 87%;
+}
+
+#navbarScroll {
+    margin-right: 0%;
+}
+
+#navbarScroll a {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: large;
+    font-size: larger;
     color: #db6b97;
 }
 
-#nav-container { max-width: 100%; }
+#nav-container {
+  max-width: 100%;
+  margin-right: 2%;
+  margin-left: 0;
+}
 
 /* Color de icono hamburger de navbar */
 .navbar-light .navbar-toggler-icon {
@@ -12,8 +38,8 @@
     border: #db6b97;
 
     /*
-     * Obtiene el ícono de este link, 
-     * creo que sería mejor descargarlo y utilizar esa imagen
+     * Obtiene el ícono de este link, creo que sería mejor
+    * descargarlo y utilizar esa imagen
      * (Encontré el url en internet y le
      * cambié el parámetro del color 'stroke')
      */

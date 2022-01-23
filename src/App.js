@@ -1,7 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import NavBar from "./components/navbar.jsx";
+import NavBar from "./components/navbar/navbar.jsx";
 import logo from './helado.png';
+
+/* Entrega 3 */
+import ItemListContainer from './components/items/itemListContainer';
 
 function App() {
   return (
@@ -11,6 +14,7 @@ function App() {
         <div id="logo-banner" className="" align="left"/>
         <div id="bg-superior-inner"/>
       </div>
+      <ItemListContainer />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
