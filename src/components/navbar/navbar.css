@@ -17,6 +17,7 @@
 }
 
 #navbarScroll {
+    flex-grow: 0;
     margin-right: 0%;
 }
 
