@@ -1,5 +1,5 @@
 #logo:hover {
-    opacity: 87%;
+    opacity: 85%;
 }
 
 #cart {
@@ -9,11 +9,11 @@
 }
 
 .navbar-nav a:hover  {
-    opacity: 80%;
+    opacity: 75%;
 }
 
 #cart:hover {
-    opacity: 87%;
+    opacity: 82%;
 }
 
 #navbarScroll {
