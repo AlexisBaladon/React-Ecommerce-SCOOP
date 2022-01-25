@@ -1,7 +1,13 @@
-.contenedor {
-  display: flex;
-  justify-content: space-between;
+#item-list-container {
+  background-color: #398c91;/*#fdf5c9;*/
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-  margin-left: 2.5%;
-  margin-right: 2.5%;
+h3 {
+  color: white;
+}
+
+#producto-seleccionado {
+  margin: 0 0 50px 0;
+  height: 400px;
 }

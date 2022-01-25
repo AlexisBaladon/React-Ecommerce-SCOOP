@@ -1,4 +1,5 @@
 .App {
+  overflow: hidden;
   text-align: center;
 }
 
@@ -35,34 +36,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-/* Algún día esto va a ir en otro archivo */
-
-#bg-superior-inner {
-  padding-top:    calc(var(--vh, 1vh) * 15);
-  padding-bottom: calc(var(--vh, 1vh) * 15);
-}
-
-#bg-superior {
-  background: url('../public/background.jpg')
-    no-repeat center 100% fixed;
-  background-size: cover;
-  
-  height: calc(var(--vh, 1vh) * 100);
-  min-height: 500px;
-}
-
-#logo-banner {
-  background: url('../public/icon-banner.png')
-    no-repeat center center;
-  height: calc(var(--vh, 1vh) * 55);
-  display: block;
-
-  /* Para que no se corte la imagen */
-  -webkit-background-size: contain;
-  -moz-background-size:    contain;
-  -o-background-size:      contain;
-  background-size:         contain;
-  /*--------------------------------*/
 }

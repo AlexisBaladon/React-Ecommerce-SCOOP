@@ -1,3 +1,20 @@
 #carta {
-    margin: 2.5% 2.5% 2.5% 2.5%
+    margin: 2.5% 2.5% 2.5% 2.5%;
+    
+    display: flex;
+    justify-content: space-between;
+    
+    transition: 0.3s;
+}
+
+#carta:hover {
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
+}
+
+#cuerpo-carta {
+    background-color: white;
+}
+
+#titulo-carta {
+    padding-bottom: 0;
 }

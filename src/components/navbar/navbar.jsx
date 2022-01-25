@@ -20,7 +20,7 @@ const NavBar = () => {
             <a href="#Tienda">
               <CartWidget id="cart" alt="Tienda" />
             </a>
-          </BTNavBar.Collapse>
+        </BTNavBar.Collapse>
       </Container>
     </BTNavBar>
   </>;

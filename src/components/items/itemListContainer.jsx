@@ -1,30 +1,54 @@
-import React from 'react';
+import React, {useState} from 'react';
+import $ from 'jquery';
 import './itemListContainer.css';
 import Item from './item.jsx'
-import HeladoPaleta from '../../logica/heladoPaleta.js';
-import HeladoBocha from '../../logica/heladoBocha.js';
+import Helado from '../../dataTypes/helado.js';
 
-const helados = [new HeladoPaleta(1,'./default.png','Chocolate',true),
-                 new HeladoPaleta(2,'./default.png','Dulce de Leche',false),
-                 new HeladoBocha(3,'./default.png','Frambuesa',true,'Frutal'),
-                 new HeladoBocha(4,'./default.png','Lemon Pie',false,'Crema'),
-                 new HeladoBocha(5,'./default.png','Chocolate c/Almendra',true,'Crema'),
-                 new HeladoBocha(6,'./default.png','Maracuyá',false,'Frutal'),
-                 new HeladoBocha(7,'./default.png','Vainilla',true,'Crema'),
-                 new HeladoBocha(8,'./default.png','Frutal',false,'Limón'),
-                ];           
+                /*          id|imagen        | nombre               | tipo        |stock|descuento*/
+const helados = [new Helado(1,'./default.png','Chocolate'           ,'Paleta'     ,true     ),
+                 new Helado(2,'./default.png','Dulce de Leche'      ,'Paleta'     ,false ,20),
+                 new Helado(3,'./default.png','Frambuesa'           ,'Bocha'      ,true     ),
+                 new Helado(4,'./default.png','Lemon Pie'           ,'Recipiente' ,false    ),
+                 new Helado(5,'./default.png','Chocolate c/Almendra','Bocha'      ,true  ,1 ),
+                 new Helado(6,'./default.png','Maracuyá'            ,'Recipiente' ,false    ),
+                 new Helado(7,'./default.png','Vainilla'            ,'Recipiente' ,true  ,25),
+                 new Helado(8,'./default.png','Limón'               ,'Paleta'     ,false    ),
+                ];
 
 const ItemListContainer = () => {
+  const [selectedItem, setSelectedItem] = useState(null);
+  
+  /* Sube al item seleccionado! */
+  function scrollToSection(sectionID) {
+    $('html, body').animate({
+      scrollTop: $(sectionID).offset().top
+    }, 100);
+  }
 
   return <>
-      <div className= "row contenedor justify-content-center">
+    <div id="item-list-container">
+      <br />
+      <div>
+        <h3>Producto seleccionado</h3>
+        <div id="producto-seleccionado" className= "row justify-content-center">
+          {selectedItem ? 
+          <Item item = {selectedItem}/> :
+          <h3>-</h3>
+          }
+        </div>
+      </div>
+      <h3>Lista de productos</h3>
+      <div className= "row justify-content-center">
         {helados.map(h =>
-          <>
-           <Item key={h.id} item = {h} />
-          </>
+           <Item key={h.id} 
+            item = {h}
+            setSelectedItem = {setSelectedItem}
+            onClick={() => scrollToSection('#item-list-container')} 
+            />
         )}
       </div>
-    </>
+    </div>
+  </>
 }
 
 export default ItemListContainer;
