@@ -12,7 +12,7 @@ const Item = ({item, setSelectedItem, onClick}) => {
   };
 
   return <>
-    <Card id="carta" className="" style={{ width: '12rem', padding: 0 }}>
+    <Card id="carta" className="" >
       <Card.Img variant="top" src={imagen}/>
       <Card.Body>
         <Card.Title id="titulo-carta" className="btn stretched-link" onClick={selectItem}>

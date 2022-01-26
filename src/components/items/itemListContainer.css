@@ -3,11 +3,23 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-h3 {
+#greeting {
+  padding: 5% 0 1.5% 0
+}
+
+h3 {color: white;}
+
+hr {
   color: white;
+  margin: 0 10% 0 10%;
+}
+
+#lista-productos {
+  margin: 0 7.5% 0 7.5%;
+  justify-content: center;
 }
 
 #producto-seleccionado {
-  margin: 0 0 50px 0;
+  margin: 5% 0 5% 0;
   height: 400px;
 }

@@ -2,15 +2,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import logo from './helado.png';
 import Header from './components/header/header.jsx';
-
-/* Entrega 3 */
 import ItemListContainer from './components/items/itemListContainer';
+
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <ItemListContainer />
+
+      {/* Entrega 3 */}
+      <ItemListContainer greeting="Bienvenido a Scoop, tu tienda helados favorita!"/>
+      <div style={{height: '5px'}}/>
+      <ItemListContainer greeting="Bienvenido a Scoop, tu proveedor de prop greetings favorito!"/>
+
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
