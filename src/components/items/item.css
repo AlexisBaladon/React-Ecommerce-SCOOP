@@ -2,16 +2,22 @@
     margin: 2.5% 2.5% 2.5% 2.5%;
     width: 10rem;
     padding: 0;
+    color:#212529;
     
     display: flex;
     justify-content: space-between;
     
     transition: 0.3s;
+}
 
+@media (max-width: 1000px) {
+  #carta {
+    width: 45%;
+  }
 }
 
 #carta:hover {
-    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4.5px 9px 0 rgba(0, 0, 0, 0.35);
 }
 
 #cuerpo-carta { background-color: white; }

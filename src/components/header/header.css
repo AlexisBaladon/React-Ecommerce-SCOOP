@@ -16,7 +16,7 @@
   #logo-banner {
     background: url('../../../public/icon-banner.png')
       no-repeat center center;
-    height: calc(var(--vh, 1vh) * 55);
+    height: 55vh;
     display: block;
   
     /* Para que no se corte la imagen */

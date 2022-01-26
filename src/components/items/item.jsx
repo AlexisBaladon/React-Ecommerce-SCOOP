@@ -14,7 +14,7 @@ const Item = ({item, setSelectedItem, onClick}) => {
   return <>
     <Card id="carta" className="" >
       <Card.Img variant="top" src={imagen}/>
-      <Card.Body>
+      <Card.Body style={{padding: "0 0 0.5rem 0"}}>
         <Card.Title id="titulo-carta" className="btn stretched-link" onClick={selectItem}>
           <strong>{nombre}</strong>
         </Card.Title>

@@ -1,16 +1,28 @@
 #item-list-container {
+  color: white;
   background-color: #398c91;/*#fdf5c9;*/
+  background-size: cover;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-#greeting {
-  padding: 5% 0 1.5% 0
+#titulo-tienda {
+  display: block;
+  height: 50vh;
+  background: rgb(255,219,219);
+  background: linear-gradient(90deg, rgba(255,219,219,1) 0%, rgba(219,107,144,1) 0%, rgba(203,112,148,1) 100%);
 }
 
-h3 {color: white;}
+#greeting {
+  max-width: 66%;
+  font-size: calc(1.75vw + 3.25vh);
+  font-weight: 700;
+  font-family: sans-serif, Arial, Helvetica;
+  transform: translate(5vw,17.5vh); /* DEPENDE DE ALTURA DE #titulo-tienda */
+  text-align: left;
+  color: white;
+}
 
 hr {
-  color: white;
   margin: 0 10% 0 10%;
 }
 
