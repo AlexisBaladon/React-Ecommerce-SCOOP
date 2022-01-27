@@ -9,7 +9,7 @@ const helados = [new Helado(1,'./default.png','Chocolate'           ,'Paleta'   
                  new Helado(2,'./default.png','Dulce de Leche'      ,'Paleta'     ,false ,20),
                  new Helado(3,'./default.png','Frambuesa'           ,'Bocha'      ,true     ),
                  new Helado(4,'./default.png','Lemon Pie'           ,'Recipiente' ,false    ),
-                 new Helado(5,'./default.png','Maracuyá','Bocha'    ,'Bocha'      ,true  ,1 ),
+                 new Helado(5,'./default.png','Maracuyá'            ,'Bocha'      ,true  ,1 ),
                  /*new Helado(6,'./default.png','Frutilla'            ,'Recipiente' ,false    ),
                  new Helado(7,'./default.png','Vainilla'            ,'Recipiente' ,true  ,25),
                  new Helado(8,'./default.png','Limón'               ,'Paleta'     ,false    ),*/
