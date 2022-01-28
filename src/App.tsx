@@ -1,9 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import logo from './helado.png';
-import Header from './components/header/header.jsx';
+import Header from './components/header/header';
 import ItemListContainer from './components/items/itemListContainer';
-
+const logo =  require('./helado.png');
 
 function App() {
   return (

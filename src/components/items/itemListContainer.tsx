@@ -1,7 +1,7 @@
 import React from 'react';
 import './itemListContainer.css';
-import Item from './item.jsx'
-import Helado from '../../dataTypes/helado.js';
+import Item from './item'
+import Helado from '../../dataTypes/helado';
 
                 /*          id|imagen        | nombre               stock|descuento*/
 const helados = [new Helado(1,'./default.png','Chocolate'           ,10     ),
@@ -14,12 +14,16 @@ const helados = [new Helado(1,'./default.png','Chocolate'           ,10     ),
                  new Helado(8,'./default.png','Limón'               ,4      ),
                 ];
 
-const ItemListContainer = ({greeting}) => {
+interface IProps {
+  greeting: string;
+}
+
+const ItemListContainer = ({greeting}: IProps) => {
 
   //ItemCount
-  const onAdd = (num, setNum) => setNum(num + 1)
-  const onSub = (num, setNum) => setNum(num - 1)
-  const initial = 0;
+  const onAdd = (num: number, setNum: React.Dispatch<number>): void => setNum(num + 1);
+  const onSub = (num: number, setNum: React.Dispatch<number>): void => setNum(num - 1);
+  const initial: number = 0;
 
   // Componente auxiliar
   const ListaItems = () =>
@@ -28,7 +32,7 @@ const ItemListContainer = ({greeting}) => {
         <Item 
           key={h.id} 
           item = {h}
-          setSelectedItem = {{}}
+          setSelectedItem = {null}
           onClick={{}}
           initial = {initial}
           onAdd = {onAdd}

@@ -1,14 +1,26 @@
 import React from 'react';
 import {Card, Button} from 'react-bootstrap';
+import Helado from '../../dataTypes/helado';
 import './item.css';
-import ItemCount from './itemCount.jsx'
+import ItemCount from './itemCount'
 
 
-const Item = ({item, setSelectedItem, onClick, 
-               initial, onAdd, onSub}) => {
-  const [imagen, nombre, cantStock] = [item.imagen, item.nombre, item.cantStock];
+interface IProps {
+  item: Helado;
+  setSelectedItem: React.Dispatch<Helado> | null;
+  initial: number;
+  onClick: any;
+  onAdd(num: number, set: React.Dispatch<number>): void;
+  onSub(num: number, set: React.Dispatch<number>): void;
+}
+
+
+const Item = ({item, setSelectedItem, initial,
+               onClick, onAdd, onSub}: IProps) => {
+  const [imagen, nombre, cantStock]: [string, string, number] =
+        [item.imagen, item.nombre, item.cantStock];
   
-  const selectItem = () => {
+  const selectItem = (): void => {
     if (setSelectedItem) setSelectedItem(item);
     if (onClick) onClick()
   };
