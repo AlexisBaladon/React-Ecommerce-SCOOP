@@ -1,37 +1,25 @@
-import React, {useState} from 'react';
-import $ from 'jquery';
+import React from 'react';
 import './itemListContainer.css';
 import Item from './item.jsx'
 import Helado from '../../dataTypes/helado.js';
 
-                /*          id|imagen        | nombre               | tipo        |stock|descuento*/
-const helados = [new Helado(1,'./default.png','Chocolate'           ,'Paleta'     ,true     ),
-                 new Helado(2,'./default.png','Dulce de Leche'      ,'Paleta'     ,false ,20),
-                 new Helado(3,'./default.png','Frambuesa'           ,'Bocha'      ,true     ),
-                 new Helado(4,'./default.png','Lemon Pie'           ,'Recipiente' ,false    ),
-                 new Helado(5,'./default.png','Maracuyá'            ,'Bocha'      ,true  ,1 ),
-                 /*new Helado(6,'./default.png','Frutilla'            ,'Recipiente' ,false    ),
-                 new Helado(7,'./default.png','Vainilla'            ,'Recipiente' ,true  ,25),
-                 new Helado(8,'./default.png','Limón'               ,'Paleta'     ,false    ),*/
+                /*          id|imagen        | nombre               stock|descuento*/
+const helados = [new Helado(1,'./default.png','Chocolate'           ,10     ),
+                 new Helado(2,'./default.png','Dulce de Leche'      ,0   ,20),
+                 new Helado(3,'./default.png','Frambuesa'           ,2      ),
+                 new Helado(4,'./default.png','Lemon Pie'           ,1      ),
+                 new Helado(5,'./default.png','Maracuyá'            ,7   ,1 ),
+                 new Helado(6,'./default.png','Frutilla'            ,16     ),
+                 new Helado(7,'./default.png','Vainilla'            ,22  ,25),
+                 new Helado(8,'./default.png','Limón'               ,4      ),
                 ];
 
 const ItemListContainer = ({greeting}) => {
-  const [selectedItem, setSelectedItem] = useState(null);
-  
-  // Sube al item seleccionado!
-  const scrollToSection = sectionID => {
-    $('html, body').animate({
-      scrollTop: $(sectionID).offset().top
-    }, 100);
-  }
 
-  // Componente auxiliar
-  const ItemSeleccionado = () =>
-    <> {
-      selectedItem ? 
-      <Item item = {selectedItem}/> :
-      <h3>-</h3>
-    } </>
+  //ItemCount
+  const onAdd = (num, setNum) => setNum(num + 1)
+  const onSub = (num, setNum) => setNum(num - 1)
+  const initial = 0;
 
   // Componente auxiliar
   const ListaItems = () =>
@@ -40,8 +28,11 @@ const ItemListContainer = ({greeting}) => {
         <Item 
           key={h.id} 
           item = {h}
-          setSelectedItem = {setSelectedItem}
-          onClick={() => scrollToSection('#producto-seleccionado')} 
+          setSelectedItem = {{}}
+          onClick={{}}
+          initial = {initial}
+          onAdd = {onAdd}
+          onSub = {onSub}
           />
       )
     } </>
@@ -51,12 +42,8 @@ const ItemListContainer = ({greeting}) => {
       <div id="titulo-tienda">
         <h2 id="greeting">{greeting}</h2>
       </div>
-      <div id="producto-seleccionado" className="row justify-content-center">
-        <h3>Producto seleccionado</h3>
-        <ItemSeleccionado />
-      </div>
       <div id="lista-productos" className= "row">
-        <h3>Lista de productos</h3>
+        <h2>Lista de productos</h2>
         <ListaItems />
       </div>
     </div>

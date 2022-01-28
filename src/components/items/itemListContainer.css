@@ -17,7 +17,7 @@
   font-size: calc(1.75vw + 3.25vh);
   font-weight: 700;
   font-family: sans-serif, Arial, Helvetica;
-  transform: translate(5vw,17.5vh); /* DEPENDE DE ALTURA DE #titulo-tienda */
+  transform: translate(5vw,17.5vh);
   text-align: left;
   color: white;
 }
@@ -27,7 +27,7 @@ hr {
 }
 
 #lista-productos {
-  margin: 0 7.5% 0 7.5%;
+  margin: 2.5% 7.5% 0 7.5%;
   justify-content: center;
 }
 

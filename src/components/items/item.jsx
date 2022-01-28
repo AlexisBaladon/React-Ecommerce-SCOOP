@@ -1,10 +1,12 @@
 import React from 'react';
-import {Card} from 'react-bootstrap';
+import {Card, Button} from 'react-bootstrap';
 import './item.css';
+import ItemCount from './itemCount.jsx'
 
 
-const Item = ({item, setSelectedItem, onClick}) => {
-  const [imagen, nombre, enStock, descuento] = [item.imagen, item.nombre, item.enStock, item.descuento];
+const Item = ({item, setSelectedItem, onClick, 
+               initial, onAdd, onSub}) => {
+  const [imagen, nombre, cantStock] = [item.imagen, item.nombre, item.cantStock];
   
   const selectItem = () => {
     if (setSelectedItem) setSelectedItem(item);
@@ -19,16 +21,21 @@ const Item = ({item, setSelectedItem, onClick}) => {
           <strong>{nombre}</strong>
         </Card.Title>
         <hr></hr>
-        <Card.Text>
-          {enStock ? 'En stock':'Sin stock'} 
+        <Card.Text className ="texto-carta">
+          Stock: {cantStock ? cantStock : 0} 
         </Card.Text>
+        <div className = "item-count-container">
+          <ItemCount 
+            stock = {cantStock}
+            initial = {initial}
+            onAdd = {onAdd}
+            onSub = {onSub}
+          />
+        </div>
+        <div className ="aniadir-carro-container input-group py-2 display-content-center">
+          <Button className = "aniadir-carro" variant="primary">Agregar al carro</Button>
+        </div>
       </Card.Body>
-      {descuento?
-        <Card.Footer>
-          <small className="text-muted">{descuento}% de descuento </small>
-        </Card.Footer>
-        : null
-      }
     </Card>
   </>;
 };

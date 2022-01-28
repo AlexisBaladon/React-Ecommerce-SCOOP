@@ -22,4 +22,37 @@
 
 #cuerpo-carta { background-color: white; }
 
+.texto-carta {
+  margin: 5% 0 5% 0;
+}
+
 #titulo-carta { padding-bottom: 0; }
+
+.item-count-container {
+  display: inline-block;
+  width: 85%;
+}
+
+/* CARRO */
+
+.aniadir-carro-container {
+  width: 85%;
+  display: inline-block;
+}
+
+.aniadir-carro {
+  width: 100%;
+  border-radius: 3%;
+  font-size: 90%;
+  background-color: #398c91 !important;
+  border-color: transparent !important;
+}
+
+.aniadir-carro:hover, .aniadir-carro:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.aniadir-carro:hover {
+  background-color: #337d81 !important;
+}

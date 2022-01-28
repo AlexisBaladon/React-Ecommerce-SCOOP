@@ -9,12 +9,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-
-      {/* Entrega 3 */}
       <ItemListContainer greeting="Bienvenido a Scoop, tu tienda helados favorita!"/>
-      <div style={{height: '5px'}}/>
-      <ItemListContainer greeting="Bienvenido a Scoop, tu proveedor de prop greetings favorito!"/>
-
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
