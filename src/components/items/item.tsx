@@ -9,7 +9,7 @@ interface IProps {
   item: Helado;
   setSelectedItem: React.Dispatch<Helado> | null;
   initial: number;
-  onClick: any;
+  onClick: Function;
   onAdd(num: number, set: React.Dispatch<number>): void;
   onSub(num: number, set: React.Dispatch<number>): void;
 }

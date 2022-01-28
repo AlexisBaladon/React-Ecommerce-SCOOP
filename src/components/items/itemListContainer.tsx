@@ -33,7 +33,7 @@ const ItemListContainer = ({greeting}: IProps) => {
           key={h.id} 
           item = {h}
           setSelectedItem = {null}
-          onClick={{}}
+          onClick={()=>{}}
           initial = {initial}
           onAdd = {onAdd}
           onSub = {onSub}
