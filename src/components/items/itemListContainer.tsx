@@ -1,12 +1,17 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import './itemListContainer.css';
 import ItemList from './itemList'
+import DtItem from '../../dataTypes/item'
+import {obtenerPromiseHelados} from '../../logic/promises';
 
 interface IProps {
   greeting: string;
 }
 
 const ItemListContainer: FunctionComponent<IProps> = ({greeting}: IProps) => {
+  const [helados,setHelados] = useState<DtItem[]>([]);
+  obtenerPromiseHelados(helados, setHelados);
+  
   return <>
     <div id="item-list-container">
       <div id="titulo-tienda">
@@ -14,7 +19,7 @@ const ItemListContainer: FunctionComponent<IProps> = ({greeting}: IProps) => {
       </div>
       <div id="lista-productos" className= "row">
         <h2>Lista de productos</h2>
-        <ItemList />
+        <ItemList items={helados} />
       </div>
     </div>
   </>

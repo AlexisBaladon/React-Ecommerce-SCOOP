@@ -17,8 +17,9 @@ interface IProps {
 const Item: FunctionComponent<IProps> = 
   ({item, setSelectedItem, initial, onClick, onAdd, onSub}: IProps) => {
   
-  const [imagen, nombre, cantStock]: [string, string, number] =
-      [item.pictureUrl, item.title, 1];
+  const [title, description, price, pictureUrl, stock]:
+        [string, string, number, string, number] =
+        [item.title, item.description, item.price, item.pictureUrl, item.stock];
   
   const selectItem = (): void => {
     if (setSelectedItem) setSelectedItem(item);
@@ -27,18 +28,21 @@ const Item: FunctionComponent<IProps> =
 
   return <>
     <Card id="carta" className="" >
-      <Card.Img variant="top" src={imagen}/>
+      <Card.Img variant="top" src={pictureUrl}/>
       <Card.Body style={{padding: "0 0 0.5rem 0"}}>
         <Card.Title id="titulo-carta" className="btn stretched-link" onClick={selectItem}>
-          <strong>{nombre}</strong>
+          <strong>{title}</strong>
         </Card.Title>
         <hr></hr>
         <Card.Text className ="texto-carta">
-          Stock: {cantStock ? cantStock : 0} 
+          {description}
+        </Card.Text>
+        <Card.Text className ="texto-carta">
+          <strong>{price} US$</strong>
         </Card.Text>
         <div className = "item-count-container">
           <ItemCount 
-            stock = {cantStock}
+            stock = {stock}
             initial = {initial}
             onAdd = {onAdd}
             onSub = {onSub}
@@ -48,6 +52,9 @@ const Item: FunctionComponent<IProps> =
           <Button className = "aniadir-carro" variant="primary">Agregar al carro</Button>
         </div>
       </Card.Body>
+      <Card.Footer>
+        Stock: {stock}
+      </Card.Footer>
     </Card>
   </>;
 };
