@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import {Card, Button} from 'react-bootstrap';
-import Helado from '../../dataTypes/helado';
+import DtItem from '../../dataTypes/item';
 import './item.css';
 import ItemCount from './itemCount'
 
 
 interface IProps {
-  item: Helado;
-  setSelectedItem: React.Dispatch<Helado> | null;
+  item: DtItem;
+  setSelectedItem: React.Dispatch<DtItem> | null;
   initial: number;
   onClick: Function;
   onAdd(num: number, set: React.Dispatch<number>): void;
   onSub(num: number, set: React.Dispatch<number>): void;
 }
 
-
-const Item = ({item, setSelectedItem, initial,
-               onClick, onAdd, onSub}: IProps) => {
+const Item: FunctionComponent<IProps> = 
+  ({item, setSelectedItem, initial, onClick, onAdd, onSub}: IProps) => {
+  
   const [imagen, nombre, cantStock]: [string, string, number] =
-        [item.imagen, item.nombre, item.cantStock];
+      [item.pictureUrl, item.title, 1];
   
   const selectItem = (): void => {
     if (setSelectedItem) setSelectedItem(item);

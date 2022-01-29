@@ -1,36 +1,12 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import './itemListContainer.css';
-import Item from './item'
-import Helado from '../../dataTypes/helado';
-import {helados} from '../../data/helados';
+import ItemList from './itemList'
 
 interface IProps {
   greeting: string;
 }
 
-const ItemListContainer = ({greeting}: IProps) => {
-
-  //ItemCount
-  const onAdd = (num: number, setNum: React.Dispatch<number>): void => setNum(num + 1);
-  const onSub = (num: number, setNum: React.Dispatch<number>): void => setNum(num - 1);
-  const initial: number = 0;
-
-  // Componente auxiliar
-  const ListaItems = () =>
-    <> {
-      helados.map(h =>
-        <Item 
-          key={h.id} 
-          item = {h}
-          setSelectedItem = {null}
-          onClick={()=>{}}
-          initial = {initial}
-          onAdd = {onAdd}
-          onSub = {onSub}
-          />
-      )
-    } </>
-
+const ItemListContainer: FunctionComponent<IProps> = ({greeting}: IProps) => {
   return <>
     <div id="item-list-container">
       <div id="titulo-tienda">
@@ -38,7 +14,7 @@ const ItemListContainer = ({greeting}: IProps) => {
       </div>
       <div id="lista-productos" className= "row">
         <h2>Lista de productos</h2>
-        <ListaItems />
+        <ItemList />
       </div>
     </div>
   </>
