@@ -8,7 +8,6 @@ interface IProps {
   onAdd(num: number, set: React.Dispatch<number>): void;
   onSub(num: number, set: React.Dispatch<number>): void;
 }
-  
 
 const ItemCount = ({stock, initial, onAdd, onSub}: IProps) => {
   const [itemsCarrito, sumaItemsCarrito] = useState(initial);
@@ -27,7 +26,6 @@ const ItemCount = ({stock, initial, onAdd, onSub}: IProps) => {
                 </span>
             </div>
         </>
-        
 }
 
 export default ItemCount;
