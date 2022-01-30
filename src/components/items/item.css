@@ -56,3 +56,7 @@
 .aniadir-carro:hover {
   background-color: #337d81 !important;
 }
+
+.body-card {
+  padding: 0 0 0.5rem 0;
+}

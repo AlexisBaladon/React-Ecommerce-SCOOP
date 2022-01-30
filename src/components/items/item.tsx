@@ -29,7 +29,7 @@ const Item: FunctionComponent<IProps> =
   return <>
     <Card id="carta" className="" >
       <Card.Img variant="top" src={pictureUrl}/>
-      <Card.Body style={{padding: "0 0 0.5rem 0"}}>
+      <Card.Body className="body-card">
         <Card.Title id="titulo-carta" className="btn stretched-link" onClick={selectItem}>
           <strong>{title}</strong>
         </Card.Title>
