@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <ItemListContainer greeting="Bienvenido a Scoop, tu tienda helados favorita!"/>
+      <ItemListContainer greeting="Bienvenido a Scoop, tu tienda de helados favorita!"/>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

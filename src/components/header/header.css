@@ -3,11 +3,11 @@
   background: url('../../../public/b.jpg')
     no-repeat center 100% fixed;
   background-size: cover;
-  
+  max-height: 1100px;
 }
 
 .header-row{
-  margin-top: 3%;
+  padding-top: 3%;
   margin-left: 5vw;
   display: flex;
   min-height: 100vh;
@@ -19,10 +19,9 @@
 }
 
 .header-greeting {
-  padding: 65px 5% 5% 5%;
+  padding: 65px 5% 0 5%;
   float: none;
   margin: 0 auto;
-  margin-bottom: 5%;
   text-align: middle;
 }
 
@@ -48,6 +47,7 @@
 }
 
 .header-btn {
+  margin-bottom: 5%;
   margin-left: 1.5rem;
   width: 160px;
   padding: 0.5rem 2rem;
@@ -95,6 +95,7 @@
     width: 300px;
     max-width: 100vw;
   }
+
 
   .header-description,.header-title {
     margin-left: 3vw;
