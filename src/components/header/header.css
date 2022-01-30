@@ -1,28 +1,111 @@
-#bg-superior-inner {
-    padding-top:    calc(var(--vh, 1vh) * 15);
-    padding-bottom: calc(var(--vh, 1vh) * 15);
-  }
+#bg-superior {
+  background-color: #dee5f5;
+  background: url('../../../public/b.jpg')
+    no-repeat center 100% fixed;
+  background-size: cover;
   
-  #bg-superior {
-    background-color: #dee5f5;
-    background: url('../../../public/background.jpg')
-      no-repeat center 100% fixed;
-    background-size: cover;
-    
-    height: calc(var(--vh, 1vh) * 100);
-    min-height: 500px;
+}
+
+.header-row{
+  margin-top: 3%;
+  margin-left: 5vw;
+  display: flex;
+  min-height: 100vh;
+}
+
+.header-img {
+  justify-content: center;
+  max-width: 100%;
+}
+
+.header-greeting {
+  padding: 65px 5% 5% 5%;
+  float: none;
+  margin: 0 auto;
+  margin-bottom: 5%;
+  text-align: middle;
+}
+
+.header-title {
+  margin-left: 0%;
+}
+
+.header-title h1 {
+  text-align: left;
+  color: #db6b97;
+  font-size: 45px ;
+}
+
+.header-description {
+  margin: 5% 0% 2.5% 0%;
+  width: 75%;
+}
+
+.header-description p {
+  justify-content: center;
+  text-align:justify;
+  font-size: 19px ;
+}
+
+.header-btn {
+  margin-left: 1.5rem;
+  width: 160px;
+  padding: 0.5rem 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+  color: #db6b97;
+  border: 0.2rem solid transparent;
+  border-radius: 0.25rem;
+  border-color: #db6b97;
+
+}
+
+.header-btn:hover {
+  color:#db6b97;
+  opacity: 80%;
+}
+
+/* Pantallas verticales */
+@media (max-width: 992px) {
+  .header-img-col {
+    max-height:300px;
+    height:auto
+  };
+
+  .header-img {
+    padding-top: 10%;
+    margin-top: 0;
+    margin-bottom: 0;
   }
-  
-  #logo-banner {
-    background: url('../../../public/icon-banner.png')
-      no-repeat center center;
-    height: 55vh;
-    display: block;
-  
-    /* Para que no se corte la imagen */
-    -webkit-background-size: contain;
-    -moz-background-size:    contain;
-    -o-background-size:      contain;
-    background-size:         contain;
-    /*--------------------------------*/
+
+  .header-row {
+    gap: 0 !important;
+    flex-direction: column;
   }
+
+  .header-row img {
+    width: 300px;
+    max-width: 100vw;
+  }
+
+  .header-description,.header-title {
+    margin-left: 3vw;
+    margin-right: 3vw;
+  }
+
+  .header-btn {
+    margin-left: calc(4.5vw + 1rem);
+  }
+
+  .header-greeting {
+    margin-left: 6vw;
+    margin-right: 5%;
+    margin-bottom: 0;
+    margin-top: 2%;
+    padding-left: 0;
+    padding-top: 0;
+  }
+}
