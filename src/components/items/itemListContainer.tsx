@@ -18,7 +18,7 @@ const ItemListContainer: FunctionComponent<IProps> = ({greeting}: IProps) => {
         <h2 id="greeting">{greeting}</h2>
       </div>
       <div id="lista-productos" className= "row">
-        <h2>Lista de productos</h2>
+        <h2>Tienda</h2>
         <ItemList items={helados} />
       </div>
     </div>

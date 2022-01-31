@@ -25,21 +25,21 @@ const Item: FunctionComponent<IProps> =
   };
 
   return <>
-    <Card id="carta" className="" >
+    <Card className="carta" >
       <Card.Img className="item-img" variant="top" src={pictureUrl}/>
       <Card.Body className="body-card">
-        <Card.Title id="titulo-carta" className="btn stretched-link" onClick={selectItem}>
+        <Card.Title className="titulo-carta btn stretched-link" onClick={selectItem}>
           <strong>{title}</strong>
         </Card.Title>
-        <hr></hr>
-        <Card.Text className ="texto-carta">
+        <hr />
+        <Card.Text className ="item-desc texto-carta">
           {description}
         </Card.Text>
-        <Card.Text className ="texto-carta">
+        <Card.Text className ="item-price texto-carta">
           <strong>{price} US$</strong>
         </Card.Text>
       </Card.Body>
-      <Card.Footer>
+      <Card.Footer className="item-footer">
         Stock: {stock}
       </Card.Footer>
     </Card>

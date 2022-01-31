@@ -1,7 +1,7 @@
 import DtItem from '../dataTypes/item';
 import {obtenerHelados} from '../data/item';
 
-const obtenerPromiseHelados = (items: DtItem[], setHelados: Function): Promise<DtItem[] | void> => {
+const obtenerPromiseHelados = (items: DtItem[], setItems: Function): Promise<DtItem[] | void> => {
   const itemsPromise = new Promise<DtItem[]>((resolve,reject) => {
     const itemsDB: DtItem[] = obtenerHelados();
     if (itemsDB.length === 0) {
@@ -12,14 +12,10 @@ const obtenerPromiseHelados = (items: DtItem[], setHelados: Function): Promise<D
     }, 2000);
   }).
   then((result: DtItem[]) => {
-    setHelados(result);
-    console.log('Helados: ' + items);
+    setItems(result);
   })
   .catch((err) => {
-    console.log(err);
-  })
-  .finally(() => {
-    console.log('Fin de promesa de helados!');
+    console.warn(err);
   });
 
   return itemsPromise;
