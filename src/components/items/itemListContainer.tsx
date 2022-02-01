@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import './itemListContainer.css';
 import ItemList from './itemList'
 import DtItem from '../../dataTypes/item'
@@ -10,7 +10,10 @@ interface IProps {
 
 const ItemListContainer: FunctionComponent<IProps> = ({greeting}: IProps) => {
   const [helados,setHelados] = useState<DtItem[]>([]);
-  obtenerPromiseHelados(helados, setHelados);
+
+  useEffect(() => {
+    obtenerPromiseHelados(helados, setHelados);
+  }, []);
   
   return <>
     <div id="item-list-container">

@@ -9,6 +9,7 @@ const obtenerPromiseHelados = (items: DtItem[], setItems: Function): Promise<DtI
     }
     setTimeout(() => {
       resolve(itemsDB);
+      console.log('Se ejecuta solo una vez!')
     }, 2000);
   }).
   then((result: DtItem[]) => {
