@@ -1,14 +1,14 @@
 import {Navbar as BTNavBar, Nav, Container} from 'react-bootstrap';
 import './navbar.css';
 import CartWidget from '../cartWidget/cartWidget';
-const logo =  require('./icon.png');
+const logo = require('./scoop.png');
 
 const NavBar = () => {
   return <>
     <BTNavBar id="navegador" expand="lg" variant="light" >
       <Container id="nav-container">
         <BTNavBar.Brand href="#home">
-          <img id="logo" src={logo} width="100px" height="100px" alt="Scoop" />
+          <img id="logo" className="mx-2" src={logo} width="120px" alt="Scoop" />
         </BTNavBar.Brand>
           <BTNavBar.Toggle id="nav-toggle" aria-controls="basic-navbar-nav" />
           <BTNavBar.Collapse id="navbarScroll" className="">

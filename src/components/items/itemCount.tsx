@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {FunctionComponent, useState} from 'react';
 import {Button} from 'react-bootstrap';
 import './itemCount.css'
 
@@ -8,9 +8,8 @@ interface IProps {
   onAdd(num: number, set: React.Dispatch<number>): void;
   onSub(num: number, set: React.Dispatch<number>): void;
 }
-  
 
-const ItemCount = ({stock, initial, onAdd, onSub}: IProps) => {
+const ItemCount: FunctionComponent<IProps> = ({stock, initial, onAdd, onSub}: IProps) => {
   const [itemsCarrito, sumaItemsCarrito] = useState(initial);
   const sumar = () => {if (itemsCarrito < stock) onAdd(itemsCarrito, sumaItemsCarrito)};
   const restar = () => {if (itemsCarrito > 0) onSub(itemsCarrito, sumaItemsCarrito)};

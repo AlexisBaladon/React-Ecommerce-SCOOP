@@ -1,19 +1,19 @@
 #logo:hover {
-    opacity: 85%;
+    opacity: 80%;
 }
 
 #cart {
-    padding-right: 0;
+    padding: 0;
     vertical-align:middle;
-    width: 30px; height: 30px;
+    width: 45px; height: 45px;
 }
 
 .navbar-nav a:hover  {
-    opacity: 75%;
+    opacity: 70%;
 }
 
 #cart:hover {
-    opacity: 82%;
+    opacity: 75%;
 }
 
 #navbarScroll {
@@ -22,14 +22,16 @@
 }
 
 #navbarScroll a {
+    margin-right: 2vw;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: larger;
+    font-size: 20px;
     color: #db6b97;
 }
 
 #nav-container {
+  width: 100%;
   max-width: 100%;
-  margin-right: 2%;
+  margin-right: 0;
   margin-left: 0;
 }
 
