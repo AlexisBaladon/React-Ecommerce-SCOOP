@@ -2,7 +2,7 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import './itemListContainer.css';
 import ItemList from './itemList'
 import DtItem from '../../dataTypes/item'
-import {obtenerPromiseHelados} from '../../logic/promises';
+import {obtenerPromiseHelados} from '../../helpers/promises';
 
 interface IProps {
   greeting: string;
@@ -13,8 +13,9 @@ const ItemListContainer: FunctionComponent<IProps> = ({greeting}: IProps) => {
 
   useEffect(() => {
     obtenerPromiseHelados(helados, setHelados);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  
+   
   return <>
     <div id="item-list-container">
       <div id="titulo-tienda">

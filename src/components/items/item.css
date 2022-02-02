@@ -1,8 +1,9 @@
 .carta {
   background-color: rgb(250,250,250);
+  padding: 0;
   margin: 2.5% 2.5% 2.5% 2.5%;
   width: 10rem;
-  padding: 0;
+  min-width: 125px;
   color:#212529;
   
   display: flex;
