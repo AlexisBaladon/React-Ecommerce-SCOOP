@@ -1,13 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Header from './components/header/header';
+import ItemDetailContainer from './components/items/itemDetailContainer';
 import ItemListContainer from './components/items/itemListContainer';
+import Routes from './routes/routes';
 const logo =  require('./helado.png');
 
 function App() {
   return (
     <div className="App">
-      <Header />
+      <Routes />
+      {/*<Header />
+      <ItemDetailContainer itemId={1}/>
       <ItemListContainer greeting="Bienvenido a Scoop, tu tienda de helados favorita!"/>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -22,7 +26,7 @@ function App() {
         >
           Realizada con React
         </a>
-      </header>
+      </header>*/}
     </div>
   );
 }

@@ -12,8 +12,7 @@ const ItemListContainer: FunctionComponent<IProps> = ({greeting}: IProps) => {
   const [helados,setHelados] = useState<DtItem[]>([]);
 
   useEffect(() => {
-    obtenerPromiseHelados(helados, setHelados);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    obtenerPromiseHelados(setHelados);
   }, []);
    
   return <>
