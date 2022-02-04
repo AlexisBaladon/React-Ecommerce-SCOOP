@@ -1,28 +1,23 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
 import './App.css';
 import Header from './components/header/header';
-import ItemListContainer from './components/items/itemListContainer';
+import ItemDetailContainer from './components/items/detail/itemDetailContainer';
+import ItemListContainer from './components/items/list/itemListContainer';
 const logo =  require('./helado.png');
 
 function App() {
+  const [id, setId] = useState<number | null>(null);
+
   return (
     <div className="App">
-      <Header />
-      <ItemListContainer greeting="Bienvenido a Scoop, tu tienda de helados favorita!"/>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Próximamente: Heladería e-commerce.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Realizada con React
-        </a>
-      </header>
+      <ItemListContainer setId={setId} greeting="Bienvenido a Scoop, tu tienda de helados favorita!"/>
+      <h1>Item seleccionado: </h1>
+      {id ? 
+       <ItemDetailContainer itemId={id} /> :
+       <p>No se ha seleccionado ningún item</p>
+      }
+
     </div>
   );
 }

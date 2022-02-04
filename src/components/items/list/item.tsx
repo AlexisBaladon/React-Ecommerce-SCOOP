@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import {Card} from 'react-bootstrap';
-import DtItem from '../../dataTypes/item';
+import DtItem from '../../../dataTypes/item';
 import './item.css';
 
 interface IProps {

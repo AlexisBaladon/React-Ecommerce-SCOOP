@@ -15,4 +15,16 @@ const items: Item[] = [
 
 const obtenerHelados = (): Item[] => items;
 
-export {obtenerHelados};
+const obtenerHelado = (itemId: number): Item => {
+  let res: Item | undefined;
+  const sameId = (item: Item) => (item.id === itemId);
+  
+  res = items.find(sameId);
+  if (!(res instanceof Item)) {
+    throw new Error("Item no encontrado!!!");
+  }
+  
+  return res;
+}
+
+export {obtenerHelados, obtenerHelado};

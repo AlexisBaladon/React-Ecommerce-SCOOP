@@ -1,19 +1,20 @@
 import React, { FunctionComponent, useEffect, useState } from 'react';
 import './itemListContainer.css';
 import ItemList from './itemList'
-import DtItem from '../../dataTypes/item'
-import {obtenerPromiseHelados} from '../../helpers/promises';
+import DtItem from '../../../dataTypes/item'
+import {obtenerPromiseHelados} from '../../../helpers/promises';
+import ItemDetailContainer from '../detail/itemDetailContainer';
 
 interface IProps {
+  setId: Function;
   greeting: string;
 }
 
-const ItemListContainer: FunctionComponent<IProps> = ({greeting}: IProps) => {
+const ItemListContainer: FunctionComponent<IProps> = ({setId, greeting}: IProps) => {
   const [helados,setHelados] = useState<DtItem[]>([]);
 
   useEffect(() => {
-    obtenerPromiseHelados(helados, setHelados);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    obtenerPromiseHelados(setHelados);
   }, []);
    
   return <>
@@ -23,7 +24,7 @@ const ItemListContainer: FunctionComponent<IProps> = ({greeting}: IProps) => {
       </div>
       <div id="lista-productos" className= "row">
         <h2>Tienda</h2>
-        <ItemList items={helados} />
+        <ItemList setId={setId} items={helados} />
       </div>
     </div>
   </>
