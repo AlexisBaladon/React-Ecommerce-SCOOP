@@ -4,6 +4,7 @@ import './App.css';
 import Header from './components/header/header';
 import ItemDetailContainer from './components/items/detail/itemDetailContainer';
 import ItemListContainer from './components/items/list/itemListContainer';
+import NavBar from './components/navbar/navbar';
 const logo =  require('./helado.png');
 
 function App() {
@@ -11,11 +12,13 @@ function App() {
 
   return (
     <div className="App">
-      <ItemListContainer setId={setId} greeting="Bienvenido a Scoop, tu tienda de helados favorita!"/>
-      <h1>Item seleccionado: </h1>
+      <NavBar />
+      {/* Elige entre Detail y List */}
       {id ? 
-       <ItemDetailContainer itemId={id} /> :
-       <p>No se ha seleccionado ningún item</p>
+        <>
+          <ItemDetailContainer setId={setId} itemId={id} />
+        </> :
+        <ItemListContainer setId={setId} greeting="Bienvenido a Scoop, tu tienda de helados favorita!"/>
       }
 
     </div>

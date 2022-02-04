@@ -1,27 +1,28 @@
 .item-count {
-    margin: -1px;
-    border: 1px solid black;
-    border-radius: 2px;
+  padding: 0;
+  margin: -1px;
+  border: 1px solid black;
+  border-radius: 2px;
 }
 
 .item-count-element {
-    text-align: center;
-    border-radius: 0;
-    border: 0;
-    background-color: white !important;
-    color: black !important;
-
-    transition: 0.3s;
+  text-align: center;
+  border-radius: 0;
+  border: 0;
+  background-color: white !important;
+  color: black !important;
+  
+  transition: 0.3s;
 }
 
 .item-count-element:hover, .item-count-element:focus {
-    box-shadow: none !important;
-    outline: none !important;
-    border-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  border-color: transparent !important;
 }
 
-.item-count-element:hover {
-    background-color: #398c91 !important;
+.item-count-btn:hover {
+  background-color: #db6b97 !important;
 }
 
 .item-count-btn {

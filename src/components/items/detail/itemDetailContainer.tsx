@@ -4,20 +4,20 @@ import { getItem } from "../../../helpers/promises";
 import ItemDetail from "./itemDetail";
 
 interface IProps {
-    itemId: number;
+  setId: Function;
+  itemId: number;
 }
 
-const ItemDetailContainer = ({itemId}: IProps) => {
+const ItemDetailContainer = ({setId, itemId}: IProps) => {
   const [helado,setHelado] = useState<DtItem | null>(null);
 
   useEffect(() => {
     getItem(itemId,setHelado);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [itemId]);
 
   return <div>
     {helado? 
-    <ItemDetail item={helado}/>:
+    <ItemDetail setId={setId} item={helado}/>:
     <p>No se ha seleccionado ningún item</p>
     }
   </div>;
