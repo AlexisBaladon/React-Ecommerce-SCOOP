@@ -1,4 +1,6 @@
 .App {
+  background-color: rgb(250, 250, 250);
+  min-width: 512px !important;
   overflow: hidden;
   text-align: center;
 }

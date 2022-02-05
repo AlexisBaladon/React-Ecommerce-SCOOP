@@ -22,7 +22,7 @@ const obtenerPromiseHelados = (setHelados: Function): Promise<any> => {
 }
 
 const getItem = (itemId: number, setHelados: Function): Promise<any> => {
-  const getItemsAux = () => {obtenerHelado(itemId);};
+  const getItemsAux = () => obtenerHelado(itemId);
   return obtenerPromiseAux(setHelados, getItemsAux);
 }
 

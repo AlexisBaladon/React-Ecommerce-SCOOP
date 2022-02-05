@@ -1,0 +1,119 @@
+#item-detail {
+  font-family: sans-serif, Arial, Helvetica;
+  background-color: rgb(250, 250, 250)/*rgb(247, 244, 241)*//*rgb(202, 202, 202)*/;
+  padding-bottom: 2%;
+}
+
+/* Image */
+
+#img-container-item-detail {
+  padding: 5% 5% 0 5%;
+  margin: 0 0 5% 0;
+  max-height: 550px;
+
+  background-color: transparent;
+}
+
+#img-item-detail {
+  margin-top: 0;
+  border-color: whitesmoke;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 5%;
+}
+
+/* Info container */
+
+#info-item-detail {
+  background-color: transparent;
+  margin: 0 2.5% 0 2.5%;
+  padding: 3% 0 5% 0;
+}
+
+/* Text-Info container */
+
+#text-info-item-detail {
+  height: fit-content;
+  background-color: transparent;
+  padding: 0 10% 0 10%;
+}
+
+#text-info-inner-item-detail {
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.05);
+  width: 375px;
+  overflow: hidden;
+  border-radius: 2%;
+  background-color: white;
+  margin-right: 0 !important;
+}
+
+/* Title */
+
+#title-item-detail h3 {
+  font-size: 33px;
+  color: white;
+
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Description */
+
+#description-item-detail {
+  font-size: large;
+  margin: 5% 10% 5% 10%;
+  text-align:justify;
+}
+
+/* Bottom info */
+
+#bottom-info-item-detail {
+  
+  margin: 100px 0 2.5% 0;
+}
+
+#price-item-detail {
+  color: #E698B7;
+  margin:  7rem 0 0 0;
+}
+
+/* Stock */
+
+#stock-item-detail {
+  font-size: large;
+  margin: 5% 0 5% 0;
+}
+
+#title-item-detail {
+  height: 4rem;
+  font-family: sans-serif, Arial, Helvetica;
+  background-color: #E698B7 ;
+}
+
+/* Cart */
+
+.aniadir-carro-container {
+    width: 85%;
+    display: inline-block;
+  }
+
+.aniadir-carro {
+  width: 100%;
+  border-radius: 3%;
+  font-size: 90%;
+  background-color: #E698B7 /*#db6b97*/ !important;
+  border-color: transparent !important;
+}
+
+.aniadir-carro:hover, .aniadir-carro:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.aniadir-carro:hover {
+  background-color: /*#c7628a*/#db6b97 !important;
+}
+
+#productos-similares-item-detail {
+  margin-top: 5%;
+}

@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
 import './App.css';
 import Header from './components/header/header';
 import ItemDetailContainer from './components/items/itemDetailContainer';
@@ -7,6 +8,8 @@ import Routes from './routes/routes';
 const logo =  require('./helado.png');
 
 function App() {
+  const [id, setId] = useState<number | null>(null);
+
   return (
     <div className="App">
       <Routes />

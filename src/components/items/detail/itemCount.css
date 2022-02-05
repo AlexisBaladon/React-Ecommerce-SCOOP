@@ -1,0 +1,34 @@
+.item-count {
+  padding: 0;
+  margin: -1px;
+  border: 1px solid black;
+  border-radius: 2px;
+}
+
+.item-count-element {
+  text-align: center;
+  border-radius: 0;
+  border: 0;
+  background-color: white !important;
+  color: black !important;
+  
+  transition: 0.3s;
+}
+
+.item-count-element:hover, .item-count-element:focus {
+  box-shadow: none !important;
+  outline: none !important;
+  border-color: transparent !important;
+}
+
+.item-count-btn:hover {
+  background-color: #E698B7 !important;
+}
+
+.item-count-btn {
+  width: 100%;
+}
+
+.item-count-span {
+  width: 25%;
+}
