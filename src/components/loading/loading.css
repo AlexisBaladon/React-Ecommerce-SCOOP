@@ -1,0 +1,27 @@
+/* Waiting... */
+
+#waiting-inner {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  #waiting-text {
+      font-style: normal;
+    color: #E698B7;
+  }
+  
+  @media (prefers-reduced-motion: no-preference) {
+    #waiting-img {
+      animation: App-logo-spin infinite 5s linear;
+    }
+  }
+    
+  @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }

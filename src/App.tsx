@@ -15,9 +15,7 @@ function App() {
       <NavBar />
       {/* Elige entre Detail y List */}
       {id ? 
-        <>
-          <ItemDetailContainer setId={setId} itemId={id} />
-        </> :
+        <ItemDetailContainer setId={setId} itemId={id} /> :
         <ItemListContainer setId={setId} greeting="Bienvenido a Scoop, tu tienda de helados favorita!"/>
       }
 

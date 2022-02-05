@@ -8,8 +8,8 @@
 #titulo-tienda {
   display: block;
   height: 50vh;
-  background: rgb(255,219,219);
-  background: linear-gradient(90deg, rgba(255,219,219,1) 0%, rgba(219,107,144,1) 0%, rgba(203,112,148,1) 100%);
+  background: #E698B7;
+  /*background: linear-gradient(90deg, rgba(255,219,219,1) 0%, rgba(219,107,144,1) 0%, rgba(203,112,148,1) 100%);*/
 }
 
 #greeting {
@@ -28,8 +28,8 @@ hr {
 
 #lista-productos {
   min-height: 100vh;
-  color: #db6b97;
-  padding: 0 12.5% 2.5% 12.5%;
+  color: #E698B7;
+  padding: 0 5.5% 2.5% 5.5%;
   margin: 2.5% 0 0 0;
   justify-content: center;
 }

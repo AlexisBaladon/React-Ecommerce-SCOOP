@@ -1,0 +1,14 @@
+/* Go back */
+
+#routes-item-detail {
+    background-color: #E698B7;
+    padding: 2% 0 2% 0;
+  }
+  
+  #routes-item-detail span,
+  #routes-item-detail a {
+    font-size: large;
+    text-decoration: none; 
+    color: white;
+    margin-bottom: 0;
+  }

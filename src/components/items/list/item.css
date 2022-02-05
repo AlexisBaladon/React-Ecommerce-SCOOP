@@ -1,8 +1,9 @@
 .carta {
+  overflow: hidden;
   background-color: rgb(250,250,250);
   padding: 0;
   margin: 2.5% 2.5% 2.5% 2.5%;
-  width: 10rem;
+  width: 14rem;
   min-width: 125px;
   color:#212529;
   
@@ -19,14 +20,15 @@
 .titulo-carta {
   padding: 0;
   margin: 0 0 3px 0;
-  font-size: 100%;
+  font-size: large;
 }
 
 .item-desc {
-  font-size: smaller;
+  font-size:medium;
 }
 
 .item-price {
+  font-size:larger;
   color: #db6b97;
 }
 
@@ -42,7 +44,7 @@
 }
 
 .carta:hover {
-    box-shadow: 0 4.5px 9px 0 rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4.5px 9px 0 rgba(0, 0, 0, 0.35);
 }
 
 .cuerpo-carta { background-color: white; }

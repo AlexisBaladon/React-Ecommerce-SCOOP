@@ -5,10 +5,10 @@ const logo = require('./scoop.png');
 
 const NavBar = () => {
   return <>
-    <BTNavBar id="navegador" expand="lg" variant="light" >
+    <BTNavBar id="navegador" className="top-0" expand="lg" variant="dark" >
       <Container id="nav-container">
         <BTNavBar.Brand href="#home">
-          <img id="logo" className="mx-2" src={logo} width="120px" alt="Scoop" />
+            <h2 id="logo">SCOOP</h2>
         </BTNavBar.Brand>
           <BTNavBar.Toggle id="nav-toggle" aria-controls="basic-navbar-nav" />
           <BTNavBar.Collapse id="navbarScroll" className="">

@@ -4,6 +4,7 @@ import ItemList from './itemList'
 import DtItem from '../../../dataTypes/item'
 import {obtenerPromiseHelados} from '../../../helpers/promises';
 import ItemDetailContainer from '../detail/itemDetailContainer';
+import Loading from '../../loading/loading';
 
 interface IProps {
   setId: Function;
@@ -24,7 +25,11 @@ const ItemListContainer: FunctionComponent<IProps> = ({setId, greeting}: IProps)
       </div>
       <div id="lista-productos" className= "row">
         <h2>Tienda</h2>
-        <ItemList setId={setId} items={helados} />
+        {helados.length?
+         <ItemList setId={setId} items={helados} />:
+         <Loading />
+        }
+        
       </div>
     </div>
   </>
