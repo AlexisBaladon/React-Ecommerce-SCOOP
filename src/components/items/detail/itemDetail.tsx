@@ -4,11 +4,10 @@ import ItemCount from './itemCount';
 import './itemDetail.css';
 
 interface IProps {
-    setId: Function;
     item: DtItem;
 }
 
-const ItemDetail = ({setId, item}: IProps) => {
+const ItemDetail = ({item}: IProps) => {
 
   //ItemCount
   const onAdd = (num: number, setNum: React.Dispatch<number>): void => setNum(num + 1);
@@ -25,7 +24,7 @@ const ItemDetail = ({setId, item}: IProps) => {
     <div id="item-detail">
       <Row id="info-item-detail" className="align-items-center">
         <Col xl="6" id="img-container-item-detail">
-          <img id="img-item-detail" width={imgWidth.paleta} src={pictureUrl} alt={"Imagen "+title} />
+          <img id="img-item-detail" width={imgWidth.paleta} src={window.location.origin + pictureUrl} alt={"Imagen "+title} />
         </Col>
         <Col xl="6" id="text-info-item-detail" className="d-flex justify-content-center">
           <div id="text-info-inner-item-detail">

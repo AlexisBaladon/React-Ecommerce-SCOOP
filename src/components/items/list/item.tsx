@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import {Card} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import DtItem from '../../../dataTypes/item';
 import './item.css';
 
@@ -26,11 +27,13 @@ const Item: FunctionComponent<IProps> =
 
   return <>
     <Card className="carta" >
-      <Card.Img className="item-img" variant="top" src={pictureUrl}/>
+        <Card.Img className="item-img" variant="top" src={pictureUrl}/>
       <Card.Body className="body-card">
-        <Card.Title className="titulo-carta btn stretched-link" onClick={selectItem}>
-          <strong>{title}</strong>
-        </Card.Title>
+        <Link to={"item/"+item.id}>
+          <Card.Title className="titulo-carta btn stretched-link" onClick={selectItem}>
+            <strong>{title}</strong>
+          </Card.Title>
+        </Link>
         <hr />
         <Card.Text className ="item-desc texto-carta">
           {description}

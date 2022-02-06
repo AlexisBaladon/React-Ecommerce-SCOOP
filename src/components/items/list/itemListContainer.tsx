@@ -7,11 +7,10 @@ import ItemDetailContainer from '../detail/itemDetailContainer';
 import Loading from '../../loading/loading';
 
 interface IProps {
-  setId: Function;
   greeting: string;
 }
 
-const ItemListContainer: FunctionComponent<IProps> = ({setId, greeting}: IProps) => {
+const ItemListContainer: FunctionComponent<IProps> = ({greeting}: IProps) => {
   const [helados,setHelados] = useState<DtItem[]>([]);
 
   useEffect(() => {
@@ -26,7 +25,7 @@ const ItemListContainer: FunctionComponent<IProps> = ({setId, greeting}: IProps)
       <div id="lista-productos" className= "row">
         <h2>Tienda</h2>
         {helados.length?
-         <ItemList setId={setId} items={helados} />:
+         <ItemList items={helados} />:
          <Loading />
         }
         

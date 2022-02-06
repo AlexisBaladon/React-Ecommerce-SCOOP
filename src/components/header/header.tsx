@@ -5,7 +5,6 @@ import { Col, Row } from 'react-bootstrap';
 const Header = () => {
   return <>
     <div id="bg-superior">
-        <NavBar />
         <Row lg="4" sm="12" className="header-row">
           <Col className="header-img-col">
             <div className="header-img justify-content-center">

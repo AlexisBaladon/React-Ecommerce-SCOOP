@@ -5,37 +5,35 @@ import { getItem } from "../../../helpers/promises";
 import ItemDetail from "./itemDetail";
 import './itemDetailContainer.css'
 import Loading from '../../loading/loading';
+import { Link, NavLink, useParams } from 'react-router-dom';
 
-interface IProps {
-  setId: Function;
-  itemId: number;
-}
-
-const ItemDetailContainer = ({setId, itemId}: IProps) => {
+const ItemDetailContainer = () => {
+  const { id } = useParams<{id?: string}>();
   const [helado,setHelado] = useState<DtItem | null>(null);
 
   useEffect(() => {
-    getItem(itemId,setHelado);
-  }, [itemId]);
+    getItem(Number(id),setHelado);
+  }, [id]);
+
 
   return <div>
     <Row id="routes-item-detail">
         <Navbar variant="light">
           <Container id="nav-container" className="justify-content-center" >
             <Nav>
-              <Nav.Link onClick={() => setId(null)} href="#Listado">Volver al listado</Nav.Link>
+              <Nav.Link><Link to="/">Volver al listado</Link></Nav.Link>
               <Navbar.Text>|</Navbar.Text>
-              <Nav.Link onClick={() => setId(null)} href="#Home">Home</Nav.Link>
+              <Nav.Link><Link to="/">Home</Link></Nav.Link>
               <Navbar.Text>{" > "}</Navbar.Text>
-              <Nav.Link onClick={() => setId(null)} href="#Listado">Listado</Nav.Link>
+              <Nav.Link href="#Listado"><Link to="/">Listado</Link></Nav.Link>
               <Navbar.Text>{" > "}</Navbar.Text>
-              <Nav.Link onClick={() => setId(itemId)} href="#Listado">Producto</Nav.Link>
+              <Nav.Link href="#Listado"><Link to="/">Producto</Link></Nav.Link>
             </Nav>
           </Container>
         </Navbar>
       </Row>
     {helado? 
-    <ItemDetail setId={setId} item={helado}/>:
+    <ItemDetail item={helado}/>:
     <Loading />
     }
   </div>;
