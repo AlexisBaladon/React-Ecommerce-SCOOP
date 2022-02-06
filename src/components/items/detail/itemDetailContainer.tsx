@@ -18,8 +18,8 @@ const ItemDetailContainer = () => {
 
   return <div>
     <Row id="routes-item-detail">
-        <Navbar variant="light">
-          <Container id="nav-container" className="justify-content-center" >
+        <Navbar className="routes-nav-item-detail" variant="light">
+          <Container className="justify-content-center" >
             <Nav>
               <Nav.Link as={Link} to="/">Volver al listado</Nav.Link>
               <Navbar.Text>|</Navbar.Text>

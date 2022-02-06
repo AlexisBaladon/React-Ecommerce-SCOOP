@@ -38,12 +38,15 @@ const ItemListContainer: FunctionComponent<IProps> = ({greeting}: IProps) => {
       <div id="titulo-tienda">
         <h2 id="greeting">{greeting}</h2>
       </div>
-      <div id="lista-productos" className= "row">
-        <h2>Tienda</h2>
-        {helados.length?
-         <ItemList items={helados} />:
-         <Loading />
-        }
+      <div id="lista-productos">
+        <div className= "row justify-content-center">
+          <h2>Tienda</h2>
+          {helados.length?
+          <ItemList items={helados} />:
+          <Loading />
+          }
+        </div>
+        
       </div>
     </div>
   </>

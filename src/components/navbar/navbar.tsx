@@ -15,6 +15,7 @@ const NavBar = () => {
             <Nav>
               <Nav.Link as={Link} to="/">Inicio</Nav.Link>
               <NavDropdown title="Productos" id="basic-nav-dropdown">
+                <NavDropdown.Item as={Link} to="/">Todos</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to={"/category/"+ItemCategory.Paleta}>Paletas</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to={"/category/"+ItemCategory.Recipiente}>Recipientes</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to={"/category/"+ItemCategory.Postre}>Postres</NavDropdown.Item>

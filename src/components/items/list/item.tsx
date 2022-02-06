@@ -28,14 +28,14 @@ const Item: FunctionComponent<IProps> =
   return <>
     <Card className="carta" >
         <Card.Img className="item-img" variant="top" src={pictureUrl}/>
-      <Card.Body className="body-card">
+      <Card.Body className="body-card"style={{backgroundColor:""}}>
         <Link to={"/item/"+item.id}>
           <Card.Title className="titulo-carta btn stretched-link" onClick={selectItem}>
             <strong>{title}</strong>
           </Card.Title>
         </Link>
         <hr />
-        <Card.Text className ="item-desc texto-carta">
+        <Card.Text className ="item-desc texto-carta" >
           {description}
         </Card.Text>
         <Card.Text className ="item-price texto-carta">
