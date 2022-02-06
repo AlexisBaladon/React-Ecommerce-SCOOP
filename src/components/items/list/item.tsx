@@ -29,7 +29,7 @@ const Item: FunctionComponent<IProps> =
     <Card className="carta" >
         <Card.Img className="item-img" variant="top" src={pictureUrl}/>
       <Card.Body className="body-card">
-        <Link to={"item/"+item.id}>
+        <Link to={"/item/"+item.id}>
           <Card.Title className="titulo-carta btn stretched-link" onClick={selectItem}>
             <strong>{title}</strong>
           </Card.Title>

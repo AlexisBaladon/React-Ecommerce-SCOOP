@@ -1,6 +1,6 @@
 #navegador {
   z-index: 1000;
-  background-color:#E698B7;
+  background-color:var(--main-color);
   margin:0;
   width: 100vw;
 }
@@ -58,4 +58,18 @@
 
 #nav-toggle {
   margin-right: 1.5%;
+}
+
+/* Dropdown items */
+
+.dropdown-menu  {
+  background-color: var(--main-dark-color);
+}
+
+.dropdown-item:hover, .dropdown-item:active {
+  background-color: var(--main-color);
+}
+
+.dropdown-menu .dropdown-item {
+  text-decoration: none !important;
 }

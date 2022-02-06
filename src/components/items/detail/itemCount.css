@@ -22,7 +22,7 @@
 }
 
 .item-count-btn:hover {
-  background-color: #E698B7 !important;
+  background-color: var(--main-color) !important;
 }
 
 .item-count-btn {

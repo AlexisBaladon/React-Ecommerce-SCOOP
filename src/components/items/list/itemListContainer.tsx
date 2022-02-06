@@ -2,20 +2,36 @@ import React, { FunctionComponent, useEffect, useState } from 'react';
 import './itemListContainer.css';
 import ItemList from './itemList'
 import DtItem from '../../../dataTypes/item'
-import {obtenerPromiseHelados} from '../../../helpers/promises';
-import ItemDetailContainer from '../detail/itemDetailContainer';
+import {getFilteredItems, obtenerPromiseHelados} from '../../../helpers/promises';
 import Loading from '../../loading/loading';
+import { useParams } from 'react-router-dom';
 
 interface IProps {
   greeting: string;
 }
 
 const ItemListContainer: FunctionComponent<IProps> = ({greeting}: IProps) => {
+
+  //Parameters
+  const { id } = useParams<{id?: string}>();
+
+  //Showed items
   const [helados,setHelados] = useState<DtItem[]>([]);
 
+  //Filters items by category
+  const catFilter = (i: DtItem): boolean => i.category === id;
+
+  // Sets items on mount (to avoid warnings)
   useEffect(() => {
-    obtenerPromiseHelados(setHelados);
+    setHelados([]);
   }, []);
+
+  // Filters items in case of defining category
+  useEffect(() => {
+    id ? 
+    getFilteredItems(catFilter, setHelados) :
+    obtenerPromiseHelados(setHelados);
+  }, [id]);
    
   return <>
     <div id="item-list-container">
@@ -28,7 +44,6 @@ const ItemListContainer: FunctionComponent<IProps> = ({greeting}: IProps) => {
          <ItemList items={helados} />:
          <Loading />
         }
-        
       </div>
     </div>
   </>

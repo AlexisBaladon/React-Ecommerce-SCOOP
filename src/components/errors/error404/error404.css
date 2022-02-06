@@ -1,8 +1,4 @@
-.App {
-    min-width: 512px !important;
-    overflow: hidden;
-    text-align: center;
-  }
+
   
   .App-logo {
     height: 40vmin;
@@ -16,7 +12,7 @@
   }
   
   .App-header {
-    background-color: #E698B7;
+    background-color: #db6b97;
     min-height: 100vh;
     display: flex;
     flex-direction: column;

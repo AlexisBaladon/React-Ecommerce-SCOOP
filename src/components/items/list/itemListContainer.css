@@ -8,7 +8,7 @@
 #titulo-tienda {
   display: block;
   height: 50vh;
-  background: #E698B7;
+  background: var(--main-color);
   /*background: linear-gradient(90deg, rgba(255,219,219,1) 0%, rgba(219,107,144,1) 0%, rgba(203,112,148,1) 100%);*/
 }
 

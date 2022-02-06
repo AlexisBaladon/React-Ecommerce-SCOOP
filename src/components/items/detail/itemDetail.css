@@ -73,7 +73,7 @@
 }
 
 #price-item-detail {
-  color: #E698B7;
+  color: var(--main-color);
   margin:  7rem 0 0 0;
 }
 
@@ -87,7 +87,7 @@
 #title-item-detail {
   height: 4rem;
   font-family: sans-serif, Arial, Helvetica;
-  background-color: #E698B7 ;
+  background-color: var(--main-color) ;
 }
 
 /* Cart */
@@ -101,7 +101,7 @@
   width: 100%;
   border-radius: 3%;
   font-size: 90%;
-  background-color: #E698B7 /*#db6b97*/ !important;
+  background-color: var(--main-color) !important;
   border-color: transparent !important;
 }
 
@@ -111,7 +111,7 @@
 }
 
 .aniadir-carro:hover {
-  background-color: /*#c7628a*/#db6b97 !important;
+  background-color: var(--main-dark-color) !important;
 }
 
 #productos-similares-item-detail {

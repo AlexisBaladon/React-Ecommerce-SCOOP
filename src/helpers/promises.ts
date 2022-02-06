@@ -1,6 +1,11 @@
 import {obtenerHelado, obtenerHelados} from '../data/item';
+import Item from '../dataTypes/item';
 
-const obtenerPromiseAux = (setItems: Function, getItems: Function): Promise<any> => {
+/* 
+ * Gets an object with getItems; use setItems on it; and finally,
+ * returns it after 2 seconds with a Promise
+ */
+const obtenerPromiseAux = (setItems: (i: any) => any, getItems: () => any): Promise<any> => {
   const itemsPromise = new Promise<any>((resolve,reject) => {
     const itemsDB: any = getItems();
     setTimeout(() => {
@@ -17,13 +22,18 @@ const obtenerPromiseAux = (setItems: Function, getItems: Function): Promise<any>
   return itemsPromise;
 }
 
-const obtenerPromiseHelados = (setHelados: Function): Promise<any> => {
-  return obtenerPromiseAux(setHelados, obtenerHelados);
+const obtenerPromiseHelados = (setItems: (i: Item[]) => any): Promise<any> => {
+  return obtenerPromiseAux(setItems, obtenerHelados);
 }
 
-const getItem = (itemId: number, setHelados: Function): Promise<any> => {
+const getFilteredItems = (itemFilter: (i: Item) => boolean, setItems: (i: Item[]) => any): Promise<any> => {
+  const setItemsWithFilter = (items: Item[]): void => setItems(items.filter(itemFilter));
+  return obtenerPromiseAux(setItemsWithFilter, obtenerHelados);
+}
+
+const getItem = (itemId: number, setItem: (i: Item) => any): Promise<any> => {
   const getItemsAux = () => obtenerHelado(itemId);
-  return obtenerPromiseAux(setHelados, getItemsAux);
+  return obtenerPromiseAux(setItem, getItemsAux);
 }
 
-export {obtenerPromiseHelados, getItem};
+export {obtenerPromiseHelados, getItem, getFilteredItems};
