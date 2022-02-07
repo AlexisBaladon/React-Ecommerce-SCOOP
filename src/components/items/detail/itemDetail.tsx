@@ -18,7 +18,7 @@ const ItemDetail = ({item}: IProps) => {
   //Image size according to category
   const imgWidth = new Map([[ItemCategory.Paleta    , "450px"],
                             [ItemCategory.Recipiente, "575px"],
-                            [ItemCategory.Postre    , "450px"],
+                            [ItemCategory.Postre    , "600px"],
                           ])
 
   //Item destructuring

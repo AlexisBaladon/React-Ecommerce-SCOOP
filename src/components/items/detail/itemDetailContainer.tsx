@@ -11,10 +11,19 @@ const ItemDetailContainer = () => {
   const { id } = useParams<{id?: string}>();
   const [helado,setHelado] = useState<DtItem | null>(null);
 
-  useEffect(() => {
-    getItem(Number(id),setHelado);
-  }, [id]);
+  // SetItem shouldn't be usesd after being unmounted
+  let isMounted = true;
 
+  const setIfMounted = (item: DtItem) => {
+    if (isMounted) setHelado(item);
+  }
+    
+  //Gets item according to parameters
+  useEffect(() => {
+    isMounted = true;
+    getItem(Number(id),setIfMounted);
+    return () => {isMounted = false};
+  }, [id]);
 
   return <div>
     <Row id="routes-item-detail">

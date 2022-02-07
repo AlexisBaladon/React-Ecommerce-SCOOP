@@ -21,16 +21,19 @@ const ItemListContainer: FunctionComponent<IProps> = ({greeting}: IProps) => {
   //Filters items by category
   const catFilter = (i: DtItem): boolean => i.category === id;
 
-  // Sets items on mount (to avoid warnings)
-  useEffect(() => {
-    setHelados([]);
-  }, []);
+  //SetItem shouldn't be usesd after being unmounted
+  let isMounted = false;
+  const setIfMounted = (item: DtItem[]) => {
+    if (isMounted) setHelados(item);
+  }
 
-  // Filters items in case of defining category
+  //Filters items in case of defining category
   useEffect(() => {
-    id ? 
-    getFilteredItems(catFilter, setHelados) :
-    obtenerPromiseHelados(setHelados);
+    isMounted = true;
+    id ?
+    getFilteredItems(catFilter, setIfMounted) :
+    obtenerPromiseHelados(setIfMounted);
+    return () => {isMounted = false};
   }, [id]);
    
   return <>
