@@ -1,7 +1,6 @@
 import {Navbar as BTNavBar, Nav, Container} from 'react-bootstrap';
 import './navbar.css';
 import CartWidget from '../cartWidget/cartWidget';
-const logo = require('./scoop.png');
 
 const NavBar = () => {
   return <>

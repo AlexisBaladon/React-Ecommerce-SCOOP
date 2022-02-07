@@ -1,15 +1,20 @@
 /* Waiting... */
 
+#waiting {
+  height: 80vh;
+  background-color: whitesmoke;
+}
+
 #waiting-inner {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
   
-  #waiting-text {
-      font-style: normal;
-    color: #E698B7;
-  }
+#waiting-text {
+  font-style: normal;
+  color: #E698B7;
+}
   
   @media (prefers-reduced-motion: no-preference) {
     #waiting-img {

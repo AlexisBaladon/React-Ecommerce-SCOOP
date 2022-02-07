@@ -3,7 +3,6 @@ import './itemListContainer.css';
 import ItemList from './itemList'
 import DtItem from '../../../dataTypes/item'
 import {obtenerPromiseHelados} from '../../../helpers/promises';
-import ItemDetailContainer from '../detail/itemDetailContainer';
 import Loading from '../../loading/loading';
 
 interface IProps {
