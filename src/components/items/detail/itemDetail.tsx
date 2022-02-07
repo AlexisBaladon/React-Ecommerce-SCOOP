@@ -1,14 +1,16 @@
 import { Button, Col, Row } from 'react-bootstrap';
+import ItemCount from './itemCount';
+
 import DtItem from '../../../dataTypes/item';
 import ItemCategory from '../../../dataTypes/itemCategory';
-import ItemCount from './itemCount';
+
 import './itemDetail.css';
 
 interface IProps {
     item: DtItem;
 }
 
-const ItemDetail = ({item}: IProps) => {
+const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
 
   //ItemCount
   const onAdd = (num: number, setNum: React.Dispatch<number>): void => setNum(num + 1);
@@ -49,8 +51,8 @@ const ItemDetail = ({item}: IProps) => {
                   onSub = {onSub}
                 />
               </Row>
-              <Row className ="aniadir-carro-container input-group py-2 display-content-center">
-                <Button className = "aniadir-carro" variant="primary">Agregar al carro</Button>
+              <Row className ="add-cart-container input-group py-2 display-content-center">
+                <Button className = "add-cart" variant="primary">Agregar al carro</Button>
               </Row>
             </div>
           </div>

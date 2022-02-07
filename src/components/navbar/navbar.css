@@ -1,7 +1,9 @@
-#navegador {
+#navigator {
   background-color:var(--main-color);
   margin:0;
 }
+
+/* Logo */
 
 #logo {
   margin: 0;
@@ -17,11 +19,7 @@
   opacity: 80%;
 }
 
-#cart {
-  padding: 0;
-  vertical-align:middle;
-  width: 45px; height: 45px;
-}
+/* Options */
 
 .navbar-nav a:hover  {
   opacity: 70%;
@@ -50,6 +48,8 @@
   margin-left: 0;
 }
 
+/* Toggler */
+
 .navbar-light .navbar-toggler {
   color: rgba(0, 0, 0, 0) !important;
 }
@@ -60,14 +60,23 @@
 
 /* Dropdown items */
 
-.dropdown-menu  {
+#navigator .dropdown-menu  {
+  background-color: var(--main-semi-dark-color);
+}
+
+#navigator .dropdown-item:hover, #navigator .dropdown-item:active {
   background-color: var(--main-dark-color);
 }
 
-.dropdown-item:hover, .dropdown-item:active {
-  background-color: var(--main-dark-color);
-}
-
-.dropdown-menu .dropdown-item {
+#navigator .dropdown-menu .dropdown-item {
   text-decoration: none !important;
+}
+
+/* Cart */
+
+#cart {
+  padding: 0;
+  vertical-align:middle;
+  width: 45px;
+  height: 45px;
 }

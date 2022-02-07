@@ -5,11 +5,12 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-#titulo-tienda {
+/* Greeting */
+
+#store-title {
   display: block;
   height: 50vh;
   background: var(--main-color);
-  /*background: linear-gradient(90deg, rgba(255,219,219,1) 0%, rgba(219,107,144,1) 0%, rgba(203,112,148,1) 100%);*/
 }
 
 #greeting {
@@ -22,19 +23,16 @@
   color: white;
 }
 
-hr {
-  margin: 0 10% 0 10%;
-}
+/* Products */
 
-#lista-productos {
+#product-list {
   min-height: 100vh;
-  color: #E698B7;
+  color: var(--main-color);
   padding: 0 5.5% 2.5% 5.5%;
   margin: 2.5% 0 0 0;
   justify-content: center;
 }
 
-#producto-seleccionado {
-  margin: 5% 0 5% 0;
-  height: 400px;
+#product-list hr {
+  margin: 0 8% 0 8%;
 }

@@ -1,9 +1,7 @@
-import { Navbar } from "react-bootstrap";
 import { BrowserRouter, Routes as Switch, Route } from "react-router-dom";
-import Header from "../components/header/header";
+import NavBar from "../components/navbar/navbar";
 import ItemDetailContainer from "../components/items/detail/itemDetailContainer";
 import ItemListContainer from "../components/items/list/itemListContainer";
-import NavBar from "../components/navbar/navbar";
 import Error404 from "../components/errors/error404/error404";
 
 const Routes = () => {

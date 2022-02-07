@@ -1,10 +1,11 @@
-.App {
+#app {
     min-width: 100% !important;
     min-height: 100vh !important;
     overflow: hidden;
     text-align: center;
     
-    --main-color: /*#db6b97;*/ #E698B7;
-    --main-dark-color: /*#c7628a;*/ #db6b97;
+    --main-color: #E698B7;
+    --main-semi-dark-color: #e47ca6;
+    --main-dark-color: #db6b97;
   }
   

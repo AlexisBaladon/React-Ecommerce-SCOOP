@@ -5,11 +5,11 @@
   padding: 2% 0 2% 0;
   overflow-y: auto;
 }
-  
-  #routes-item-detail span,
-  #routes-item-detail a {
-    font-size: 96% !important;
-    text-decoration: none; 
-    color: white;
-    margin-bottom: 0;
-  }
+
+#routes-item-detail span,
+#routes-item-detail a {
+  font-size: 96% !important;
+  text-decoration: none; 
+  color: white;
+  margin-bottom: 0;
+}

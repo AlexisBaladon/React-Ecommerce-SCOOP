@@ -1,6 +1,6 @@
 #item-detail {
   font-family: sans-serif, Arial, Helvetica;
-  background-color: rgb(250, 250, 250)/*rgb(247, 244, 241)*//*rgb(202, 202, 202)*/;
+  background-color: rgb(250, 250, 250);
   padding-bottom: 2%;
 }
 
@@ -93,12 +93,12 @@
 
 /* Cart */
 
-.aniadir-carro-container {
+.add-cart-container {
     width: 85%;
     display: inline-block;
   }
 
-.aniadir-carro {
+.add-cart {
   width: 100%;
   border-radius: 3%;
   font-size: 90%;
@@ -106,15 +106,11 @@
   border-color: transparent !important;
 }
 
-.aniadir-carro:hover, .aniadir-carro:focus {
+.add-cart:hover, .add-cart:focus {
   box-shadow: none !important;
   outline: none !important;
 }
 
-.aniadir-carro:hover {
+.add-cart:hover {
   background-color: var(--main-dark-color) !important;
-}
-
-#productos-similares-item-detail {
-  margin-top: 5%;
 }

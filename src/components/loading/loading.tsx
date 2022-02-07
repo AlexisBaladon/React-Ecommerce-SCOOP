@@ -1,11 +1,13 @@
 import React from 'react';
-import './loading.css';
 
-const Loading = () => {
+import './loading.css';
+const icon = require('./helado.png');
+
+const Loading: React.FC<{}> = () => {
   return <>
-    <div id="waiting" style={{height: "80vh", backgroundColor: 'whitesmoke'}}>
+    <div id="waiting">
       <div id="waiting-inner">
-        <img id="waiting-" src={window.location.origin + "/favicon2.ico"} width="150px"/>
+        <img id="waiting---" src={icon} width="150px" alt="waiting..."/>
         <h1 id="waiting-text">Cargando...</h1>
       </div>
     </div>

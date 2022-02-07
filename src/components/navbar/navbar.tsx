@@ -1,13 +1,16 @@
 import {Navbar as BTNavBar, Nav, Container, NavDropdown} from 'react-bootstrap';
-import './navbar.css';
 import CartWidget from '../cartWidget/cartWidget';
 import { Link } from 'react-router-dom';
 import ItemCategory from '../../dataTypes/itemCategory';
-const logo = require('./scoop.png');
 
-const NavBar = () => {
-  return <>
-    <BTNavBar id="navegador" className="top-0" expand="lg" variant="dark" >
+import './navbar.css';
+
+const NavBar: React.FC<{}> = () => {
+  //Enum destructuring
+  const {Paleta, Recipiente, Postre} = ItemCategory;
+
+  return <header>
+    <BTNavBar id="navigator" className="top-0" expand="lg" variant="dark" >
       <Container id="nav-container">
         <BTNavBar.Brand as={Link} to="/"><h2 id="logo">SCOOP</h2></BTNavBar.Brand>
           <BTNavBar.Toggle id="nav-toggle" aria-controls="basic-navbar-nav" />
@@ -16,9 +19,9 @@ const NavBar = () => {
               <Nav.Link as={Link} to="/">Inicio</Nav.Link>
               <NavDropdown title="Productos" id="basic-nav-dropdown">
                 <NavDropdown.Item as={Link} to="/">Todos</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to={"/category/"+ItemCategory.Paleta}>Paletas</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to={"/category/"+ItemCategory.Recipiente}>Recipientes</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to={"/category/"+ItemCategory.Postre}>Postres</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={"/category/"+Paleta}>Paletas</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={"/category/"+Recipiente}>Recipientes</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={"/category/"+Postre}>Postres</NavDropdown.Item>
               </NavDropdown>
               <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
             </Nav>
@@ -26,7 +29,7 @@ const NavBar = () => {
         </BTNavBar.Collapse>
       </Container>
     </BTNavBar>
-  </>;
+  </header>;
 
 };
 

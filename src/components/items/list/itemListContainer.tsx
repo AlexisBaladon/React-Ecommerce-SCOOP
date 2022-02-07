@@ -1,55 +1,57 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import './itemListContainer.css';
-import ItemList from './itemList'
-import DtItem from '../../../dataTypes/item'
-import {getFilteredItems, obtenerPromiseHelados} from '../../../helpers/promises';
-import Loading from '../../loading/loading';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import ItemList from './itemList'
+import Loading from '../../loading/loading';
+
+import DtItem from '../../../dataTypes/item'
+import {getFilteredItems, getItems} from '../../../helpers/promises';
+
+import './itemListContainer.css';
 
 interface IProps {
   greeting: string;
 }
 
-const ItemListContainer: FunctionComponent<IProps> = ({greeting}: IProps) => {
+const ItemListContainer: React.FC<IProps> = ({greeting}: IProps) => {
 
   //Parameters
   const { id } = useParams<{id?: string}>();
 
   //Showed items
-  const [helados,setHelados] = useState<DtItem[]>([]);
+  const [items,setItems] = useState<DtItem[]>([]);
 
-  //Filters items by category
-  const catFilter = (i: DtItem): boolean => i.category === id;
-
-  //SetItem shouldn't be usesd after being unmounted
-  let isMounted = false;
-  const setIfMounted = (item: DtItem[]) => {
-    if (isMounted) setHelados(item);
-  }
-
-  //Filters items in case of defining category
   useEffect(() => {
-    isMounted = true;
-    id ?
+
+    //SetItem shouldn't be usesd after being unmounted
+    let isMounted = true;
+    const setIfMounted = (item: DtItem[]) => {
+      if (isMounted) setItems(item);
+    }
+
+    //Filters items by category
+    const catFilter = (i: DtItem): boolean => i.category === id;
+
+    //Filters items in case of defining category
+    id ? 
     getFilteredItems(catFilter, setIfMounted) :
-    obtenerPromiseHelados(setIfMounted);
+    getItems(setIfMounted);
+
     return () => {isMounted = false};
   }, [id]);
    
   return <>
     <div id="item-list-container">
-      <div id="titulo-tienda">
+      <div id="store-title">
         <h2 id="greeting">{greeting}</h2>
       </div>
-      <div id="lista-productos">
+      <div id="product-list">
         <div className= "row justify-content-center">
           <h2>Tienda</h2>
-          {helados.length?
-          <ItemList items={helados} />:
+          {items.length?
+          <ItemList items={items} />:
           <Loading />
           }
         </div>
-        
       </div>
     </div>
   </>
