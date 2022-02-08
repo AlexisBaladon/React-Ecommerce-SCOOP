@@ -9,10 +9,12 @@ Scoop es un sitio web e-commerce de venta de helados donde podrás:
 - Próximamente habrán nuevas funcionalidades como poder agregar items al carrito
 
 
+
+
 ![GIF](./gif.gif)
 
 
-## Tech
+# Tech
 
 
 Scoop usa algunas de las tecnologías más populares dentro de la programación web:
@@ -20,7 +22,23 @@ Scoop usa algunas de las tecnologías más populares dentro de la programación 
 
 - [ReactJS] - Utilizado para el front end de la aplicación
 - [Typescript] - Lenguaje de fuerte tipado para trabajar con React de forma más organizada
-- [React Bootrstrap] - Librería de React utilizada para facilitar componentes prediseñados.
+
+
+# Libraries
+
+
+Dentro de React, son utilizadas las siguientes librerías:
+
+
+- [React-Bootrstrap] - Librería de React utilizada para facilitar componentes prediseñados.
+- [React-Router-Dom] - Fundamental para la selección de vistas de la aplicación de acuerdo al url.
+- [Typescript] - Utilizada para hacer posible el uso de typescript dentro del framework.
+
+
+# Folders
+
+
+![FOLDERS](./folder-diagram.png)
 
 
 # Instrucciones de ejecución
