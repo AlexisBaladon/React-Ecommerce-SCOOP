@@ -1,7 +1,7 @@
 ![SCOOP](./readme-logo.png)
 
 
-** Scoop ** es un sitio web e-commerce de venta de helados donde podrás:
+**Scoop** es un sitio web e-commerce de venta de helados donde podrás:
 
 
 - Ver y filtrar helados por categoría
