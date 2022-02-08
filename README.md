@@ -9,6 +9,7 @@ Scoop es un sitio web e-commerce de venta de helados donde podrás:
 - Próximamente habrán nuevas funcionalidades como poder agregar items al carrito
 
 
+#Presentation
 
 
 ![GIF](./gif.gif)
