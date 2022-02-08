@@ -1,11 +1,15 @@
-![SCOOP](https://myoctocat.com/assets/images/base-octocat.svg)
+![SCOOP](./readme-logo.png)
 
 
 Scoop es un sitio web e-commerce de venta de helados donde podrás:
 
 
 - Ver y filtrar helados por categoría
-- Seleccionar un helado para verlo en más detalle
+- Seleccionar un item para verlo en más detalle
+- Próximamente habrán nuevas funcionalidades como poder agregar items al carrito
+
+
+![GIF](./gif.gif)
 
 
 ## Tech
@@ -19,12 +23,9 @@ Scoop usa algunas de las tecnologías más populares dentro de la programación 
 - [React Bootrstrap] - Librería de React utilizada para facilitar componentes prediseñados.
 
 
-A continuación, instrucciones de React sobre el uso de la aplicación:
+# Instrucciones de ejecución
 
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Estas instrucciones fueron automáticamente generadas por react-create-app
 
 ## Available Scripts
 
