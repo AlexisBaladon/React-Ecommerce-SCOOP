@@ -1,7 +1,7 @@
 ![SCOOP](./readme-logo.png)
 
 
-Scoop es un sitio web e-commerce de venta de helados donde podrás:
+** Scoop ** es un sitio web e-commerce de venta de helados donde podrás:
 
 
 - Ver y filtrar helados por categoría
@@ -42,7 +42,7 @@ Dentro de React, son utilizadas las siguientes librerías:
 ![FOLDERS](./folder-diagram.png)
 
 
-# Instrucciones de ejecución
+# Instructions
 
 Estas instrucciones fueron automáticamente generadas por react-create-app
 
