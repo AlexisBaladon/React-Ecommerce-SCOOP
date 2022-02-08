@@ -8,11 +8,7 @@ import {getFilteredItems, getItems} from '../../../helpers/promises';
 
 import './itemListContainer.css';
 
-interface IProps {
-  greeting: string;
-}
-
-const ItemListContainer: React.FC<IProps> = ({greeting}: IProps) => {
+const ItemListContainer: React.FC<{}> = () => {
 
   //Parameters
   const { id } = useParams<{id?: string}>();
@@ -38,11 +34,11 @@ const ItemListContainer: React.FC<IProps> = ({greeting}: IProps) => {
 
     return () => {isMounted = false};
   }, [id]);
-   
+  
   return <>
     <div id="item-list-container">
       <div id="store-title">
-        <h2 id="greeting">{greeting}</h2>
+        <h2 id="greeting">Pide tus helados antes de que se derritan!</h2>
       </div>
       <div id="product-list">
         <div className= "row justify-content-center">

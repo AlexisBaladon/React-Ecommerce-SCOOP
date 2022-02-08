@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrowserRouter, Routes as Switch, Route } from "react-router-dom";
 import NavBar from "../components/navbar/navbar";
 import ItemDetailContainer from "../components/items/detail/itemDetailContainer";
@@ -5,16 +6,18 @@ import ItemListContainer from "../components/items/list/itemListContainer";
 import Error404 from "../components/errors/error404/error404";
 
 const Routes = () => {
-  const greetingHome = "Bienvenido a Scoop, tu tienda de helados favorita!";
-  const greetingStore = "Compra tus helados antes de que se derritan!";
+
+  const [hasNavbar, setHasNavbar] = useState(true);
 
   return <div>
+
       <BrowserRouter>
+        {hasNavbar? <NavBar /> : null }
         <Switch>
-            <Route path="/" element={<><NavBar /><ItemListContainer greeting={greetingHome}/></>} />
-            <Route path="/category/:id" element={<><NavBar /><ItemListContainer greeting={greetingStore}/></>} />
-            <Route path="/item/:id" element={<><NavBar /><ItemDetailContainer /></>} />
-            <Route path="*" element={<Error404 />} />
+          <Route path="/"             element={<ItemListContainer                    /> } />
+          <Route path="/category/:id" element={<ItemListContainer                    /> } />
+          <Route path="/item/:id"     element={<ItemDetailContainer                  /> } />
+          <Route path="*"             element={<Error404 setHasNavbar={setHasNavbar} /> } />
         </Switch>
       </BrowserRouter>
   </div>;

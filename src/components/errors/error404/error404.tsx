@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import './error404.css'
 const icon = require('./helado.png');
 
-const Error404: React.FC<{}> = () => {
+interface IProps {
+  setHasNavbar: (b: boolean) => any;
+}
+
+const Error404: React.FC<IProps> = ({setHasNavbar}) => {
+
+  useEffect(() => {
+    setHasNavbar(false);
+  
+    return () => {
+      setHasNavbar(true);
+    };
+  }, []);
+  
+
   return <div id="error">
     <img id="error-logo" src={icon} alt="logo" />
     <h1>Error 404</h1>
