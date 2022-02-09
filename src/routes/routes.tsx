@@ -7,6 +7,10 @@ import Error404 from "../components/errors/error404/error404";
 
 const Routes = () => {
 
+  /*
+   * Allows the use of NavBar in most of the pages
+   * without unnecessary rendering
+   */
   const [hasNavbar, setHasNavbar] = useState(true);
 
   return <div>

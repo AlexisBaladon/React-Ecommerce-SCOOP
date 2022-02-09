@@ -16,7 +16,7 @@ const ItemDetailContainer: React.FC<{}> = () => {
 
   useEffect(() => {
     
-    // SetItem shouldn't be usesd after being unmounted
+    // SetItem shouldn't be used after being unmounted
     let isMounted = true;
     const setIfMounted = (itm: DtItem) => {
       if (isMounted) setItem(itm);

@@ -10,6 +10,7 @@ interface IProps {
 
 const Error404: React.FC<IProps> = ({setHasNavbar}) => {
 
+  //You shouldn't see the navbar on the error page!
   useEffect(() => {
     setHasNavbar(false);
   
