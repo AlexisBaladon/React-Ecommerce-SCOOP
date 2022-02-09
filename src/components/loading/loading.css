@@ -15,18 +15,3 @@
   font-style: normal;
   color: #E698B7;
 }
-  
-  @media (prefers-reduced-motion: no-preference) {
-    #waiting-img {
-      animation: App-logo-spin infinite 5s linear;
-    }
-  }
-    
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }

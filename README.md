@@ -1,6 +1,50 @@
-# Getting Started with Create React App
+![SCOOP](./readme-logo.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+**Scoop** es un sitio web e-commerce de venta de helados donde podrás:
+
+
+- Ver y filtrar helados por categoría
+- Seleccionar un item para verlo en más detalle
+- Próximamente habrán nuevas funcionalidades como poder agregar items al carrito
+
+
+#  Presentation
+
+
+![GIF](./gif.gif)
+
+
+# Tech
+
+
+Scoop usa algunas de las tecnologías más populares dentro de la programación web:
+
+
+- [ReactJS] - Utilizado para el front end de la aplicación
+- [Typescript] - Lenguaje de fuerte tipado para trabajar con React de forma más organizada
+
+
+# Libraries
+
+
+Dentro de React, son utilizadas las siguientes librerías:
+
+
+- [React-Bootrstrap] - Librería de React utilizada para facilitar componentes prediseñados.
+- [React-Router-Dom] - Fundamental para la selección de vistas de la aplicación de acuerdo al url.
+- [Typescript] - Utilizada para hacer posible el uso de typescript dentro del framework.
+
+
+# Folders
+
+
+![FOLDERS](./folder-diagram.png)
+
+
+# Instructions
+
+Estas instrucciones fueron automáticamente generadas por react-create-app
 
 ## Available Scripts
 

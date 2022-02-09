@@ -1,6 +1,13 @@
 import {obtenerHelado, obtenerHelados} from '../data/item';
+import Item from '../dataTypes/item';
 
-const obtenerPromiseAux = (setItems: Function, getItems: Function): Promise<any> => {
+/* 
+ * Uses getItems to query i from "Database".
+ * After 2 seconds, i gets resolved.
+ * Then, setItems is used with i.
+ * Finally *laughs in asynchronous*, the promise gets returned.
+ */
+const getPromiseAux = (setItems: (i: any) => any, getItems: () => any): Promise<any> => {
   const itemsPromise = new Promise<any>((resolve,reject) => {
     const itemsDB: any = getItems();
     setTimeout(() => {
@@ -17,13 +24,18 @@ const obtenerPromiseAux = (setItems: Function, getItems: Function): Promise<any>
   return itemsPromise;
 }
 
-const obtenerPromiseHelados = (setHelados: Function): Promise<any> => {
-  return obtenerPromiseAux(setHelados, obtenerHelados);
+const getItems = (setItems: (i: Item[]) => any): Promise<any> => {
+  return getPromiseAux(setItems, obtenerHelados);
 }
 
-const getItem = (itemId: number, setHelados: Function): Promise<any> => {
+const getFilteredItems = (itemFilter: (i: Item) => boolean, setItems: (i: Item[]) => any): Promise<any> => {
+  const setItemsWithFilter = (items: Item[]): void => setItems(items.filter(itemFilter));
+  return getPromiseAux(setItemsWithFilter, obtenerHelados);
+}
+
+const getItem = (itemId: number, setItem: (i: Item) => any): Promise<any> => {
   const getItemsAux = () => obtenerHelado(itemId);
-  return obtenerPromiseAux(setHelados, getItemsAux);
+  return getPromiseAux(setItem, getItemsAux);
 }
 
-export {obtenerPromiseHelados, getItem};
+export {getItems, getItem, getFilteredItems};

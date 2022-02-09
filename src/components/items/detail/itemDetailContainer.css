@@ -1,14 +1,15 @@
 /* Go back */
 
 #routes-item-detail {
-    background-color: #E698B7;
-    padding: 2% 0 2% 0;
-  }
-  
-  #routes-item-detail span,
-  #routes-item-detail a {
-    font-size: large;
-    text-decoration: none; 
-    color: white;
-    margin-bottom: 0;
-  }
+  background-color: var(--main-color);
+  padding: 2% 0 2% 0;
+  overflow-y: auto;
+}
+
+#routes-item-detail span,
+#routes-item-detail a {
+  font-size: 96% !important;
+  text-decoration: none; 
+  color: white;
+  margin-bottom: 0;
+}

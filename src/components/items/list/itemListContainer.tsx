@@ -1,34 +1,53 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
-import './itemListContainer.css';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import ItemList from './itemList'
-import DtItem from '../../../dataTypes/item'
-import {obtenerPromiseHelados} from '../../../helpers/promises';
 import Loading from '../../loading/loading';
 
-interface IProps {
-  setId: Function;
-  greeting: string;
-}
+import DtItem from '../../../dataTypes/item'
+import {getFilteredItems, getItems} from '../../../helpers/promises';
 
-const ItemListContainer: FunctionComponent<IProps> = ({setId, greeting}: IProps) => {
-  const [helados,setHelados] = useState<DtItem[]>([]);
+import './itemListContainer.css';
+
+const ItemListContainer: React.FC<{}> = () => {
+
+  //Parameters
+  const { id } = useParams<{id?: string}>();
+
+  //Showed items
+  const [items,setItems] = useState<DtItem[]>([]);
 
   useEffect(() => {
-    obtenerPromiseHelados(setHelados);
-  }, []);
-   
+
+    //SetItem shouldn't be usesd after being unmounted
+    let isMounted = true;
+    const setIfMounted = (item: DtItem[]) => {
+      if (isMounted) setItems(item);
+    }
+
+    //Filters items by category
+    const catFilter = (i: DtItem): boolean => i.category === id;
+
+    //Filters items in case of defining category
+    id ? 
+    getFilteredItems(catFilter, setIfMounted) :
+    getItems(setIfMounted);
+
+    return () => {isMounted = false};
+  }, [id]);
+  
   return <>
     <div id="item-list-container">
-      <div id="titulo-tienda">
-        <h2 id="greeting">{greeting}</h2>
+      <div id="store-title">
+        <h2 id="greeting">Pide tus helados antes de que se derritan!</h2>
       </div>
-      <div id="lista-productos" className= "row">
-        <h2>Tienda</h2>
-        {helados.length?
-         <ItemList setId={setId} items={helados} />:
-         <Loading />
-        }
-        
+      <div id="product-list">
+        <div className= "row justify-content-center">
+          <h2>Tienda</h2>
+          {items.length?
+          <ItemList items={items} />:
+          <Loading />
+          }
+        </div>
       </div>
     </div>
   </>

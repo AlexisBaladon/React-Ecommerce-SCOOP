@@ -1,45 +1,56 @@
 import { Container, Nav, Navbar, Row } from 'react-bootstrap';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import DtItem from '../../../dataTypes/item';
-import { getItem } from "../../../helpers/promises";
+
 import ItemDetail from "./itemDetail";
-import './itemDetailContainer.css'
 import Loading from '../../loading/loading';
 
-interface IProps {
-  setId: Function;
-  itemId: number;
-}
+import { getItem } from "../../../helpers/promises";
+import DtItem from '../../../dataTypes/item';
 
-const ItemDetailContainer = ({setId, itemId}: IProps) => {
-  const [helado,setHelado] = useState<DtItem | null>(null);
+import './itemDetailContainer.css'
+
+const ItemDetailContainer: React.FC<{}> = () => {
+  const { id } = useParams<{id?: string}>();
+  const [item,setItem] = useState<DtItem | null>(null);
 
   useEffect(() => {
-    try {
-      getItem(itemId,setHelado);
-    } catch (err: any) {
-       console.warn('No se ha podido encontrar el item');
+    
+    // SetItem shouldn't be used after being unmounted
+    let isMounted = true;
+    const setIfMounted = (itm: DtItem) => {
+      if (isMounted) setItem(itm);
     }
-  }, [itemId]);
+
+    //Gets item according to parameters
+    try {
+      getItem(Number(id),setIfMounted);
+    } 
+    catch (err: any) {
+      console.warn('No se ha podido encontrar el item');
+    }
+    
+    return () => {isMounted = false};
+  }, [id]);
 
   return <div>
     <Row id="routes-item-detail">
-      <Navbar variant="light">
-        <Container id="nav-container" className="justify-content-center" >
+      <Navbar className="routes-nav-item-detail" variant="light">
+        <Container className="justify-content-center" >
           <Nav>
-            <Nav.Link onClick={() => setId(null)} href="#Listado">Volver al listado</Nav.Link>
+            <Nav.Link as={Link} to="/">Volver al listado</Nav.Link>
             <Navbar.Text>|</Navbar.Text>
-            <Nav.Link onClick={() => setId(null)} href="#Home">Home</Nav.Link>
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Navbar.Text>{" > "}</Navbar.Text>
-            <Nav.Link onClick={() => setId(null)} href="#Listado">Listado</Nav.Link>
+            <Nav.Link as={Link} to="/">Listado</Nav.Link>
             <Navbar.Text>{" > "}</Navbar.Text>
-            <Nav.Link onClick={() => setId(itemId)} href="#Listado">Producto</Nav.Link>
+            <Nav.Link as={Link} to="">Producto</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
     </Row>
-    {helado? 
-    <ItemDetail setId={setId} item={helado}/>:
+    {item? 
+    <ItemDetail item={item}/>:
     <Loading />
     }
   </div>;

@@ -1,31 +1,38 @@
 import { Button, Col, Row } from 'react-bootstrap';
-import DtItem from '../../../dataTypes/item';
 import ItemCount from './itemCount';
+
+import DtItem from '../../../dataTypes/item';
+import ItemCategory from '../../../dataTypes/itemCategory';
+
 import './itemDetail.css';
 
 interface IProps {
-    setId: Function;
     item: DtItem;
 }
 
-const ItemDetail = ({setId, item}: IProps) => {
+const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
 
   //ItemCount
   const onAdd = (num: number, setNum: React.Dispatch<number>): void => setNum(num + 1);
   const onSub = (num: number, setNum: React.Dispatch<number>): void => setNum(num - 1);
   const initial: number = 0;
-  const imgWidth: {paleta: string , recipiente: string } = 
-                  {paleta: "450px", recipiente: "650px"};
 
-  const [title, description, price, pictureUrl, stock]:
-        [string, string, number, string, number] =
-        [item.title, item.description, item.price, item.pictureUrl, item.stock];
+  //Image size according to category
+  const imgWidth = new Map([[ItemCategory.Paleta    , "450px"],
+                            [ItemCategory.Recipiente, "575px"],
+                            [ItemCategory.Postre    , "600px"],
+                          ])
+
+  //Item destructuring
+  const [title, description, price, pictureUrl, stock, category]:
+        [string, string, number, string, number, ItemCategory] =
+        [item.title, item.description, item.price, item.pictureUrl, item.stock, item.category];
 
   return <>
     <div id="item-detail">
       <Row id="info-item-detail" className="align-items-center">
         <Col xl="6" id="img-container-item-detail">
-          <img id="img-item-detail" width={imgWidth.paleta} src={pictureUrl} alt={"Imagen "+title} />
+          <img id="img-item-detail" width={imgWidth.get(category)} src={window.location.origin + pictureUrl} alt={"Imagen "+title} />
         </Col>
         <Col xl="6" id="text-info-item-detail" className="d-flex justify-content-center">
           <div id="text-info-inner-item-detail">
@@ -44,16 +51,14 @@ const ItemDetail = ({setId, item}: IProps) => {
                   onSub = {onSub}
                 />
               </Row>
-              <Row className ="aniadir-carro-container input-group py-2 display-content-center">
-                <Button className = "aniadir-carro" variant="primary">Agregar al carro</Button>
+              <Row className ="add-cart-container input-group py-2 display-content-center">
+                <Button className = "add-cart" variant="primary">Agregar al carro</Button>
               </Row>
             </div>
           </div>
         </Col>
       </Row>
     </div>
-    <Row id="productos-similares-item-detail">
-    </Row>
   </>
 }
 

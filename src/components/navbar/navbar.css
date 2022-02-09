@@ -1,9 +1,9 @@
-#navegador {
-  z-index: 1000;
-  background-color:#E698B7;
+#navigator {
+  background-color:var(--main-color);
   margin:0;
-  width: 100vw;
 }
+
+/* Logo */
 
 #logo {
   margin: 0;
@@ -19,11 +19,7 @@
   opacity: 80%;
 }
 
-#cart {
-  padding: 0;
-  vertical-align:middle;
-  width: 45px; height: 45px;
-}
+/* Options */
 
 .navbar-nav a:hover  {
   opacity: 70%;
@@ -39,10 +35,10 @@
 }
 
 #navbarScroll a {
+  color: whitesmoke;
   margin-right: 2vw;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
-  color: white;
 }
 
 #nav-container {
@@ -52,10 +48,35 @@
   margin-left: 0;
 }
 
+/* Toggler */
+
 .navbar-light .navbar-toggler {
   color: rgba(0, 0, 0, 0) !important;
 }
 
 #nav-toggle {
   margin-right: 1.5%;
+}
+
+/* Dropdown items */
+
+#navigator .dropdown-menu  {
+  background-color: var(--main-semi-dark-color);
+}
+
+#navigator .dropdown-item:hover, #navigator .dropdown-item:active {
+  background-color: var(--main-dark-color);
+}
+
+#navigator .dropdown-menu .dropdown-item {
+  text-decoration: none !important;
+}
+
+/* Cart */
+
+#cart {
+  padding: 0;
+  vertical-align:middle;
+  width: 45px;
+  height: 45px;
 }

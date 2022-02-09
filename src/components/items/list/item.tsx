@@ -1,41 +1,40 @@
-import React, { FunctionComponent } from 'react';
 import {Card} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 import DtItem from '../../../dataTypes/item';
+
 import './item.css';
 
 interface IProps {
   item: DtItem;
   setSelectedItem: React.Dispatch<DtItem> | null;
-  initial: number;
-  onClick: Function;
-  onAdd(num: number, set: React.Dispatch<number>): void;
-  onSub(num: number, set: React.Dispatch<number>): void;
 }
 
-const Item: FunctionComponent<IProps> = 
-  ({item, setSelectedItem, initial, onClick}: IProps) => {
+const Item: React.FC<IProps> = 
+  ({item, setSelectedItem}: IProps) => {
   
   const [title, description, price, pictureUrl, stock]:
         [string, string, number, string, number] =
         [item.title, item.description, item.price, item.pictureUrl, item.stock];
   
-  const selectItem = (): void => {
+  const onClick = (): void => {
     if (setSelectedItem) setSelectedItem(item);
-    if (onClick) onClick()
   };
 
   return <>
-    <Card className="carta" >
-      <Card.Img className="item-img" variant="top" src={pictureUrl}/>
+    <Card className="item-card" >
+        <Card.Img className="item-img" variant="top" src={pictureUrl}/>
       <Card.Body className="body-card">
-        <Card.Title className="titulo-carta btn stretched-link" onClick={selectItem}>
-          <strong>{title}</strong>
-        </Card.Title>
+        <Link to={"/item/"+item.id}>
+          <Card.Title className="item-title btn stretched-link" onClick={onClick}>
+            <strong>{title}</strong>
+          </Card.Title>
+        </Link>
         <hr />
-        <Card.Text className ="item-desc texto-carta">
+        <Card.Text className ="item-desc item-text" >
           {description}
         </Card.Text>
-        <Card.Text className ="item-price texto-carta">
+        <Card.Text className ="item-price item-text">
           <strong>{price} US$</strong>
         </Card.Text>
       </Card.Body>
