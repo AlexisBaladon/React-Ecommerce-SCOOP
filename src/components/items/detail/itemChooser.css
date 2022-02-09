@@ -1,0 +1,13 @@
+#img-container-item-detail {
+  --width: 200px;
+  
+  border: dotted;
+  position: relative;
+  width: 536px;
+  height: 350px;
+}
+
+.img-item-detail {
+  left: 0;
+  position: absolute;
+}
