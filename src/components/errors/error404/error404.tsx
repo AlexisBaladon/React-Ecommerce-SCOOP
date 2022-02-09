@@ -17,6 +17,8 @@ const Error404: React.FC<IProps> = ({setHasNavbar}) => {
     return () => {
       setHasNavbar(true);
     };
+    // setHasNavbar won't change:
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
 
