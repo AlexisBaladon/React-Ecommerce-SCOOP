@@ -13,6 +13,7 @@
 
 
 ![GIF](./gif.gif)
+![GIF-RESPONSIVE](./gifResponsive.gif)
 
 
 # Tech
