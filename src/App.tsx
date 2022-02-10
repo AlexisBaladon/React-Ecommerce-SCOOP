@@ -4,6 +4,11 @@ import ItemChooser from './components/items/detail/itemChooser';
 import Routes from './routes/routes';
 import ImageInfo from './dataTypes/imageInfo'
 import ShowedImageInfo from './dataTypes/ShowedImageInfo';
+import { getFilteredItems, getItems } from './helpers/promises';
+import { obtenerHelados } from './data/item';
+import DtItem from './dataTypes/item';
+import ItemCategory from './dataTypes/itemCategory';
+import { useState } from 'react';
 
 
 function App() {
@@ -13,12 +18,11 @@ function App() {
      new ShowedImageInfo('3','/images/helados/recipientes/vainilla.jpg'),
     ], 500)
 
-
   return <div id="app">
     {/*<Routes />*/}
     
     < ItemChooser 
-    imgInfo={imgInfo}
+    imgInfo={imgInfo} items={obtenerHelados().filter((i: DtItem) => i.category === ItemCategory.Recipiente)}
     />
   </div>
 }
