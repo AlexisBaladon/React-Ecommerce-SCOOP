@@ -5,6 +5,7 @@ import DtItem from '../../../dataTypes/item';
 import ItemCategory from '../../../dataTypes/itemCategory';
 
 import './itemDetail.css';
+import ItemChoserContainer from './itemChoserContainer';
 
 interface IProps {
     item: DtItem;
@@ -32,7 +33,15 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
     <div id="item-detail">
       <Row id="info-item-detail" className="align-items-center">
         <Col xl="6" id="img-container-item-detail">
-          <img id="img-item-detail" width={imgWidth.get(category)} src={window.location.origin + pictureUrl} alt={"Imagen "+title} />
+          {
+            category!==ItemCategory.Recipiente?
+            <img id="img-item-detail" width={imgWidth.get(category)} 
+                  src={window.location.origin + pictureUrl} alt={"Imagen "+title} />
+            :
+            <div id="img-item-detail" style={{width: imgWidth.get(category) }} >
+              <ItemChoserContainer />
+            </div>
+          }
         </Col>
         <Col xl="6" id="text-info-item-detail" className="d-flex justify-content-center">
           <div id="text-info-inner-item-detail">

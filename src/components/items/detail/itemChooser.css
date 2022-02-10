@@ -1,16 +1,23 @@
-#img-container-item-detail {
-  border: dotted;
+#img-container-item-choser {
+  flex-direction: column;
   position: relative;
-  width: 536px;
   height: 350px;
+  width: 383.33px;
+  max-width: 100%;
+
+  margin-top: 0;
+  border-color: whitesmoke;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.05);
+  border-radius: 5%;
 }
 
-.img-item-detail {
+.img-item-choser {
   left: 0;
   position: absolute;
 }
 
-.selected-image-item-detail:hover {
+.selected-image-item-choser:hover {
   opacity: 60%;
   cursor: pointer;
 }
+
