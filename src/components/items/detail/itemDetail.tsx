@@ -25,22 +25,23 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
                           ])
 
   //Item destructuring
-  const [title, description, price, pictureUrl, stock, category]:
-        [string, string, number, string, number, ItemCategory] =
-        [item.title, item.description, item.price, item.pictureUrl, item.stock, item.category];
+  const [id, title, description, price, pictureUrl, stock, category]:
+        [number, string, string, number, string, number, ItemCategory] =
+        [item.id, item.title, item.description, item.price, item.pictureUrl, item.stock, item.category];
 
   return <>
     <div id="item-detail">
       <Row id="info-item-detail" className="align-items-center">
-        <Col xl="6" id="img-container-item-detail">
+        <Col xl="6" id="img-container-item-detail" className="justify-content-center">
           {
             category!==ItemCategory.Recipiente?
             <img id="img-item-detail" width={imgWidth.get(category)} 
                   src={window.location.origin + pictureUrl} alt={"Imagen "+title} />
             :
-            <div id="img-item-detail" style={{width: imgWidth.get(category) }} >
-              <ItemChoserContainer />
-            </div>
+            <Row className="justify-content-center">
+              <div id="title-item-choser"><h3>Personaliza tu helado:</h3></div>
+              <ItemChoserContainer id={id}/>
+            </Row>
           }
         </Col>
         <Col xl="6" id="text-info-item-detail" className="d-flex justify-content-center">

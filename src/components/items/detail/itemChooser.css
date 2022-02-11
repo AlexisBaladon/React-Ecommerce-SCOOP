@@ -1,23 +1,30 @@
-#img-container-item-choser {
+#images-container-item-choser {
   flex-direction: column;
   position: relative;
-  height: 350px;
-  width: 383.33px;
   max-width: 100%;
 
+  overflow: hidden;
   margin-top: 0;
-  border-color: whitesmoke;
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.05);
   border-radius: 5%;
 }
 
 .img-item-choser {
   left: 0;
   position: absolute;
+  height: 100%;
+  width:100%;
+  object-fit: cover; 
 }
 
-.selected-image-item-choser:hover {
-  opacity: 60%;
+.img-container-item-choser {
+  position: absolute;
+  border: solid;
+  border-color: white;
+  height: 100%;
+}
+
+.img-item-choser:hover {
+  opacity: 80%;
   cursor: pointer;
 }
 

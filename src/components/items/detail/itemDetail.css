@@ -22,6 +22,11 @@
   border-radius: 5%;
 }
 
+#title-item-choser {
+  color: var(--main-color);
+  padding-bottom: 5%;
+}
+
 /* Info container */
 
 #info-item-detail {

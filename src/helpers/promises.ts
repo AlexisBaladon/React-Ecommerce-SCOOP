@@ -1,4 +1,6 @@
+import { getFlavor, getFlavors } from '../data/flavors';
 import {obtenerHelado, obtenerHelados} from '../data/item';
+import Flavor from '../dataTypes/flavor';
 import Item from '../dataTypes/item';
 
 /* 
@@ -24,6 +26,8 @@ const getPromiseAux = (setItems: (i: any) => any, getItems: () => any): Promise<
   return itemsPromise;
 }
 
+/* Items */
+
 const getItems = (setItems: (i: Item[]) => any): Promise<any> => {
   return getPromiseAux(setItems, obtenerHelados);
 }
@@ -38,4 +42,18 @@ const getItem = (itemId: number, setItem: (i: Item) => any): Promise<any> => {
   return getPromiseAux(setItem, getItemsAux);
 }
 
-export {getItems, getItem, getFilteredItems};
+/* Flavors */
+
+const getPromiseFlavors = (setItems: (i: Flavor[]) => any): Promise<any> => {
+  return getPromiseAux(setItems, getFlavors);
+}
+
+const getPromiseFlavor = (itemId: number, setItem: (i: Flavor) => any): Promise<any> => {
+  const getFlavorsAux = () => getFlavor(itemId);
+  return getPromiseAux(setItem, getFlavorsAux);
+}
+
+
+
+export {getItems, getItem, getFilteredItems,
+        getPromiseFlavors, getPromiseFlavor};

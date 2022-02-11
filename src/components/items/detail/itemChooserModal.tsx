@@ -1,18 +1,17 @@
 import { useState } from "react";
-import { Button, Card, Modal } from "react-bootstrap";
-import DtItem from "../../../dataTypes/item";
+import { Button, Card, Modal, Row } from "react-bootstrap";
+import Flavor from "../../../dataTypes/flavor";
 
 import './itemChooserModal.css'
 
 interface IProps {
-  items: DtItem[];
+  items: Flavor[];
   show: boolean;
   onHide: () => any;
   selectItemById: (id: number) => any
 }
 
-const ModalRecipientes: React.FC<IProps> = ({items, show,onHide, selectItemById}) => {
-  const [newId, setNewId] = useState<number | null>(null);
+const ModalRecipientes: React.FC<IProps> = ({items, show, onHide, selectItemById}) => {
 
     return (
       <Modal
@@ -24,31 +23,25 @@ const ModalRecipientes: React.FC<IProps> = ({items, show,onHide, selectItemById}
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-          Elige un sabor
+            Elige un sabor
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="row" style={{overflowY: "auto"}}>
+          <Row className="item-container-choser-modal justify-content-center">
             {items.map(i => {
-                return <div key={i.id} style={{width: "10rem"}} className="card-img-modal">
-                    <Card className="item-card" style={{}} >
-                        <Card.Img width="100px" variant="top" src={window.location.origin + i.pictureUrl}/>
-                    <Card.Body style={{padding: "0 0 15px 0"}} className="body-card">
-                        <Card.Title style={{ height: "15px"}} onClick={() => {setNewId(i.id)}} className="item-title btn stretched-link">
-                            {i.title}
-                        </Card.Title>
+                return <div key={i.id} className="card-img-modal">
+                  <Card className="item-card" >
+                    <Card.Img width="100px" variant="top" src={window.location.origin + i.pictureUrl}/>
+                    <Card.Body className="body-choser-modal" >
+                      <Card.Title className="title-choser-modal btn stretched-link" onClick={() => {selectItemById(i.id); onHide();}}>
+                        {i.title}
+                      </Card.Title>
                     </Card.Body>
-                    </Card>
+                  </Card>
                 </div> 
             })}
-            
-          </div>
-          
+          </Row>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={newId==null ? onHide : () => {selectItemById(newId); onHide();}}>Aceptar</Button>
-          <Button onClick={onHide}>Cerrar</Button>
-        </Modal.Footer>
       </Modal>
     );
   }
