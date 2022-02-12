@@ -4,6 +4,7 @@ import NavBar from "../components/navbar/navbar";
 import ItemDetailContainer from "../components/items/detail/itemDetailContainer";
 import ItemListContainer from "../components/items/list/itemListContainer";
 import Error404 from "../components/errors/error404/error404";
+import Cart from "../components/cart/cart";
 
 const Routes = () => {
 
@@ -21,6 +22,7 @@ const Routes = () => {
           <Route path="/"             element={<ItemListContainer                    /> } />
           <Route path="/category/:id" element={<ItemListContainer                    /> } />
           <Route path="/item/:id"     element={<ItemDetailContainer                  /> } />
+          <Route path="/cart"         element={<Cart                                 /> } />
           <Route path="*"             element={<Error404 setHasNavbar={setHasNavbar} /> } />
         </Switch>
       </BrowserRouter>

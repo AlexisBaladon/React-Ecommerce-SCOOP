@@ -1,30 +1,31 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button} from 'react-bootstrap';
 
 import './itemCount.css'
 
 interface IProps {
   stock: number;
-  initial: number;
-  onAdd(num: number, set: React.Dispatch<number>): void;
-  onSub(num: number, set: React.Dispatch<number>): void;
+  productCount: number;
+  increase(): void;
+  decrease(): void;
+  onAdd(): void;
 }
 
-const ItemCount: React.FC<IProps> = ({stock, initial, onAdd, onSub}: IProps) => {
-  const [productCount, setProductCount] = useState<number>(initial);
-  const add = () => {if (productCount < stock) onAdd(productCount, setProductCount)};
-  const sub = () => {if (productCount >     0) onSub(productCount, setProductCount)};
+const ItemCount: React.FC<IProps> = ({stock, productCount, increase, decrease, onAdd}: IProps) => {
 
   return <> <div className="item-count input-group">
-              <span className="item-count-span" onClick={sub}>
+              <span className="item-count-span" onClick={decrease}>
                   <Button className="item-count-btn item-count-element">-</Button>
               </span>
               <input type="text" name="cantItems" 
                      className="item-count-element form-control input-number" 
                      readOnly value={productCount} min="0" max={stock} />
-                <span className="item-count-span" onClick={add}>
+                <span className="item-count-span" onClick={increase}>
                   <Button className="item-count-btn item-count-element">+</Button>
                 </span>
+            </div>
+            <div className ="add-cart-container input-group py-2 display-content-center">
+              <Button className = "add-cart" variant="primary" onClick={onAdd}>Agregar al carro</Button>
             </div>
         </>
         

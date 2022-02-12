@@ -1,5 +1,9 @@
 /* Go back */
 
+#routes-container-item-detail {
+  padding: 2% 0 2% 0;
+}
+
 #routes-item-detail {
   background-color: var(--main-color);
   padding: 2% 0 2% 0;

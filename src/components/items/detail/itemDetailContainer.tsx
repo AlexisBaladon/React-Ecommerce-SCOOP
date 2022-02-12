@@ -36,7 +36,7 @@ const ItemDetailContainer: React.FC<{}> = () => {
   return <div>
     <Row id="routes-item-detail">
       <Navbar className="routes-nav-item-detail" variant="light">
-        <Container className="justify-content-center" >
+        <Container id="routes-container-item-detail" className="justify-content-center" >
           <Nav>
             <Nav.Link as={Link} to="/">Volver al listado</Nav.Link>
             <Navbar.Text>|</Navbar.Text>

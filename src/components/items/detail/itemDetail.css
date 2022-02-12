@@ -99,7 +99,8 @@
 /* Cart */
 
 .add-cart-container {
-    width: 85%;
+    padding-left: 0; padding-right: 0;
+    width: 100%;
     display: inline-block;
   }
 

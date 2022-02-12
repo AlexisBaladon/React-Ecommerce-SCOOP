@@ -6,6 +6,8 @@ import ItemCategory from '../../../dataTypes/itemCategory';
 
 import './itemDetail.css';
 import ItemChoserContainer from './itemChoserContainer';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 interface IProps {
     item: DtItem;
@@ -13,21 +15,55 @@ interface IProps {
 
 const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
 
-  //ItemCount
-  const onAdd = (num: number, setNum: React.Dispatch<number>): void => setNum(num + 1);
-  const onSub = (num: number, setNum: React.Dispatch<number>): void => setNum(num - 1);
-  const initial: number = 0;
+  //Item destructuring
+  const [itemId, title, description, price, pictureUrl, stock, category]:
+        [number, string, string, number, string, number, ItemCategory] =
+        [item.id, item.title, item.description, item.price, item.pictureUrl, item.stock, item.category];
 
+  //ItemCount
+  const initial: number = 0;
+  const [productCount, setProductCount] = useState<number>(initial);
+  const [inCart, setInCart] = useState<boolean>(false);
+  
+  const increase = (): void => {
+    if (productCount < stock) setProductCount(productCount + 1);
+  }
+  
+  const decrease = (): void => {
+    if (productCount > 0) setProductCount(productCount - 1);
+  }
+
+  const onAdd = (): void => {
+    if (productCount > 0) setInCart(true);
+  }
+
+  //Item count is only showed when the item is not in the cart
+  const BuyItem: React.FC<{}> = () => 
+    inCart ?
+    <>
+      <div style={{fontStyle:"italic"}}>
+        <p style={{marginBottom:"0px"}}> Producto agregado al carrito! </p>
+      </div>
+      <Link to="/cart">
+        <div className = "py-2">
+          <Button className = "add-cart" variant="primary">Ver carrito</Button>
+        </div>
+      </Link>
+    </>
+    :
+    <ItemCount
+      stock = {stock}
+      productCount = {productCount}
+      increase = {increase}
+      decrease = {decrease}
+      onAdd = {onAdd}
+    />
+  
   //Image size according to category
   const imgWidth = new Map([[ItemCategory.Paleta    , "450px"],
                             [ItemCategory.Recipiente, "575px"],
                             [ItemCategory.Postre    , "600px"],
                           ])
-
-  //Item destructuring
-  const [id, title, description, price, pictureUrl, stock, category]:
-        [number, string, string, number, string, number, ItemCategory] =
-        [item.id, item.title, item.description, item.price, item.pictureUrl, item.stock, item.category];
 
   return <>
     <div id="item-detail">
@@ -40,7 +76,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
             :
             <Row className="justify-content-center">
               <div id="title-item-choser"><h3>Personaliza tu helado:</h3></div>
-              <ItemChoserContainer id={id}/>
+              <ItemChoserContainer id={itemId}/>
             </Row>
           }
         </Col>
@@ -54,15 +90,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
             <div id="bottom-info-item-detail">
               <p id="stock-item-detail">Stock: {stock}</p>
               <Row className = "item-count-container ">
-                <ItemCount
-                  stock = {stock}
-                  initial = {initial}
-                  onAdd = {onAdd}
-                  onSub = {onSub}
-                />
-              </Row>
-              <Row className ="add-cart-container input-group py-2 display-content-center">
-                <Button className = "add-cart" variant="primary">Agregar al carro</Button>
+                <BuyItem /> {/* Dynamically selected component*/}
               </Row>
             </div>
           </div>
