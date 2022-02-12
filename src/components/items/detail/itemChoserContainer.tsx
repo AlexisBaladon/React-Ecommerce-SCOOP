@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { getFlavors } from '../../../data/flavors';
-import { obtenerHelados } from '../../../data/item';
 import Flavor from '../../../dataTypes/flavor';
-import Item from '../../../dataTypes/item';
-import DtItem from '../../../dataTypes/item';
-import ItemCategory from '../../../dataTypes/itemCategory';
 import { getPromiseFlavors } from '../../../helpers/promises';
-import ItemChooser from './itemChooser'
+import ItemChooser from './itemChoser'
 
 interface IProps {
   id: number;
