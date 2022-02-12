@@ -6,14 +6,18 @@ import ItemCategory from '../../../dataTypes/itemCategory';
 
 import './itemDetail.css';
 import ItemChoserContainer from './itemChoserContainer';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { CartContext } from '../../../context/context';
 
 interface IProps {
     item: DtItem;
 }
 
 const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
+  //Cart context
+  const cartData = useContext(CartContext);
+  const addItem = cartData.addItem;
 
   //Item destructuring
   const [itemId, title, description, price, pictureUrl, stock, category]:
@@ -34,7 +38,10 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
   }
 
   const onAdd = (): void => {
-    if (productCount > 0) setInCart(true);
+    if (productCount > 0) {
+      setInCart(true);
+      addItem(item);
+    }
   }
 
   //Item count is only showed when the item is not in the cart

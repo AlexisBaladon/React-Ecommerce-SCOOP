@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { CartContext } from '../../context/context';
 
 const Cart = () => {
+  const cartData = useContext(CartContext);
+  
   return (
-    <img className="py-5" src={require('./carrito.jpg')} alt="No hay tal carrito" />
+    <div>
+      {cartData.items.map((it) =>
+        <div key={it.id}>
+          <h1>{it.title}</h1>
+        </div>   
+      )}
+    </div>
   )
 }
 
