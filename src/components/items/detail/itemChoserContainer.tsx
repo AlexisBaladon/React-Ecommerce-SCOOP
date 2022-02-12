@@ -12,7 +12,15 @@ const ItemChoserContainer: React.FC<IProps> = ({id}) => {
   const [selectedFlavors, setSelectedFlavors] = useState<Flavor[]>([]);
 
   useEffect(() => {
-    getPromiseFlavors(setFlavors);
+    let isMounted = true;
+
+    const setIfMounted = (flavors: Flavor[]) => {
+      if (isMounted) {setFlavors(flavors)}
+    }
+
+    getPromiseFlavors(setIfMounted);
+    
+    return () => {isMounted = false}
   }, [])
 
   return (
