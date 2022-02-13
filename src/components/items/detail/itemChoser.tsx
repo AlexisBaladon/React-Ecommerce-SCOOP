@@ -9,39 +9,39 @@ import './itemChoser.css'
 interface IProps {
   imgWidth: number;
   itemId: number;
-  items: Flavor[];
-  selectedItems: Flavor[];
-  setSelectedItems: any;
+  flavors: Flavor[];
+  selectedFlavors: Flavor[];
+  setSelectedFlavors: any;
 }
 
-const ItemChooser: React.FC<IProps> = ({imgWidth, itemId, items, selectedItems, setSelectedItems}) => {
+const ItemChooser: React.FC<IProps> = ({imgWidth, itemId, flavors, selectedFlavors, setSelectedFlavors}) => {
   const [show, setShow] = useState<boolean>(false);
   const [changedItemIndex, setChangedItemIndex] = useState<number>(0);
 
   
   //Number of flavors according to item id
-  const numFlavorsById = new Map([[5, 2], //1/2 Liter
-                                  [6, 3], //1   Liter
-                                  [7, 4], //2   Liter
+  const numFlavorsById = new Map([[5, 2], //1/2 Litre
+                                  [6, 3], //1   Litre
+                                  [7, 4], //2   Litre
                                  ])
 
-  const magicNumberById = new Map([[5, 200], //1/2 Liter
-                                   [6, 150], //1   Liter
-                                   [7, 133], //2   Liter
+  const magicNumberById = new Map([[5, 200], //1/2 Litre
+                                   [6, 150], //1   Litre
+                                   [7, 133], //2   Litre
                                    ])                       
 
   useEffect(() => {
-    setSelectedItems(items.slice(0,numFlavorsById.get(itemId)));
-  }, [items])
-
+    setSelectedFlavors(flavors.slice(0,numFlavorsById.get(itemId)));
+  }, [flavors])
 
   const selectItemById = (newItemId: number) => {
-    let newSelectedItems = selectedItems;
-    const newItem = items.find(i => i.id === newItemId)
+    let newSelectedItems = selectedFlavors;
+    const newItem = flavors.find(i => i.id === newItemId)
 
     if (newItem instanceof Flavor) {
       newSelectedItems[changedItemIndex] = newItem;
-      setSelectedItems(newSelectedItems);
+      //Slice makes a copy of the item, otherwise it will have the same reference
+      setSelectedFlavors(newSelectedItems.slice());
     }
     else {
       console.warn("Changed item couldn't be finded");
@@ -49,15 +49,15 @@ const ItemChooser: React.FC<IProps> = ({imgWidth, itemId, items, selectedItems, 
   }
 
   //numImages destructuring
-  const numImages: number = selectedItems.length;
+  const numImages: number = selectedFlavors.length;
 
   return <>
-    <ModalRecipientes items={items} show={show} onHide={() => setShow(false)}
+    <ModalRecipientes items={flavors} show={show} onHide={() => setShow(false)}
                       selectItemById={selectItemById}/>
     <div id="images-container-item-choser" style={{ width: imgWidth, height: imgWidth*2/3}}>
       
       {//Image mapping
-      selectedItems.map((dtItem, i) => {
+      selectedFlavors.map((dtItem, i) => {
 
         //Item destructuring
           const [magicNumber, pictureUrl, title]: [number , string, string] = 

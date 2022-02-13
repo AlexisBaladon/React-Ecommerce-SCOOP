@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../../context/cartContext';
 import { Button, Col, Row } from 'react-bootstrap';
@@ -7,12 +7,12 @@ import ItemChoserContainer from './itemChoserContainer';
 import ItemCount from './itemCount';
 
 import ItemShowCase from '../../../dataTypes/itemShowcase';
-import ItemTicket from '../../../dataTypes/itemTicket';
 import ItemCategory from '../../../dataTypes/category';
 import ProductDetail from '../../../dataTypes/ProductDetail';
 import { createTicket } from '../../../helpers/itemFactory';
 
 import './itemDetail.css';
+import ProductDetailSimple from '../../../dataTypes/ProductDetailSimple';
 
 interface IProps {
   item: ItemShowCase;
@@ -21,8 +21,7 @@ interface IProps {
 const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
 
   //Cart context
-  const cartData = useContext(CartContext);
-  const [items, addItem] = [cartData.items, cartData.addItem];
+  const cartContext = useContext(CartContext);
 
   //Item destructuring
   const [itemId, title, description, price, pictureUrl, stock, category]:
@@ -31,25 +30,35 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
 
   //ItemCount
   const initial: number = 0;
-  const [productCount, setProductCount] = useState<number>(initial);
   
-  const increase = (): void => {
+  const increase = (productCount: number, setProductCount:(pc: number) => any): void => {
     if (productCount < stock) setProductCount(productCount + 1);
   }
   
-  const decrease = (): void => {
+  const decrease = (productCount: number, setProductCount:(pc: number) => any): void => {
     if (productCount > 0) setProductCount(productCount - 1);
   }
 
   //Product details (different categories have different details)
-  const [productDetail, setProductDetail] = useState<ProductDetail>(new ProductDetail());
+  const [productDetail, setProductDetail] = useState<ProductDetail>(new ProductDetailSimple());
+  const [first, setfirst] = useState<boolean>(false);
+
+  useEffect(() => {
+    setfirst(cartContext.isInCart(itemId, productDetail))
+  })
+
+  useEffect(() => {
+    console.log(productDetail)
+    setfirst(cartContext.isInCart(itemId, productDetail));
+  }, [productDetail])
+  
 
   //Add to cart
-  const onAdd = (): void => {
+  const onAdd = (productCount: number): void => {
     if (productCount > 0) {
       try {
         const newTicket = createTicket(item, productDetail, productCount);
-        addItem(newTicket);
+        cartContext.addItem(newTicket);
       }
       catch (err: any) {
         if (err instanceof Error) {
@@ -91,8 +100,8 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
             <div id="bottom-info-item-detail">
               <p id="stock-item-detail">Stock: {stock}</p>
               <Row className = "item-count-container ">
-                {/* Dynamically selected component*/}
-                {items.some((it: ItemTicket) => item.id === it.id) ?
+                {/* Dynamically selected component*/ console.log("elige: "+cartContext.isInCart(itemId, productDetail) )}
+                {first ?
                 <>
                   <div style={{fontStyle:"italic"}}>
                     <p style={{marginBottom:"0px"}}> Producto agregado al carrito! </p>
@@ -106,7 +115,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
                 :
                 <ItemCount
                   stock = {stock}
-                  productCount = {productCount}
+                  initial = {initial}
                   increase = {increase}
                   decrease = {decrease}
                   onAdd = {onAdd}

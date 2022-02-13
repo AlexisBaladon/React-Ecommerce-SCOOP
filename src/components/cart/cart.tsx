@@ -14,7 +14,7 @@ const Cart = () => {
         [it.id, it.getTicketTitle(), it.amount];
 
         return (
-          <div key={id}>
+          <div key={id + title}>
             <h1>{title}</h1>
             <h2>{amount}</h2>
           </div>

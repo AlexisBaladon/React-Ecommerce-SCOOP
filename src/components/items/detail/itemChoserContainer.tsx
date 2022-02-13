@@ -21,23 +21,24 @@ const ItemChoserContainer: React.FC<IProps> = ({id, setProductDetail}) => {
       if (isMounted) {setFlavors(flavors)}
     }
 
-    getPromiseFlavors(setIfMounted);
+    getPromiseFlavors(setIfMounted)
     
     return () => {isMounted = false}
   }, [])
 
+  //update details according to flavors showed on screen
   useEffect(() => {
-    setProductDetail(new ProductDetailRecipiente(flavors));
-  }, [flavors])
+    //slice passes de value by copy
+    setProductDetail(new ProductDetailRecipiente(selectedFlavors.slice()));
+  }, [selectedFlavors])
   
-
   return (
     <ItemChooser 
       imgWidth={500}
       itemId={id}
-      items={flavors}
-      selectedItems={selectedFlavors}
-      setSelectedItems={setSelectedFlavors}
+      flavors={flavors}
+      selectedFlavors={selectedFlavors}
+      setSelectedFlavors={setSelectedFlavors}
     />
   )
 }

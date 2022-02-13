@@ -1,7 +1,6 @@
 import Item from "../dataTypes/item";
 import ItemCategory from "../dataTypes/category";
 import ItemTicket from "../dataTypes/itemTicket";
-import ItemTicketRecipiente from "../dataTypes/ProductDetailRecipiente";
 import ProductDetail from "../dataTypes/ProductDetail";
 
 const createTicket = (item: Item, productDetail: ProductDetail, amount: number): ItemTicket => {

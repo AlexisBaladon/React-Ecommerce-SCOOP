@@ -15,6 +15,10 @@ abstract class Item {
     this.category = category;
   }
   
+  equals(it: Item): boolean {
+    return it.id === this.id;
+  }
+
 }
 
 export default Item;

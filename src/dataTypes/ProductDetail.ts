@@ -1,12 +1,13 @@
-import Category from "./category";
-
-class ProductDetail {
-    constructor() {
-    }
-
-    getTicketTitle(title: string): string {
-      return title;
-    } 
+abstract class ProductDetail {
+  
+  constructor() {
   }
+
+  abstract equals(pd: ProductDetail): boolean;
+
+  getTicketTitle(title: string): string {
+    return title;
+  }
+}
   
   export default ProductDetail;

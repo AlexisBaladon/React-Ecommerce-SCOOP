@@ -12,6 +12,14 @@ class ItemTicket extends Item {
     this.amount = amount;
   }
 
+  sameDetails(pd: ProductDetail) {
+    return pd.equals(this.productDetail);
+  }
+
+  sameProductAs(it: ItemTicket): boolean {
+    return it.equals(this) && it.sameDetails(this.productDetail);
+  }
+
   getTicketTitle(): string {
     return this.productDetail.getTicketTitle(this.title);
   }
