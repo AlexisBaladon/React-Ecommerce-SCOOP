@@ -10,9 +10,9 @@ import ItemShowCase from '../../../dataTypes/itemShowcase';
 import ItemCategory from '../../../dataTypes/category';
 import ProductDetail from '../../../dataTypes/ProductDetail';
 import { createTicket } from '../../../helpers/itemFactory';
+import ProductDetailSimple from '../../../dataTypes/ProductDetailSimple';
 
 import './itemDetail.css';
-import ProductDetailSimple from '../../../dataTypes/ProductDetailSimple';
 
 interface IProps {
   item: ItemShowCase;
@@ -44,14 +44,8 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
   const [first, setfirst] = useState<boolean>(false);
 
   useEffect(() => {
-    setfirst(cartContext.isInCart(itemId, productDetail))
-  })
-
-  useEffect(() => {
-    console.log(productDetail)
     setfirst(cartContext.isInCart(itemId, productDetail));
   }, [productDetail])
-  
 
   //Add to cart
   const onAdd = (productCount: number): void => {
@@ -100,7 +94,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
             <div id="bottom-info-item-detail">
               <p id="stock-item-detail">Stock: {stock}</p>
               <Row className = "item-count-container ">
-                {/* Dynamically selected component*/ console.log("elige: "+cartContext.isInCart(itemId, productDetail) )}
+                {/* Dynamically selected component*/}
                 {first ?
                 <>
                   <div style={{fontStyle:"italic"}}>

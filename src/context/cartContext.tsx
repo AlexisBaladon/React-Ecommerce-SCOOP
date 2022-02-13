@@ -35,7 +35,7 @@ const CartProvider: React.FC<{}> = ({children}) => {
 
   const deleteItem = (deletedItem: ItemTicket): void => {
     setCartItems(cartItems.filter((it: ItemTicket) => {
-      return it.equals(deletedItem) && !deletedItem.sameProductAs(it)
+      return !(it.equals(deletedItem) && it.sameProductAs(deletedItem));
     }));
   }
 
@@ -44,7 +44,6 @@ const CartProvider: React.FC<{}> = ({children}) => {
   }
 
   const isInCart = (itemId: number, productDetail: ProductDetail): boolean => {
-    console.log(cartItems)
     return cartItems.some((it) => it.id === itemId && it.sameDetails(productDetail));
   }
 
