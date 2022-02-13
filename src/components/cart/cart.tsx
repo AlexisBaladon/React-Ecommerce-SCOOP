@@ -1,16 +1,26 @@
 import React, { useContext } from 'react'
-import { CartContext } from '../../context/context';
+import { CartContext } from '../../context/cartContext';
 
 const Cart = () => {
   const cartData = useContext(CartContext);
-  
+  const items = cartData.items;
+
   return (
     <div>
-      {cartData.items.map((it) =>
-        <div key={it.id}>
-          <h1>{it.title}</h1>
-        </div>   
-      )}
+      {items.map((it) => {
+        
+        //item destructuring
+        const [id, title, amount] : [number, string, number] =
+        [it.id, it.getTicketTitle(), it.amount];
+
+        return (
+          <div key={id}>
+            <h1>{title}</h1>
+            <h2>{amount}</h2>
+          </div>
+        )
+      })}
+      
     </div>
   )
 }

@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import ItemList from './itemList'
 import Loading from '../../loading/loading';
 
-import DtItem from '../../../dataTypes/item'
-import {getFilteredItems, getItems} from '../../../helpers/promises';
+import ItemShowcase from '../../../dataTypes/itemShowcase'
+import {getPromiseFilteredItems, getPromiseItems} from '../../../helpers/promises';
 
 import './itemListContainer.css';
 
@@ -14,23 +14,23 @@ const ItemListContainer: React.FC<{}> = () => {
   const { id } = useParams<{id?: string}>();
 
   //Showed items
-  const [items,setItems] = useState<DtItem[]>([]);
+  const [items,setItems] = useState<ItemShowcase[]>([]);
 
   useEffect(() => {
 
     //SetItem shouldn't be usesd after being unmounted
     let isMounted = true;
-    const setIfMounted = (item: DtItem[]) => {
+    const setIfMounted = (item: ItemShowcase[]) => {
       if (isMounted) setItems(item);
     }
 
     //Filters items by category
-    const catFilter = (i: DtItem): boolean => i.category === id;
+    const catFilter = (i: ItemShowcase): boolean => i.category === id;
 
     //Filters items in case of defining category
     id ? 
-    getFilteredItems(catFilter, setIfMounted) :
-    getItems(setIfMounted);
+    getPromiseFilteredItems(catFilter, setIfMounted) :
+    getPromiseItems(setIfMounted);
 
     return () => {isMounted = false};
   }, [id]);

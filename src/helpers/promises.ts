@@ -1,7 +1,7 @@
 import { getFlavor, getFlavors } from '../data/flavors';
-import {obtenerHelado, obtenerHelados} from '../data/item';
+import {getItem, getItems} from '../data/item';
 import Flavor from '../dataTypes/flavor';
-import Item from '../dataTypes/item';
+import ItemShowcase from '../dataTypes/itemShowcase';
 
 /* 
  * Uses getItems to query i from "Database".
@@ -28,17 +28,17 @@ const getPromiseAux = (setItems: (i: any) => any, getItems: () => any): Promise<
 
 /* Items */
 
-const getItems = (setItems: (i: Item[]) => any): Promise<any> => {
-  return getPromiseAux(setItems, obtenerHelados);
+const getPromiseItems = (setItems: (i: ItemShowcase[]) => any): Promise<any> => {
+  return getPromiseAux(setItems, getItems);
 }
 
-const getFilteredItems = (itemFilter: (i: Item) => boolean, setItems: (i: Item[]) => any): Promise<any> => {
-  const setItemsWithFilter = (items: Item[]): void => setItems(items.filter(itemFilter));
-  return getPromiseAux(setItemsWithFilter, obtenerHelados);
+const getPromiseFilteredItems = (itemFilter: (i: ItemShowcase) => boolean, setItems: (i: ItemShowcase[]) => any): Promise<any> => {
+  const setItemsWithFilter = (items: ItemShowcase[]): void => setItems(items.filter(itemFilter));
+  return getPromiseAux(setItemsWithFilter, getItems);
 }
 
-const getItem = (itemId: number, setItem: (i: Item) => any): Promise<any> => {
-  const getItemsAux = () => obtenerHelado(itemId);
+const getPromiseItem = (itemId: number, setItem: (i: ItemShowcase) => any): Promise<any> => {
+  const getItemsAux = () => getItem(itemId);
   return getPromiseAux(setItem, getItemsAux);
 }
 
@@ -55,5 +55,5 @@ const getPromiseFlavor = (itemId: number, setItem: (i: Flavor) => any): Promise<
 
 
 
-export {getItems, getItem, getFilteredItems,
+export {getPromiseItems, getPromiseItem, getPromiseFilteredItems,
         getPromiseFlavors, getPromiseFlavor};

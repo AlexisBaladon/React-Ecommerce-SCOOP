@@ -5,26 +5,26 @@ import { useEffect, useState } from "react";
 import ItemDetail from "./itemDetail";
 import Loading from '../../loading/loading';
 
-import { getItem } from "../../../helpers/promises";
-import DtItem from '../../../dataTypes/item';
+import { getPromiseItem } from "../../../helpers/promises";
+import ItemShowcase from '../../../dataTypes/itemShowcase';
 
 import './itemDetailContainer.css'
 
 const ItemDetailContainer: React.FC<{}> = () => {
   const { id } = useParams<{id?: string}>();
-  const [item,setItem] = useState<DtItem | null>(null);
+  const [item,setItem] = useState<ItemShowcase | null>(null);
 
   useEffect(() => {
     
     // SetItem shouldn't be used after being unmounted
     let isMounted = true;
-    const setIfMounted = (itm: DtItem) => {
+    const setIfMounted = (itm: ItemShowcase) => {
       if (isMounted) setItem(itm);
     }
 
     //Gets item according to parameters
     try {
-      getItem(Number(id),setIfMounted);
+      getPromiseItem(Number(id),setIfMounted);
     } 
     catch (err: any) {
       console.warn('No se ha podido encontrar el item');

@@ -1,7 +1,7 @@
 import {Navbar as BTNavBar, Nav, Container, NavDropdown} from 'react-bootstrap';
 import CartWidget from '../cartWidget/cartWidget';
 import { Link } from 'react-router-dom';
-import ItemCategory from '../../dataTypes/itemCategory';
+import ItemCategory from '../../dataTypes/category';
 
 import './navbar.css';
 

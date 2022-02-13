@@ -1,8 +1,8 @@
 import Item from './item';
-import DtItem from '../../../dataTypes/item';
+import ItemShowcase from '../../../dataTypes/itemShowcase';
 
 interface IProps {
-  items: DtItem[];
+  items: ItemShowcase[];
 }
 
 const ItemList: React.FC<IProps> = ({items}: IProps) => {

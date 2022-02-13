@@ -1,23 +1,28 @@
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { CartContext } from '../../../context/cartContext';
 import { Button, Col, Row } from 'react-bootstrap';
+
+import ItemChoserContainer from './itemChoserContainer';
 import ItemCount from './itemCount';
 
-import DtItem from '../../../dataTypes/item';
-import ItemCategory from '../../../dataTypes/itemCategory';
+import ItemShowCase from '../../../dataTypes/itemShowcase';
+import ItemTicket from '../../../dataTypes/itemTicket';
+import ItemCategory from '../../../dataTypes/category';
+import ProductDetail from '../../../dataTypes/ProductDetail';
+import { createTicket } from '../../../helpers/itemFactory';
 
 import './itemDetail.css';
-import ItemChoserContainer from './itemChoserContainer';
-import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { CartContext } from '../../../context/context';
 
 interface IProps {
-    item: DtItem;
+  item: ItemShowCase;
 }
 
 const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
+
   //Cart context
   const cartData = useContext(CartContext);
-  const addItem = cartData.addItem;
+  const [items, addItem] = [cartData.items, cartData.addItem];
 
   //Item destructuring
   const [itemId, title, description, price, pictureUrl, stock, category]:
@@ -27,7 +32,6 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
   //ItemCount
   const initial: number = 0;
   const [productCount, setProductCount] = useState<number>(initial);
-  const [inCart, setInCart] = useState<boolean>(false);
   
   const increase = (): void => {
     if (productCount < stock) setProductCount(productCount + 1);
@@ -37,48 +41,24 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
     if (productCount > 0) setProductCount(productCount - 1);
   }
 
+  //Product details (different categories have different details)
+  const [productDetail, setProductDetail] = useState<ProductDetail>(new ProductDetail());
+
+  //Add to cart
   const onAdd = (): void => {
     if (productCount > 0) {
-      setInCart(true);
-      addItem(item);
+      try {
+        const newTicket = createTicket(item, productDetail, productCount);
+        addItem(newTicket);
+      }
+      catch (err: any) {
+        if (err instanceof Error) {
+          console.warn(err.message);
+        }
+      }
     }
   }
-
-  //Item count is only showed when the item is not in the cart
-  const BuyItem: React.FC<{}> = () => 
-    inCart ?
-    <>
-      <div style={{fontStyle:"italic"}}>
-        <p style={{marginBottom:"0px"}}> Producto agregado al carrito! </p>
-      </div>
-      <Link to="/cart">
-        <div className = "py-2">
-          <Button className = "add-cart" variant="primary">Ver carrito</Button>
-        </div>
-      </Link>
-    </>
-    :
-    <ItemCount
-      stock = {stock}
-      productCount = {productCount}
-      increase = {increase}
-      decrease = {decrease}
-      onAdd = {onAdd}
-    />
   
-    //If the item category is 'Recipiente', something magic happens!
-    const Image: React.FC<{}> = () => 
-    <>{
-      category!==ItemCategory.Recipiente?
-      <img id="img-item-detail" width={imgWidth.get(category)} 
-          src={window.location.origin + pictureUrl} alt={"Imagen "+title} />
-      :
-      <Row className="justify-content-center">
-        <div id="title-item-choser"><h3>Personaliza tu helado:</h3></div>
-        <ItemChoserContainer id={itemId}/>
-      </Row>
-    }</>
-
   //Image size according to category
   const imgWidth = new Map([[ItemCategory.Paleta    , "450px"],
                             [ItemCategory.Recipiente, "575px"],
@@ -89,7 +69,17 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
     <div id="item-detail">
       <Row id="info-item-detail" className="align-items-center">
         <Col xl="6" id="img-container-item-detail" className="justify-content-center">
-          <Image /> {/* Dynamically selected component*/}
+          {/* Dynamically selected component*/}
+          <>{
+            category!==ItemCategory.Recipiente?
+              <img id="img-item-detail" width={imgWidth.get(category)} 
+                  src={window.location.origin + pictureUrl} alt={"Imagen "+title} />
+              :
+              <Row className="justify-content-center">
+                <div id="title-item-choser"><h3>Personaliza tu helado:</h3></div>
+                <ItemChoserContainer id={itemId} setProductDetail={setProductDetail}/>
+              </Row>
+            }</>
         </Col>
         <Col xl="6" id="text-info-item-detail" className="d-flex justify-content-center">
           <div id="text-info-inner-item-detail">
@@ -101,7 +91,26 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
             <div id="bottom-info-item-detail">
               <p id="stock-item-detail">Stock: {stock}</p>
               <Row className = "item-count-container ">
-                <BuyItem /> {/* Dynamically selected component*/}
+                {/* Dynamically selected component*/}
+                {items.some((it: ItemTicket) => item.id === it.id) ?
+                <>
+                  <div style={{fontStyle:"italic"}}>
+                    <p style={{marginBottom:"0px"}}> Producto agregado al carrito! </p>
+                  </div>
+                  <Link to="/cart">
+                    <div className = "py-2">
+                      <Button className = "add-cart" variant="primary">Ver carrito</Button>
+                    </div>
+                  </Link>
+                </>
+                :
+                <ItemCount
+                  stock = {stock}
+                  productCount = {productCount}
+                  increase = {increase}
+                  decrease = {decrease}
+                  onAdd = {onAdd}
+                />}
               </Row>
             </div>
           </div>
