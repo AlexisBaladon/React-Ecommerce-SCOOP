@@ -13,6 +13,7 @@ import { createTicket } from '../../../helpers/itemFactory';
 import ProductDetailSimple from '../../../dataTypes/ProductDetailSimple';
 
 import './itemDetail.css';
+import ItemTicket from '../../../dataTypes/itemTicket';
 
 interface IProps {
   item: ItemShowCase;
@@ -28,36 +29,48 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
         [number, string, string, number, string, number, ItemCategory] =
         [item.id, item.title, item.description, item.price, item.pictureUrl, item.stock, item.category];
 
+  //Product details (different categories have different details)
+  const [productDetail, setProductDetail] = useState<ProductDetail>(new ProductDetailSimple());
+  const [inCart, setInCart] = useState<boolean>(false);
+  const [amountInCart, setAmountInCart] = useState<number>(cartContext.amountInCart(itemId));
+  const [inCartMessage, setInCartMessage] = useState("Producto agregado al carrito!" )
+
+  useEffect(() => {
+    setInCart(cartContext.isInCart(itemId, productDetail));
+    if (amountInCart >= stock) {
+      setInCart(true);
+      setInCartMessage("No queda stock para este producto!");
+    }
+  }, [productDetail, amountInCart])
+
   //ItemCount
   const initial: number = 0;
   
   const increase = (productCount: number, setProductCount:(pc: number) => any): void => {
-    if (productCount < stock) setProductCount(productCount + 1);
+    if ((productCount < stock) && (amountInCart + productCount < stock)) setProductCount(productCount + 1);
   }
   
   const decrease = (productCount: number, setProductCount:(pc: number) => any): void => {
     if (productCount > 0) setProductCount(productCount - 1);
   }
 
-  //Product details (different categories have different details)
-  const [productDetail, setProductDetail] = useState<ProductDetail>(new ProductDetailSimple());
-  const [inCart, setInCart] = useState<boolean>(false);
-
-  useEffect(() => {
-    setInCart(cartContext.isInCart(itemId, productDetail));
-  }, [productDetail])
-
   //Add to cart
   const onAdd = (productCount: number): void => {
     if (productCount > 0) {
       try {
-        const newTicket = createTicket(item, productDetail, productCount);
+        const newTicket: ItemTicket = createTicket(item, productDetail, productCount);
         cartContext.addItem(newTicket);
         setInCart(cartContext.isInCart(itemId,productDetail));
+        setAmountInCart(cartContext.amountInCart(itemId));
+        if (amountInCart > item.stock) {
+          throw new Error("La cantidad de items en el carrito supera al stock");
+        }
       }
       catch (err: any) {
         if (err instanceof Error) {
           console.warn(err.message);
+          setInCartMessage(err.message);
+          setInCart(true);
         }
       }
     }
@@ -94,12 +107,13 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
             <h1 id="price-item-detail">{price} US$</h1>
             <div id="bottom-info-item-detail">
               <p id="stock-item-detail">Stock: {stock}</p>
+              <p id="stock-item-detail">En carrito: {amountInCart}</p>
               <Row className = "item-count-container ">
                 {/* Dynamically selected component*/}
                 {inCart ?
                 <>
                   <div style={{fontStyle:"italic"}}>
-                    <p style={{marginBottom:"0px"}}> Producto agregado al carrito! </p>
+                    <p style={{marginBottom:"0px"}}> {inCartMessage} </p>
                   </div>
                   <Link to="/cart">
                     <div className = "py-2">

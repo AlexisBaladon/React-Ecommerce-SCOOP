@@ -11,7 +11,13 @@
   color: white;
   margin: 0;
   padding: 2% 0 1% 0;
+  top: 50%;
   background-color: var(--main-color);
+}
+
+#amount-items-cart {
+  position: relative;
+  font-size: x-large;
 }
 
 /* Column names */
@@ -23,16 +29,21 @@
 
 /* Items */
 
-.item-cart {
-  padding: 0% 5% 0% 5%;
+.item-container-cart {
+
+  border-width: 5px;
+  border-color: black;
 }
 
-.item-cart img {
-  border-color: whitesmoke;
-  border-style: solid;
+.item-cart {
+  padding: 0% 5% 0% 5%;
 }
 
 .item-price-cart {
   font-size: larger;
   color: var(--main-dark-color)
+}
+
+.delete-icon-cart {
+  cursor: pointer;
 }

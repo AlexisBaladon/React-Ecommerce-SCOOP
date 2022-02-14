@@ -20,9 +20,6 @@ class ItemTicket extends Item {
     return it.equals(this) && it.sameDetails(this.productDetail);
   }
 
-  getTicketTitle(): string {
-    return this.productDetail.getTicketTitle(this.title);
-  }
 }
 
 export default ItemTicket;

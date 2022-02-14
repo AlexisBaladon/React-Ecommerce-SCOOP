@@ -7,11 +7,17 @@
 /* Image */
 
 #img-container-item-detail {
-  padding: 5% 5% 0 5%;
+  padding: 2.5% 0% 0 7.5%;
   margin: 0 0 5% 0;
   max-height: 550px;
 
   background-color: transparent;
+}
+
+@media (max-width: 992px){
+  #img-container-item-detail {
+    padding: 5% 5% 0 5%;
+  }
 }
 
 #img-item-detail {

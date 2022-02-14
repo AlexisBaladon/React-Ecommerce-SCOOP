@@ -18,7 +18,7 @@ const ItemChoserContainer: React.FC<IProps> = ({id, setProductDetail}) => {
     let isMounted = true;
 
     const setIfMounted = (flavors: Flavor[]) => {
-      if (isMounted) {setFlavors(flavors)}
+      if (isMounted) setFlavors(flavors);
     }
 
     getPromiseFlavors(setIfMounted)
@@ -28,7 +28,7 @@ const ItemChoserContainer: React.FC<IProps> = ({id, setProductDetail}) => {
 
   //update details according to flavors showed on screen
   useEffect(() => {
-    //slice passes de value by copy
+    //slice passes the value by copy
     setProductDetail(new ProductDetailRecipiente(selectedFlavors.slice()));
   }, [selectedFlavors])
   
