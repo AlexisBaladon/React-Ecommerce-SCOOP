@@ -29,7 +29,9 @@ const CartProvider: React.FC<{}> = ({children}) => {
       throw new Error('Este item ya ha sido agregado previamente!');
     }
     else {
-      setCartItems([...cartItems, newItem]);
+      let cartItemsAux = cartItems;
+      cartItemsAux.push(newItem)
+      setCartItems(cartItemsAux);
     }
   }
 

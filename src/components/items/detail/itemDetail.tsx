@@ -41,10 +41,10 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
 
   //Product details (different categories have different details)
   const [productDetail, setProductDetail] = useState<ProductDetail>(new ProductDetailSimple());
-  const [first, setfirst] = useState<boolean>(false);
+  const [inCart, setInCart] = useState<boolean>(false);
 
   useEffect(() => {
-    setfirst(cartContext.isInCart(itemId, productDetail));
+    setInCart(cartContext.isInCart(itemId, productDetail));
   }, [productDetail])
 
   //Add to cart
@@ -53,6 +53,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
       try {
         const newTicket = createTicket(item, productDetail, productCount);
         cartContext.addItem(newTicket);
+        setInCart(cartContext.isInCart(itemId,productDetail));
       }
       catch (err: any) {
         if (err instanceof Error) {
@@ -95,7 +96,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
               <p id="stock-item-detail">Stock: {stock}</p>
               <Row className = "item-count-container ">
                 {/* Dynamically selected component*/}
-                {first ?
+                {inCart ?
                 <>
                   <div style={{fontStyle:"italic"}}>
                     <p style={{marginBottom:"0px"}}> Producto agregado al carrito! </p>
