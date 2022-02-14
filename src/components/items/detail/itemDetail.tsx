@@ -6,6 +6,7 @@ import { Button, Col, Row } from 'react-bootstrap';
 import ItemChoserContainer from './itemChoserContainer';
 import ItemCount from './itemCount';
 
+import ItemTicket from '../../../dataTypes/itemTicket';
 import ItemShowCase from '../../../dataTypes/itemShowcase';
 import ItemCategory from '../../../dataTypes/category';
 import ProductDetail from '../../../dataTypes/ProductDetail';
@@ -13,7 +14,6 @@ import { createTicket } from '../../../helpers/itemFactory';
 import ProductDetailSimple from '../../../dataTypes/ProductDetailSimple';
 
 import './itemDetail.css';
-import ItemTicket from '../../../dataTypes/itemTicket';
 
 interface IProps {
   item: ItemShowCase;
@@ -58,6 +58,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
   const onAdd = (productCount: number): void => {
     if (productCount > 0) {
       try {
+        //Almost every function here throws an exception
         const newTicket: ItemTicket = createTicket(item, productDetail, productCount);
         cartContext.addItem(newTicket);
         setInCart(cartContext.isInCart(itemId,productDetail));
@@ -106,8 +107,10 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
             <p id="description-item-detail">{description}</p>
             <h1 id="price-item-detail">{price} US$</h1>
             <div id="bottom-info-item-detail">
-              <p id="stock-item-detail">Stock: {stock}</p>
-              <p id="stock-item-detail">En carrito: {amountInCart}</p>
+              <div id="cart-stock-item-detail">
+                <p id="stock-item-detail"><strong>Stock:</strong> {stock}</p>
+                <small id="in-cart-item-detail">({amountInCart} en carrito)</small>
+              </div>
               <Row className = "item-count-container ">
                 {/* Dynamically selected component*/}
                 {inCart ?

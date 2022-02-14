@@ -91,9 +91,17 @@
 
 /* Stock */
 
+#cart-stock-item-detail {
+  margin-bottom: 5%;
+}
+
 #stock-item-detail {
   font-size: large;
-  margin: 5% 0 5% 0;
+  margin: 10% 0 0 0;
+}
+
+#in-cart-item-detail {
+  font-style: italic;
 }
 
 #title-item-detail {

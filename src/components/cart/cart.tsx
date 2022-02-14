@@ -18,10 +18,10 @@ const Cart = () => {
           <Col id="amount-items-cart" className="d-flex justify-content-end px-5"> {items.length} items </Col>
         </Row>
         <Row id="column-names-cart">
-          <Col md="3"> Producto </Col>
-          <Col md="3"> Título </Col>
-          <Col md="2"> Cantidad </Col>
-          <Col md="3"> Precio </Col>
+          <Col className="column-names-img" md="3"> <p>Producto</p> </Col>
+          <Col md="3"> <p>Título</p> </Col>
+          <Col md="2"> <p>Cantidad</p> </Col>
+          <Col md="3"> <p>Precio</p> </Col>
           <Col md="2"></Col>
         </Row>
         <Row id="items-cart-container">
@@ -34,11 +34,11 @@ const Cart = () => {
           return (
             <div className="item-container-cart" key={id + title}>
             <Row className="item-cart">
-              <Col md="3"> <Link to={"/item/"+id}><img width="150px" src={pictureUrl} alt="Item" /></Link> </Col>
-              <Col md="3"> {title} </Col>
-              <Col md="2"> {amount} </Col>
-              <Col md="3"> <h5 className="item-price-cart">{price*amount}US$</h5></Col>
-              <Col md="1"> <span className="delete-icon-cart" onClick={() => cartData.deleteItem(it)}><img width="35px" src={deleteIcon} alt="Borrar" /></span> </Col>
+              <Col className="col-item-cart col-item-img-cart"  md="3"> <Link to={"/item/"+id}><img width="150px" src={pictureUrl} alt="Item" /></Link> </Col>
+              <Col className="col-item-cart" md="3"> <p> {title} </p></Col>
+              <Col className="col-item-cart" md="2"> <p> {amount} </p> </Col>
+              <Col className="col-item-cart" md="3"> <h5 className="item-price-cart">{price*amount}US$</h5></Col>
+              <Col className="col-item-cart" md="1"> <span className="delete-icon-cart" onClick={() => cartData.deleteItem(it)}><img width="35px" src={deleteIcon} alt="Borrar" /></span> </Col>
             </Row>
             </div>
           )
