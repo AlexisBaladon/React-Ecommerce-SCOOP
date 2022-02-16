@@ -38,9 +38,6 @@ const Item: React.FC<IProps> =
           <strong>{price} US$</strong>
         </Card.Text>
       </Card.Body>
-      <Card.Footer className="item-footer">
-        Stock: {stock}
-      </Card.Footer>
     </Card>
   </>;
 };

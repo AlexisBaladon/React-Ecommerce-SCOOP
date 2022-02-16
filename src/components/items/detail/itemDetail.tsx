@@ -33,7 +33,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
   const [productDetail, setProductDetail] = useState<ProductDetail>(new ProductDetailSimple());
   const [inCart, setInCart] = useState<boolean>(false);
   const [amountInCart, setAmountInCart] = useState<number>(cartContext.amountInCart(itemId));
-  const [inCartMessage, setInCartMessage] = useState("Producto agregado al carrito!" )
+  const [inCartMessage, setInCartMessage] = useState("Producto agregado al carrito!");
 
   useEffect(() => {
     setInCart(cartContext.isInCart(itemId, productDetail));
@@ -63,12 +63,13 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
         cartContext.addItem(newTicket);
         setInCart(cartContext.isInCart(itemId,productDetail));
         setAmountInCart(cartContext.amountInCart(itemId));
-        if (amountInCart > item.stock) {
+        if (amountInCart > stock) {
           throw new Error("La cantidad de items en el carrito supera al stock");
         }
       }
       catch (err: any) {
         if (err instanceof Error) {
+          //If something goes wrong, items won't be able to get added
           console.warn(err.message);
           setInCartMessage(err.message);
           setInCart(true);

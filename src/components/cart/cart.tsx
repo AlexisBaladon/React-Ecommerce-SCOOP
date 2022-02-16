@@ -7,52 +7,62 @@ import './cart.css'
 const deleteIcon = require('./delete.png')
 
 const Cart = () => {
-  const cartData = useContext(CartContext);
-  const items = cartData.items;
+  const cartContext = useContext(CartContext);
+  const items = cartContext.items;
 
   return (
-    <div>
-      <Col id="container-cart">
-        <Row id="title-cart">
-          <Col className="d-flex justify-content-start px-5"> <h1>Carrito</h1> </Col>
-          <Col id="amount-items-cart" className="d-flex justify-content-end px-5"> {items.length} items </Col>
-        </Row>
-        <Row id="column-names-cart">
-          <Col className="column-names-img" md="3"> <p>Producto</p> </Col>
-          <Col md="3"> <p>Título</p> </Col>
-          <Col md="2"> <p>Cantidad</p> </Col>
-          <Col md="3"> <p>Precio</p> </Col>
-          <Col md="2"></Col>
-        </Row>
-        <Row id="items-cart-container">
-        {items.map((it) => {
-          //item destructuring
-          const [id, title, pictureUrl, price, amount] : 
-                [number, string, string, number, number] =
-                [it.id, it.title, it.pictureUrl, it.price, it.amount];
+    <Row className="justify-content-center">
+      <Col md="7" sm="12" id="items-cart-container" >
+        <Col id="items-inner-cart">
+          <Row id="footer-cart" className="py-3">
+            <Col sm="4" id="go-back-cart" className="d-flex justify-content-start px-5"> <Link to="/">Volver</Link> </Col>
+            <Col sm="4" className="d-flex justify-content-center px-5"><h2>Carrito</h2></Col>
 
-          return (
-            <div className="item-container-cart" key={id + title}>
-            <Row className="item-cart">
-              <Col className="col-item-cart col-item-img-cart"  md="3"> <Link to={"/item/"+id}><img width="150px" src={pictureUrl} alt="Item" /></Link> </Col>
-              <Col className="col-item-cart" md="3"> <p> {title} </p></Col>
-              <Col className="col-item-cart" md="2"> <p> {amount} </p> </Col>
-              <Col className="col-item-cart" md="3"> <h5 className="item-price-cart">{price*amount}US$</h5></Col>
-              <Col className="col-item-cart" md="1"> <span className="delete-icon-cart" onClick={() => cartData.deleteItem(it)}><img width="35px" src={deleteIcon} alt="Borrar" /></span> </Col>
-            </Row>
-            </div>
-          )
-        })}
-        </Row>
-        <Row id="footer-cart" className="py-3">
-          <Col className="d-flex justify-content-start px-5"> <Link to="/"> Volver </Link> </Col>
-          <Col className="d-flex justify-content-end px-5"> <Button onClick={cartData.deleteAllItems}>Borrar todo</Button> </Col>
+          </Row>
+          <Row>
+            {items.map((it) => {
+              //item destructuring
+              const [id, title, pictureUrl, price, amount] : 
+                    [number, string, string, number, number] =
+                    [it.id, it.title, it.pictureUrl, it.price, it.amount];
+
+              return (
+                <div className="item-container-cart" key={id + title}>
+                <Row className="item-cart">
+                  <Col md="6" className="col-item-cart col-item-img-cart"> <Link to={"/item/"+id}><img className="img-item-cart" src={pictureUrl} alt="Item" /></Link> </Col>
+                  <Col md="5" className="item-info-container-cart">
+                    <Row className="col-item-cart"> <h5 className="item-title-cart"> {title} </h5></Row>
+                    <Row className="col-item-cart"> <p className="item-amount-cart"> Cantidad: {amount} </p> </Row>
+                    <Row className="col-item-cart"> <h5 className="item-price-cart">{price*amount}US$</h5></Row>
+                  </Col>
+                  <Col md="1" className="d-flex justify-content-start">
+                    <Row className="col-item-cart justify-content-end"> <span className="delete-icon-cart" onClick={() => cartContext.deleteItem(it)}><img src={deleteIcon} alt="Borrar" /></span> </Row>
+                  </Col>
+                </Row>
+                </div>
+              )
+            })}
+          </Row>
+        </Col>
+      </Col>
+      <Col md="5" sm="12" id="container-cart">
+        <Row id="products-info-cart">
+          <Row id="title-cart">
+            <Col className="d-flex justify-content-start px-4"> <h1>Resumen</h1> </Col>
+          </Row>
+          <Row id="column-names-cart">
+            <Row className="buy-info-cart"> <Col className="title-buy-info-cart">Subtotal</Col> <Col className="result-buy-info-cart"> {cartContext.getTotalCost()}US$ </Col> </Row>
+            <Row className="buy-info-cart"> <Col className="title-buy-info-cart">Descuento</Col> <Col className="result-buy-info-cart"> 0US$ </Col></Row>
+            <Row className="buy-info-cart"> <Col className="title-buy-info-cart">Envío</Col> <Col className="result-buy-info-cart"> Gratis </Col></Row>
+            <Row className="buy-info-cart"> <Col className="title-buy-info-cart">Total</Col> <Col className="result-buy-info-cart"> {cartContext.getTotalCost()}US$ </Col></Row>
+          </Row>
+          <Row id="button-container-cart" className="justify-content-center">
+            <Col><Button className="button-cart" >Finalizar Compra</Button></Col>
+            <Col><Button className="button-cart" onClick={cartContext.deleteAllItems}>Borrar Todo</Button></Col>
+          </Row>
         </Row>
       </Col>
-
-      
-      
-    </div>
+    </Row>
   )
 }
 
