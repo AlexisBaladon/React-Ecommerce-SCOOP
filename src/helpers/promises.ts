@@ -1,5 +1,7 @@
-import {obtenerHelado, obtenerHelados} from '../data/item';
-import Item from '../dataTypes/item';
+import { getFlavor, getFlavors } from '../data/flavors';
+import {getItem, getItems} from '../data/item';
+import Flavor from '../dataTypes/flavor';
+import ItemShowcase from '../dataTypes/itemShowcase';
 
 /* 
  * Uses getItems to query i from "Database".
@@ -24,18 +26,34 @@ const getPromiseAux = (setItems: (i: any) => any, getItems: () => any): Promise<
   return itemsPromise;
 }
 
-const getItems = (setItems: (i: Item[]) => any): Promise<any> => {
-  return getPromiseAux(setItems, obtenerHelados);
+/* Items */
+
+const getPromiseItems = (setItems: (i: ItemShowcase[]) => any): Promise<any> => {
+  return getPromiseAux(setItems, getItems);
 }
 
-const getFilteredItems = (itemFilter: (i: Item) => boolean, setItems: (i: Item[]) => any): Promise<any> => {
-  const setItemsWithFilter = (items: Item[]): void => setItems(items.filter(itemFilter));
-  return getPromiseAux(setItemsWithFilter, obtenerHelados);
+const getPromiseFilteredItems = (itemFilter: (i: ItemShowcase) => boolean, setItems: (i: ItemShowcase[]) => any): Promise<any> => {
+  const setItemsWithFilter = (items: ItemShowcase[]): void => setItems(items.filter(itemFilter));
+  return getPromiseAux(setItemsWithFilter, getItems);
 }
 
-const getItem = (itemId: number, setItem: (i: Item) => any): Promise<any> => {
-  const getItemsAux = () => obtenerHelado(itemId);
+const getPromiseItem = (itemId: number, setItem: (i: ItemShowcase) => any): Promise<any> => {
+  const getItemsAux = () => getItem(itemId);
   return getPromiseAux(setItem, getItemsAux);
 }
 
-export {getItems, getItem, getFilteredItems};
+/* Flavors */
+
+const getPromiseFlavors = (setItems: (i: Flavor[]) => any): Promise<any> => {
+  return getPromiseAux(setItems, getFlavors);
+}
+
+const getPromiseFlavor = (itemId: number, setItem: (i: Flavor) => any): Promise<any> => {
+  const getFlavorsAux = () => getFlavor(itemId);
+  return getPromiseAux(setItem, getFlavorsAux);
+}
+
+
+
+export {getPromiseItems, getPromiseItem, getPromiseFilteredItems,
+        getPromiseFlavors, getPromiseFlavor};

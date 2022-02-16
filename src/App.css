@@ -1,12 +1,11 @@
 #app {
-    min-width: 100% !important;
-    min-height: 100vh !important;
-    overflow: hidden;
-    text-align: center;
-    background-color: whitesmoke;
-    
-    --main-color: #E698B7;
-    --main-semi-dark-color: #e47ca6;
-    --main-dark-color: #db6b97;
-  }
+  min-height: 100vh !important;
+  overflow: hidden;
+  text-align: center;
+  background-color: whitesmoke;
+  
+  --main-color: #E698B7;
+  --main-semi-dark-color: #e47ca6;
+  --main-dark-color: #db6b97;
+}
   

@@ -1,13 +1,13 @@
 import {Card} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import DtItem from '../../../dataTypes/item';
+import ItemShowcase from '../../../dataTypes/itemShowcase';
 
 import './item.css';
 
 interface IProps {
-  item: DtItem;
-  setSelectedItem: React.Dispatch<DtItem> | null;
+  item: ItemShowcase;
+  setSelectedItem: React.Dispatch<ItemShowcase> | null;
 }
 
 const Item: React.FC<IProps> = 
@@ -38,9 +38,6 @@ const Item: React.FC<IProps> =
           <strong>{price} US$</strong>
         </Card.Text>
       </Card.Body>
-      <Card.Footer className="item-footer">
-        Stock: {stock}
-      </Card.Footer>
     </Card>
   </>;
 };

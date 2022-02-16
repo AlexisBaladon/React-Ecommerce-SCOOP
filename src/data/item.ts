@@ -1,5 +1,6 @@
 import Item from '../dataTypes/item';
-import ItemCategory from '../dataTypes/itemCategory';
+import ItemCategory from '../dataTypes/category';
+import ItemShowcase from '../dataTypes/itemShowcase';
 
 const imageUrl = "/images/helados/";
 
@@ -7,22 +8,21 @@ const imageUrl = "/images/helados/";
 const {Paleta, Recipiente, Postre} = ItemCategory;
 
 const items: Item[] = [
-/*        id |title                   |description                                  |price|url                                  | stock | type */
-  new Item(1,'Chocolate'            , 'No puede faltar en tu pedido!'                 ,2  ,imageUrl+'Paletas/chocolate.png'          , 15, Paleta),
-  new Item(2,'Sambayón'             , 'Un sabor clásico e imperdible'                 ,2  ,imageUrl+'Paletas/Vainilla.png'           , 12, Paleta),
-  new Item(3,'Choconuez'            , 'Porque no todo en la vida es helado'           ,3  ,imageUrl+'Paletas/nueces.png'             , 14, Paleta),
-  new Item(4,'Paleta Triple'        , 'Perfecto para los más indecisos'               ,5  ,imageUrl+'Paletas/triple.png'             , 5,  Paleta),
-  new Item(5,'Banana'               , 'El preferido de Tarzán'                        ,4  ,imageUrl+'recipientes/vainilla.jpg'       , 6,  Recipiente),
-  new Item(6,'Dulce de L.'          , 'No hace falta describirlo...'                  ,4  ,imageUrl+'recipientes/dulce-de-leche.jpg' , 7,  Recipiente),
-  new Item(7,'Mora'                 , 'Un sabor que te enamora'                       ,4  ,imageUrl+'recipientes/mora.jpg'           , 9,  Recipiente),
-  new Item(8,'Frutilla'             , 'Tu fruta favorita!'                            ,4  ,imageUrl+'recipientes/frutilla.jpg'       , 9,  Recipiente),
-  new Item(9,'Brownielado'          , 'Brownie y helado... nada más que agregar'      ,10 ,imageUrl+'postres/brownie.jpg'            , 9,  Postre),
-  new Item(10,'Super porción'       , 'Reserva de helado para toda una vida'          ,20 ,imageUrl+'postres/choco-salsa-nuez.jpg'   , 1,  Postre),
+/*                id |title                 |description                                    |price|url                                      | stock    | type */
+  new ItemShowcase(1,'Chocolate'            , 'No puede faltar en tu pedido!'                 ,1  ,imageUrl+'Paletas/chocolate.png'          , Paleta    , 15),
+  new ItemShowcase(2,'Sambayón'             , 'Un sabor clásico e imperdible'                 ,1  ,imageUrl+'Paletas/Vainilla.png'           , Paleta    , 12),
+  new ItemShowcase(3,'Choconuez'            , 'Porque no todo en la vida es helado'           ,2  ,imageUrl+'Paletas/nueces.png'             , Paleta    , 14),
+  new ItemShowcase(4,'Paleta Triple'        , 'Perfecto para los más indecisos'               ,2  ,imageUrl+'Paletas/triple.png'             , Paleta    , 5),
+  new ItemShowcase(5,'1/2 Litros'           , 'Elige hasta 2 sabores de helado!'              ,3  ,imageUrl+'recipientes/medio_litro.png'    , Recipiente, 6),
+  new ItemShowcase(6,'1 Litro'              , 'Elige hasta 3 sabores de helado!'              ,5  ,imageUrl+'recipientes/un_litro.png'       , Recipiente, 7),
+  new ItemShowcase(7,'2 Litros'             , 'Elige hasta 4 sabores de helado!'              ,9  ,imageUrl+'recipientes/dos_litros.png'     , Recipiente, 9),
+  new ItemShowcase(8,'Brownielado'          , 'Brownie y helado... nada más que agregar'      ,4 ,imageUrl+'postres/brownie.jpg'             , Postre    , 9),
+  new ItemShowcase(9,'Super porción'        , 'Reserva de helado para toda una vida'          ,5 ,imageUrl+'postres/choco-salsa-nuez.jpg'    , Postre    , 1),
 ];
 
-const obtenerHelados = (): Item[] => items;
+const getItems = (): Item[] => items;
 
-const obtenerHelado = (itemId: number): Item => {
+const getItem = (itemId: number): Item => {
   let res: Item | undefined;
   const sameId = (item: Item) => (item.id === itemId);
   
@@ -34,4 +34,4 @@ const obtenerHelado = (itemId: number): Item => {
   return res;
 }
 
-export {obtenerHelados, obtenerHelado};
+export {getItems, getItem};

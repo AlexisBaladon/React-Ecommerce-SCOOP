@@ -5,26 +5,26 @@ import { useEffect, useState } from "react";
 import ItemDetail from "./itemDetail";
 import Loading from '../../loading/loading';
 
-import { getItem } from "../../../helpers/promises";
-import DtItem from '../../../dataTypes/item';
+import { getPromiseItem } from "../../../helpers/promises";
+import ItemShowcase from '../../../dataTypes/itemShowcase';
 
 import './itemDetailContainer.css'
 
 const ItemDetailContainer: React.FC<{}> = () => {
   const { id } = useParams<{id?: string}>();
-  const [item,setItem] = useState<DtItem | null>(null);
+  const [item,setItem] = useState<ItemShowcase | null>(null);
 
   useEffect(() => {
     
     // SetItem shouldn't be used after being unmounted
     let isMounted = true;
-    const setIfMounted = (itm: DtItem) => {
+    const setIfMounted = (itm: ItemShowcase) => {
       if (isMounted) setItem(itm);
     }
 
     //Gets item according to parameters
     try {
-      getItem(Number(id),setIfMounted);
+      getPromiseItem(Number(id),setIfMounted);
     } 
     catch (err: any) {
       console.warn('No se ha podido encontrar el item');
@@ -36,7 +36,7 @@ const ItemDetailContainer: React.FC<{}> = () => {
   return <div>
     <Row id="routes-item-detail">
       <Navbar className="routes-nav-item-detail" variant="light">
-        <Container className="justify-content-center" >
+        <Container id="routes-container-item-detail" className="justify-content-center" >
           <Nav>
             <Nav.Link as={Link} to="/">Volver al listado</Nav.Link>
             <Navbar.Text>|</Navbar.Text>

@@ -1,0 +1,21 @@
+.card-img-modal {
+  margin: 1% 1% 1% 1%;
+  width: 10rem;
+}
+
+.card-img-modal:hover {
+  opacity: 60%;
+}
+ /* Body */
+.body-choser-modal {
+  padding: 0 0 15px 0;
+}
+
+.item-container-choser-modal {
+  --bs-gutter-x: 0;
+}
+
+/* Title */
+.title-choser-modal {
+  height: 15px;
+}

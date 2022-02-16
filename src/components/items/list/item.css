@@ -15,6 +15,10 @@
   transition: 0.3s;
 }
 
+.item-card:hover {
+  box-shadow: 0 4.5px 9px 0 rgba(0, 0, 0, 0.35);
+}
+
 /* Body */
 
 .body-card {
@@ -61,8 +65,4 @@
   .carta {
     width: 45%;
   }
-}
-
-.item:hover {
-  box-shadow: 0 4.5px 9px 0 rgba(0, 0, 0, 0.35);
 }

@@ -1,0 +1,30 @@
+#images-container-item-choser {
+  flex-direction: column;
+  position: relative;
+  max-width: 100%;
+
+  overflow: hidden;
+  margin-top: 0;
+  border-radius: 5%;
+}
+
+.img-item-choser {
+  left: 0;
+  position: absolute;
+  height: 100%;
+  width:100%;
+  object-fit: cover; 
+}
+
+.img-container-item-choser {
+  position: absolute;
+  border: solid;
+  border-color: white;
+  height: 100%;
+}
+
+.img-item-choser:hover {
+  opacity: 80%;
+  cursor: pointer;
+}
+
