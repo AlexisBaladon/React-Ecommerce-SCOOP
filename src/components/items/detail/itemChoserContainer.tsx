@@ -30,7 +30,7 @@ const ItemChoserContainer: React.FC<IProps> = ({id, setProductDetail}) => {
   useEffect(() => {
     //slice passes the value by copy
     setProductDetail(new ProductDetailRecipiente(selectedFlavors.slice()));
-  }, [selectedFlavors])
+  }, [selectedFlavors,   setProductDetail])
   
   return (
     <ItemChooser 

@@ -41,7 +41,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
       setInCart(true);
       setInCartMessage("No queda stock para este producto!");
     }
-  }, [productDetail, amountInCart])
+  }, [productDetail, amountInCart,   cartContext, itemId, stock])
 
   //ItemCount
   const initial: number = 0;

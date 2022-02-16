@@ -1,6 +1,4 @@
 import Item from './item';
-import ItemCategory from './category';
-import ProductDetail from './ProductDetail';
 import Category from './category';
 
 class ItemShowcase extends Item {

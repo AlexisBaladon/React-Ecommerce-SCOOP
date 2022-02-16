@@ -13,9 +13,9 @@ interface IProps {
 const Item: React.FC<IProps> = 
   ({item, setSelectedItem}: IProps) => {
   
-  const [title, description, price, pictureUrl, stock]:
-        [string, string, number, string, number] =
-        [item.title, item.description, item.price, item.pictureUrl, item.stock];
+  const [title, description, price, pictureUrl]:
+        [string, string, number, string] =
+        [item.title, item.description, item.price, item.pictureUrl];
   
   const onClick = (): void => {
     if (setSelectedItem) setSelectedItem(item);
