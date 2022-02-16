@@ -23,7 +23,7 @@ const Routes = () => {
           <Route path="/"             element={<ItemListContainer                    /> } />
           <Route path="/category/:id" element={<ItemListContainer                    /> } />
           <Route path="/item/:id"     element={<ItemDetailContainer                  /> } />
-          <Route path="/cart"         element={<CartContainer                                 /> } />
+          <Route path="/cart"         element={<CartContainer                        /> } />
           <Route path="*"             element={<Error404 setHasNavbar={setHasNavbar} /> } />
         </Switch>
       </BrowserRouter>

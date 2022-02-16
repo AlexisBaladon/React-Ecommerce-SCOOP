@@ -4,10 +4,23 @@ import { Link } from 'react-router-dom';
 import ItemCategory from '../../dataTypes/category';
 
 import './navbar.css';
+import { useContext, useEffect, useState } from 'react';
+import { CartContext } from '../../context/cartContext';
 
 const NavBar: React.FC<{}> = () => {
   //Enum destructuring
   const {Paleta, Recipiente, Postre} = ItemCategory;
+
+  //Cart context
+  const cartContext = useContext(CartContext);
+
+  const [numItemsCart, setNumItemsCart] = useState<number>(cartContext.items.length);
+
+  useEffect(() => {
+    setNumItemsCart(cartContext.items.length);
+    console.log(cartContext.items)
+  }, [cartContext.items.length])
+  
 
   return <header>
     <BTNavBar id="navigator" className="top-0" expand="lg" variant="dark" >
@@ -25,7 +38,12 @@ const NavBar: React.FC<{}> = () => {
               </NavDropdown>
               <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
             </Nav>
-            <Link to="/cart"><CartWidget id="cart" alt="Tienda" /></Link>
+            { numItemsCart > 0 &&
+             <Link to="/cart" id="link-cart-navbar">
+               <CartWidget id="cart" alt="Tienda" />
+              <h1 id="cant-items-navbar">{numItemsCart}</h1>
+             </Link> 
+             }
         </BTNavBar.Collapse>
       </Container>
     </BTNavBar>

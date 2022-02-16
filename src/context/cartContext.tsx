@@ -34,7 +34,7 @@ const CartProvider: React.FC<{}> = ({children}) => {
     else {
       let cartItemsAux = cartItems;
       cartItemsAux.push(newItem)
-      setCartItems(cartItemsAux);
+      setCartItems(cartItemsAux.slice());
     }
   }
 

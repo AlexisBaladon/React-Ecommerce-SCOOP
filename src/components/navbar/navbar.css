@@ -25,10 +25,6 @@
   opacity: 70%;
 }
 
-#cart:hover {
-  opacity: 75%;
-}
-
 #navbarScroll {
   flex-grow: 0;
   margin-right: 0%;
@@ -79,4 +75,24 @@
   vertical-align:middle;
   width: 45px;
   height: 45px;
+}
+
+#link-cart-navbar {
+  position: relative;
+}
+
+#link-cart-navbar:hover {
+  opacity: 80%;
+}
+
+#cant-items-navbar {
+  position: absolute;
+  font-size: 16.5px;
+  font-weight: 600;
+  width: 20px;
+   left: 80%;
+  top:-5%; 
+  border-radius: 10px;
+  background-color: var(--main-dark-color);
+  color: white;
 }

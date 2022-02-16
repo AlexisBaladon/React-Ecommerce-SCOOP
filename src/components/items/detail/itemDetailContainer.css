@@ -12,7 +12,8 @@
 
 #routes-item-detail span,
 #routes-item-detail a {
-  font-size: 96% !important;
+  font-size: 15px !important;
+  font-weight: 400;
   text-decoration: none; 
   color: white;
   margin-bottom: 0;
