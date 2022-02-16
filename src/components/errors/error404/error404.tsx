@@ -13,13 +13,11 @@ const Error404: React.FC<IProps> = ({setHasNavbar}) => {
   //You shouldn't see the navbar on the error page!
   useEffect(() => {
     setHasNavbar(false);
-  
+    
     return () => {
       setHasNavbar(true);
     };
-    // setHasNavbar won't change:
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setHasNavbar]);
   
 
   return <div id="error">

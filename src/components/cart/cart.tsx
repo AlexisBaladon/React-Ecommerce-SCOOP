@@ -98,6 +98,7 @@ const Cart: React.FC<{}> = () => {
               <Col className="title-buy-info-cart"><p>Envío</p></Col> 
               <Col className="result-buy-info-cart"> <p>{shipping > 0 ? shipping : "Gratis"}</p> </Col>
             </Row>
+            <hr/>
             <Row className="buy-info-cart">
               <Col className="title-buy-info-cart"><p>Total</p></Col>
               <Col className="result-buy-info-cart"> <p>{total}US$</p> </Col>

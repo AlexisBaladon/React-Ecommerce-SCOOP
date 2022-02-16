@@ -18,8 +18,7 @@ const NavBar: React.FC<{}> = () => {
 
   useEffect(() => {
     setNumItemsCart(cartContext.items.length);
-    console.log(cartContext.items)
-  }, [cartContext.items.length])
+  }, [cartContext.items])
   
 
   return <header>
