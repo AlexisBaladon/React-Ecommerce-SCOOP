@@ -7,7 +7,7 @@ interface IProps {
   items: Flavor[];
   show: boolean;
   onHide: () => any;
-  selectItemById: (id: number) => any
+  selectItemById: (id: string) => any
 }
 
 const ModalRecipientes: React.FC<IProps> = ({items, show, onHide, selectItemById}) => {
@@ -30,7 +30,7 @@ const ModalRecipientes: React.FC<IProps> = ({items, show, onHide, selectItemById
             {items.map(i => {
                 return <div key={i.id} className="card-img-modal">
                   <Card className="item-card" >
-                    <Card.Img width="100px" variant="top" src={window.location.origin + i.pictureUrl}/>
+                    <Card.Img width="100px" variant="top" src={i.pictureUrl}/>
                     <Card.Body className="body-choser-modal" >
                       <Card.Title className="title-choser-modal btn stretched-link" onClick={() => {selectItemById(i.id); onHide();}}>
                         {i.title}

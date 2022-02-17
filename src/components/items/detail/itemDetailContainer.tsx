@@ -8,6 +8,7 @@ import Loading from '../../loading/loading';
 import ItemShowcase from '../../../dataTypes/itemShowcase';
 
 import './itemDetailContainer.css'
+import { getItem } from '../../../data/itemHandler';
 
 const ItemDetailContainer: React.FC<{}> = () => {
   const { id } = useParams<{id?: string}>();
@@ -23,10 +24,12 @@ const ItemDetailContainer: React.FC<{}> = () => {
 
     //Gets item according to parameters
     try {
-      //getPromiseItem(Number(id),setIfMounted);
+      if (id) getItem(id,setIfMounted);
     } 
     catch (err: any) {
-      console.warn('No se ha podido encontrar el item');
+      if (err instanceof Error) {
+        console.warn(err.message);
+      }
     }
     
     return () => {isMounted = false};

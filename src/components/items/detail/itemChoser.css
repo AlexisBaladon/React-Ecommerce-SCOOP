@@ -1,4 +1,6 @@
 #images-container-item-choser {
+  box-shadow: 0 4.5px 9px 0 rgba(0, 0, 0, 0.35);
+
   flex-direction: column;
   position: relative;
   max-width: 100%;
@@ -18,8 +20,6 @@
 
 .img-container-item-choser {
   position: absolute;
-  border: solid;
-  border-color: white;
   height: 100%;
 }
 

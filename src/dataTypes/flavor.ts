@@ -1,8 +1,8 @@
 class Flavor {
-  id: number;
+  id: string;
   title: string;
   pictureUrl: string;
-  constructor(id: number, title: string, pictureUrl: string) {
+  constructor(id: string, title: string, pictureUrl: string) {
     this.id = id;
     this.title = title;
     this.pictureUrl = pictureUrl;

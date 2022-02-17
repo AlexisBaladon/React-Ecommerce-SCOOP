@@ -92,7 +92,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
           <>{
             category!==ItemCategory.Recipiente?
               <img id="img-item-detail" width={imgWidth.get(category)} 
-                  src={window.location.origin + pictureUrl} alt={"Imagen "+title} />
+                  src={pictureUrl} alt={"Imagen "+title} />
               :
               <Row className="justify-content-center">
                 <div id="title-item-choser"><h3>Personaliza tu helado:</h3></div>

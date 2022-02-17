@@ -6,12 +6,13 @@ import Loading from '../../loading/loading';
 import ItemShowcase from '../../../dataTypes/itemShowcase'
 
 import './itemListContainer.css';
-import { getItems } from '../../../data/itemHandler';
+import { getItems, getItemsByCategory } from '../../../data/itemHandler';
+import Category from '../../../dataTypes/category';
 
 const ItemListContainer: React.FC<{}> = () => {
 
   //Parameters
-  const { id } = useParams<{id?: string}>();
+  const { id } = useParams<{id?: Category}>();
 
   //Showed items
   const [items,setItems] = useState<ItemShowcase[]>([]);
@@ -24,15 +25,16 @@ const ItemListContainer: React.FC<{}> = () => {
       if (isMounted) setItems(item);
     }
 
-    //Filters items by category
-    const catFilter = (i: ItemShowcase): boolean => i.category === id;
-
     //Filters items in case of defining category 
-       
-    id ? 
-    getItems(setIfMounted)://getPromiseFilteredItems(catFilter, setIfMounted) :
-    getItems(setIfMounted);//(setIfMounted);
-
+    try {
+      (id !== undefined) ? 
+      getItemsByCategory(id,setIfMounted)://(setIfMounted);
+      getItems(setIfMounted);//getPromiseFilteredItems(catFilter, setIfMounted) :
+    } 
+    catch (err: any) {
+      console.warn('No se ha podido encontrar el item');
+    }
+    
     return () => {isMounted = false};
   }, [id]);
   

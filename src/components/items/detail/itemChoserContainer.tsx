@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { getFlavors } from '../../../data/flavorHandler';
 import Flavor from '../../../dataTypes/flavor';
 import ProductDetail from '../../../dataTypes/ProductDetail';
 import ProductDetailRecipiente from '../../../dataTypes/ProductDetailRecipiente';
@@ -20,7 +21,7 @@ const ItemChoserContainer: React.FC<IProps> = ({id, setProductDetail}) => {
       if (isMounted) setFlavors(flavors);
     }
 
-    //getPromiseFlavors(setIfMounted)
+    getFlavors(setIfMounted);
     
     return () => {isMounted = false}
   }, [])
@@ -31,8 +32,16 @@ const ItemChoserContainer: React.FC<IProps> = ({id, setProductDetail}) => {
     setProductDetail(new ProductDetailRecipiente(selectedFlavors.slice()));
   }, [selectedFlavors,   setProductDetail])
   
+  //Number of flavors according to item id
+  const numFlavorsById = new Map([
+    ["RzDoHkT1HVjWxrWWCoz6", 2], //1/2 Litre
+    ["d6UNi3yFX3kJoYWH5qkI", 3], //1   Litre
+    ["a5TdN0VbenQs6A9dlk1j", 4], //2   Litre
+  ])
+
   return (
     <ItemChooser 
+      maxFlavors={numFlavorsById.get(id) || 0}
       imgWidth={500}
       itemId={id}
       flavors={flavors}
