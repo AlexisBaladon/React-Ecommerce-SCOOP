@@ -8,7 +8,7 @@ import './itemChoser.css'
 
 interface IProps {
   imgWidth: number;
-  itemId: number;
+  itemId: string;
   flavors: Flavor[];
   selectedFlavors: Flavor[];
   setSelectedFlavors: any;
@@ -18,17 +18,17 @@ const ItemChooser: React.FC<IProps> = ({imgWidth, itemId, flavors, selectedFlavo
   const [show, setShow] = useState<boolean>(false);
   const [changedItemIndex, setChangedItemIndex] = useState<number>(0);
 
-  const magicNumberById = new Map([[5, 200], //1/2 Litre
-                                   [6, 150], //1   Litre
-                                   [7, 133], //2   Litre
+  const magicNumberById = new Map([["5", 200], //1/2 Litre
+                                   ["6", 150], //1   Litre
+                                   ["7", 133], //2   Litre
                                    ])                       
 
   useEffect(() => {
     //Number of flavors according to item id
     const numFlavorsById = new Map([
-      [5, 2], //1/2 Litre
-      [6, 3], //1   Litre
-      [7, 4], //2   Litre
+      ["5", 2], //1/2 Litre
+      ["6", 3], //1   Litre
+      ["7", 4], //2   Litre
     ])
 
     setSelectedFlavors(flavors.slice(0,numFlavorsById.get(itemId)));

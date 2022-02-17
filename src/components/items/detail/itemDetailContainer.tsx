@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import ItemDetail from "./itemDetail";
 import Loading from '../../loading/loading';
 
-import { getPromiseItem } from "../../../helpers/promises";
 import ItemShowcase from '../../../dataTypes/itemShowcase';
 
 import './itemDetailContainer.css'
@@ -24,7 +23,7 @@ const ItemDetailContainer: React.FC<{}> = () => {
 
     //Gets item according to parameters
     try {
-      getPromiseItem(Number(id),setIfMounted);
+      //getPromiseItem(Number(id),setIfMounted);
     } 
     catch (err: any) {
       console.warn('No se ha podido encontrar el item');

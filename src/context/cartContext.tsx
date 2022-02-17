@@ -8,8 +8,8 @@ const CartContext = React.createContext<{
     addItem(it: ItemTicket): void,
     deleteItem(it: ItemTicket): void, 
     deleteAllItems(): void, 
-    isInCart(id: number, pd: ProductDetail): boolean,
-    amountInCart(itemId: number): number,
+    isInCart(id: string, pd: ProductDetail): boolean,
+    amountInCart(itemId: string): number,
     getTotalCost(): number,
   }>
 
@@ -18,8 +18,8 @@ const CartContext = React.createContext<{
     addItem: (it:ItemTicket)=>{},
     deleteItem: (it:ItemTicket)=>{},
     deleteAllItems: () => {},
-    isInCart: (id: number, pd: ProductDetail) => false,
-    amountInCart: (itemId: number) => 0,
+    isInCart: (id: string, pd: ProductDetail) => false,
+    amountInCart: (itemId: string) => 0,
     getTotalCost: () => 0,
   });
 
@@ -48,11 +48,11 @@ const CartProvider: React.FC<{}> = ({children}) => {
     setCartItems([]);
   }
 
-  const isInCart = (itemId: number, productDetail: ProductDetail): boolean => {
+  const isInCart = (itemId: string, productDetail: ProductDetail): boolean => {
     return cartItems.some((it) => it.id === itemId && it.sameDetails(productDetail));
   }
 
-  const amountInCart = (itemId: number): number => {
+  const amountInCart = (itemId: string): number => {
     let res = 0;
 
     cartItems.forEach(it => {

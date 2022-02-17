@@ -45,7 +45,7 @@ const Cart: React.FC<{}> = () => {
               {items.map((it) => {
                 //item destructuring
                 const [id, title, pictureUrl, price, amount] : 
-                [number, string, string, number, number] =
+                [string, string, string, number, number] =
                 [it.id, it.title, it.pictureUrl, it.price, it.amount];
                 
                 return (

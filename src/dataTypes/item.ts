@@ -1,13 +1,13 @@
 import Category from "./category";
 
 abstract class Item {
-  id: number;
+  id: string;
   title: string;
   price: number;
   pictureUrl: string;
   category: Category;
 
-  constructor(id: number, title: string, price: number, pictureUrl: string, category: Category) {
+  constructor(id: string, title: string, price: number, pictureUrl: string, category: Category) {
     this.id = id;
     this.title = title;
     this.price = price;

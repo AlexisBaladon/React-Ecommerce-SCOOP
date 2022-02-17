@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import Flavor from '../../../dataTypes/flavor';
 import ProductDetail from '../../../dataTypes/ProductDetail';
 import ProductDetailRecipiente from '../../../dataTypes/ProductDetailRecipiente';
-import { getPromiseFlavors } from '../../../helpers/promises';
 import ItemChooser from './itemChoser'
 
 interface IProps {
-  id: number;
+  id: string;
   setProductDetail(pd: ProductDetail): any;
 }
 
@@ -21,7 +20,7 @@ const ItemChoserContainer: React.FC<IProps> = ({id, setProductDetail}) => {
       if (isMounted) setFlavors(flavors);
     }
 
-    getPromiseFlavors(setIfMounted)
+    //getPromiseFlavors(setIfMounted)
     
     return () => {isMounted = false}
   }, [])

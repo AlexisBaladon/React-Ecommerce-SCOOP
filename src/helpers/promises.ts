@@ -1,4 +1,4 @@
-import { getFlavor, getFlavors } from '../data/flavors';
+/*import { getFlavor, getFlavors } from '../data/flavors';
 import {getItem, getItems} from '../data/item';
 import Flavor from '../dataTypes/flavor';
 import ItemShowcase from '../dataTypes/itemShowcase';
@@ -9,7 +9,7 @@ import ItemShowcase from '../dataTypes/itemShowcase';
  * Then, setItems is used with i.
  * Finally *laughs in asynchronous*, the promise gets returned.
  */
-const getPromiseAux = (setItems: (i: any) => any, getItems: () => any): Promise<any> => {
+/*const getPromiseAux = (setItems: (i: any) => any, getItems: () => any): Promise<any> => {
   const itemsPromise = new Promise<any>((resolve,reject) => {
     const itemsDB: any = getItems();
     setTimeout(() => {
@@ -28,7 +28,7 @@ const getPromiseAux = (setItems: (i: any) => any, getItems: () => any): Promise<
 
 /* Items */
 
-const getPromiseItems = (setItems: (i: ItemShowcase[]) => any): Promise<any> => {
+/*const getPromiseItems = (setItems: (i: ItemShowcase[]) => any): Promise<any> => {
   return getPromiseAux(setItems, getItems);
 }
 
@@ -44,7 +44,7 @@ const getPromiseItem = (itemId: number, setItem: (i: ItemShowcase) => any): Prom
 
 /* Flavors */
 
-const getPromiseFlavors = (setItems: (i: Flavor[]) => any): Promise<any> => {
+/*const getPromiseFlavors = (setItems: (i: Flavor[]) => any): Promise<any> => {
   return getPromiseAux(setItems, getFlavors);
 }
 
@@ -56,4 +56,4 @@ const getPromiseFlavor = (itemId: number, setItem: (i: Flavor) => any): Promise<
 
 
 export {getPromiseItems, getPromiseItem, getPromiseFilteredItems,
-        getPromiseFlavors, getPromiseFlavor};
+        getPromiseFlavors, getPromiseFlavor};*/

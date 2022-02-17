@@ -26,7 +26,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
 
   //Item destructuring
   const [itemId, title, description, price, pictureUrl, stock, category]:
-        [number, string, string, number, string, number, ItemCategory] =
+        [string, string, string, number, string, number, ItemCategory] =
         [item.id, item.title, item.description, item.price, item.pictureUrl, item.stock, item.category];
 
   //Product details (different categories have different details)

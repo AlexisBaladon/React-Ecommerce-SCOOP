@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ItemList from './itemList'
 import Loading from '../../loading/loading';
 
 import ItemShowcase from '../../../dataTypes/itemShowcase'
-import {getPromiseFilteredItems, getPromiseItems} from '../../../helpers/promises';
 
 import './itemListContainer.css';
+import { getItems } from '../../../data/itemHandler';
 
 const ItemListContainer: React.FC<{}> = () => {
 
@@ -17,7 +17,7 @@ const ItemListContainer: React.FC<{}> = () => {
   const [items,setItems] = useState<ItemShowcase[]>([]);
 
   useEffect(() => {
-
+      
     //SetItem shouldn't be usesd after being unmounted
     let isMounted = true;
     const setIfMounted = (item: ItemShowcase[]) => {
@@ -27,10 +27,11 @@ const ItemListContainer: React.FC<{}> = () => {
     //Filters items by category
     const catFilter = (i: ItemShowcase): boolean => i.category === id;
 
-    //Filters items in case of defining category
+    //Filters items in case of defining category 
+       
     id ? 
-    getPromiseFilteredItems(catFilter, setIfMounted) :
-    getPromiseItems(setIfMounted);
+    getItems(setIfMounted)://getPromiseFilteredItems(catFilter, setIfMounted) :
+    getItems(setIfMounted);//(setIfMounted);
 
     return () => {isMounted = false};
   }, [id]);

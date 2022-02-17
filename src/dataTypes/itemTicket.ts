@@ -6,7 +6,7 @@ class ItemTicket extends Item {
   amount: number;
   productDetail: ProductDetail;
   
-  constructor(id: number, title: string, price: number, pictureUrl: string, category: Category, productDetail: ProductDetail, amount: number) {
+  constructor(id: string, title: string, price: number, pictureUrl: string, category: Category, productDetail: ProductDetail, amount: number) {
     super(id, title, price, pictureUrl, category);
     this.productDetail = productDetail;
     this.amount = amount;
