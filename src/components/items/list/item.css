@@ -46,12 +46,6 @@
   color: var(--main-dark-color);
 }
 
-.item-footer {
-  padding: 2.5px 0 2.5px 0;
-  font-size: smaller;
-  background-color: pink;
-}
-
 /* Count */
 
 .item-count-container {

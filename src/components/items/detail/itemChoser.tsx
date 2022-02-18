@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import Flavor from '../../../dataTypes/flavor';
 import ModalRecipientes from './itemChoserModal';
@@ -8,6 +8,7 @@ import './itemChoser.css'
 
 interface IProps {
   imgWidth: number;
+  imgHeight: number;
   itemId: string;
   maxFlavors: number;
   flavors: Flavor[];
@@ -15,18 +16,23 @@ interface IProps {
   setSelectedFlavors: any;
 }
 
-const ItemChooser: React.FC<IProps> = ({imgWidth, itemId, maxFlavors, flavors, selectedFlavors, setSelectedFlavors}) => {
+const ItemChooser: React.FC<IProps> = ({imgWidth, imgHeight, itemId, maxFlavors, flavors, selectedFlavors, setSelectedFlavors}) => {
   const [show, setShow] = useState<boolean>(false);
   const [changedItemIndex, setChangedItemIndex] = useState<number>(0);
-
+  
   const magicNumberById = new Map([[2, 200], //1/2 Litre
                                    [3, 150], //1   Litre
                                    [4, 133], //2   Litre
-                                   ])                       
+                                   ])
+
+  //Prevents infinite loops inside useEffect
+  const setSelectedFlavorsCallback = useCallback(() => {
+    if (selectedFlavors.length === 0) setSelectedFlavors(flavors.slice(0,maxFlavors)) ;
+  },[selectedFlavors.length, setSelectedFlavors, flavors, maxFlavors]);
 
   useEffect(() => {
-    setSelectedFlavors(flavors.slice(0,maxFlavors));
-  }, [flavors,   setSelectedFlavors, itemId])
+    setSelectedFlavorsCallback()
+  }, [setSelectedFlavorsCallback])
 
   const selectItemById = (newItemId: string) => {
     let newSelectedItems = selectedFlavors;
@@ -38,14 +44,14 @@ const ItemChooser: React.FC<IProps> = ({imgWidth, itemId, maxFlavors, flavors, s
       setSelectedFlavors(newSelectedItems.slice());
     }
     else {
-      console.warn("Changed item couldn't be finded");
+      console.warn("El item cambiado no pudo ser hallado");
     }
   }
 
   return <>
     <ModalRecipientes items={flavors} show={show} onHide={() => setShow(false)}
                       selectItemById={selectItemById}/>
-    <div id="images-container-item-choser" style={{ width: imgWidth, height: imgWidth*2/3}}>
+    <div id="images-container-item-choser" style={{ width: imgWidth, height: imgHeight, maxHeight: imgHeight}}>
       
       {//Image mapping
       selectedFlavors.map((dtItem, i) => {

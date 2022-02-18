@@ -11,7 +11,6 @@ interface IProps {
 }
 
 const ModalRecipientes: React.FC<IProps> = ({items, show, onHide, selectItemById}) => {
-
     return (
       <Modal
         onHide={onHide}

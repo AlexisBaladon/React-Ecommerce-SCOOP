@@ -51,7 +51,7 @@ const Cart: React.FC<{}> = () => {
                 return (
                   <div className="item-container-cart" key={id + title}>
                   <Row className="item-cart justify-content-start">
-                    <Col md="6" className="col-item-cart col-item-img-cart"> <Link to={"/item/"+id}><img className="img-item-cart" src={pictureUrl} alt="Item" /></Link> </Col>
+                    <Col md="6" className="col-item-cart col-item-img-cart justify-content-center"> <Link to={"/item/"+id}><img className="img-item-cart" src={pictureUrl} alt="Item" /></Link> </Col>
                     <Col md="5" className="item-info-container-cart">
                       <Row className="col-item-cart"> <h5 className="item-title-cart"> {title} </h5></Row>
                       <Row className="col-item-cart"> <p className="item-amount-cart"> Cantidad: {amount} </p> </Row>

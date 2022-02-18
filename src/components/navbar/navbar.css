@@ -57,11 +57,11 @@
 /* Dropdown items */
 
 #navigator .dropdown-menu  {
-  background-color: var(--main-semi-dark-color);
+  background-color: var(--main-dark-color);
 }
 
 #navigator .dropdown-item:hover, #navigator .dropdown-item:active {
-  background-color: var(--main-dark-color);
+  background-color: var(--main-light-color);
 }
 
 #navigator .dropdown-menu .dropdown-item {

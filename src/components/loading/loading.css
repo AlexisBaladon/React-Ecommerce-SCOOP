@@ -13,5 +13,5 @@
   
 #waiting-text {
   font-style: normal;
-  color: #E698B7;
+  color: var(--main-color);
 }

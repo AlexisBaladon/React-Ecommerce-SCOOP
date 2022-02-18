@@ -24,12 +24,12 @@
   max-width: 100%;
   margin-top: 0;
   border-color: whitesmoke;
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1);
   border-radius: 5%;
 }
 
 #title-item-choser {
-  color: var(--main-color);
+  color: var(--main-dark-color);
   padding-bottom: 5%;
 }
 
@@ -50,7 +50,7 @@
 }
 
 #text-info-inner-item-detail {
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1);
   width: 375px;
   overflow: hidden;
   border-radius: 2%;

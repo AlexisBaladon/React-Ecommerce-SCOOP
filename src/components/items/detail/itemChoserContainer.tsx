@@ -13,15 +13,22 @@ interface IProps {
 const ItemChoserContainer: React.FC<IProps> = ({id, setProductDetail}) => {
   const [flavors, setFlavors] = useState<Flavor[]>([]);
   const [selectedFlavors, setSelectedFlavors] = useState<Flavor[]>([]);
-
+  
   useEffect(() => {
     let isMounted = true;
 
     const setIfMounted = (flavors: Flavor[]) => {
       if (isMounted) setFlavors(flavors);
     }
-
-    getFlavors(setIfMounted);
+    
+    try {
+      getFlavors(setIfMounted);
+    }
+    catch(err: any) {
+      if (err instanceof Error) {
+        console.warn(err);
+      }
+    }
     
     return () => {isMounted = false}
   }, [])
@@ -30,7 +37,7 @@ const ItemChoserContainer: React.FC<IProps> = ({id, setProductDetail}) => {
   useEffect(() => {
     //slice passes the value by copy
     setProductDetail(new ProductDetailRecipiente(selectedFlavors.slice()));
-  }, [selectedFlavors,   setProductDetail])
+  }, [selectedFlavors, setProductDetail])
   
   //Number of flavors according to item id
   const numFlavorsById = new Map([
@@ -43,6 +50,7 @@ const ItemChoserContainer: React.FC<IProps> = ({id, setProductDetail}) => {
     <ItemChooser 
       maxFlavors={numFlavorsById.get(id) || 0}
       imgWidth={500}
+      imgHeight={500*2/3}
       itemId={id}
       flavors={flavors}
       selectedFlavors={selectedFlavors}

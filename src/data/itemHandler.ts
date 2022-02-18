@@ -1,4 +1,4 @@
-import {collection, doc, DocumentData, DocumentSnapshot, Firestore, getDoc, getDocs, getFirestore, orderBy, query, where} from 'firebase/firestore';
+import {collection, doc, DocumentData, DocumentSnapshot, getDoc, getDocs, getFirestore, orderBy, query, where} from 'firebase/firestore';
 import Category from '../dataTypes/category';
 import ItemShowcase from '../dataTypes/itemShowcase';
 
@@ -12,8 +12,7 @@ const createItemAux = (document: DocumentSnapshot<DocumentData>): ItemShowcase =
 
   //If items are well defined
   if (title === undefined || description === undefined || price === undefined || pictureUrl === undefined || category === undefined || stock === undefined ) {
-  console.log(id,title,description,price,pictureUrl,category,stock)
-  throw new Error("Parámetros de items de base de datos erróneos");
+    throw new Error("Parámetros de items de base de datos erróneos");
   }
   else {
     newItem = new ItemShowcase(id, title, description, price, pictureUrl, category, stock);
@@ -25,7 +24,7 @@ const createItemAux = (document: DocumentSnapshot<DocumentData>): ItemShowcase =
 const getItem = (itemId: string, setItem: (item: ItemShowcase) => void): void => {
   const db = getFirestore()
   const itemRef = doc(db, "items", itemId);
-  console.log(itemRef)
+
   getDoc(itemRef).then(snapshot => {
     if (snapshot.exists()) {
       const item = createItemAux(snapshot);
@@ -39,7 +38,7 @@ const getItem = (itemId: string, setItem: (item: ItemShowcase) => void): void =>
 
 const getItems = (setItems: (item: ItemShowcase[]) => void): void => {
   const db = getFirestore()
-  const itemCollection = query(collection(db,"items"),orderBy("type"));
+  const itemCollection = query(collection(db,"items"),orderBy("type"),orderBy("title"));
 
   getDocs(itemCollection).then(snapshot => {
     const newItems = snapshot.docs.map(doc => {
@@ -51,7 +50,7 @@ const getItems = (setItems: (item: ItemShowcase[]) => void): void => {
 
 const getItemsByCategory = (category: Category, setItems: (item: ItemShowcase[]) => void): void => {
   const db = getFirestore()
-  const itemCollection = query(collection(db,"items"),where("type","==",category));
+  const itemCollection = query(collection(db,"items"),where("type","==",category),orderBy("price"));
 
   getDocs(itemCollection).then(snapshot => {
     const newItems = snapshot.docs.map(doc => {

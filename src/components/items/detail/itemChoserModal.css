@@ -1,10 +1,14 @@
+#contained-modal-title-vcenter {
+  font-size:x-large;
+}
+
 .card-img-modal {
   margin: 1% 1% 1% 1%;
   width: 10rem;
 }
 
 .card-img-modal:hover {
-  opacity: 60%;
+  opacity: 90%;
 }
  /* Body */
 .body-choser-modal {

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ItemList from './itemList'
 import Loading from '../../loading/loading';
@@ -45,7 +45,7 @@ const ItemListContainer: React.FC<{}> = () => {
       </div>
       <div id="product-list">
         <div className= "row justify-content-center">
-          <h2>Tienda</h2>
+          <h1 className="py-4">Tienda</h1>
           {items.length?
           <ItemList items={items} />:
           <Loading />
