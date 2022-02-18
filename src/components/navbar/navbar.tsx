@@ -14,10 +14,12 @@ const NavBar: React.FC<{}> = () => {
   //Cart context
   const cartContext = useContext(CartContext);
 
-  const [numItemsCart, setNumItemsCart] = useState<number>(cartContext.items.length);
+  const [numItemsCart, setNumItemsCart] = useState<number>(0);
 
   useEffect(() => {
-    setNumItemsCart(cartContext.items.length);
+    let amountItems = 0;
+    cartContext.items.forEach(it => {amountItems += it.amount});
+    setNumItemsCart(amountItems);
   }, [cartContext.items])
   
 
