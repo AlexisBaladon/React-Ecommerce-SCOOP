@@ -17,10 +17,8 @@ const NavBar: React.FC<{}> = () => {
   const [numItemsCart, setNumItemsCart] = useState<number>(0);
 
   useEffect(() => {
-    let amountItems = 0;
-    cartContext.items.forEach(it => {amountItems += it.amount});
-    setNumItemsCart(amountItems);
-  }, [cartContext.items])
+    setNumItemsCart(cartContext.getNumberOfProducts());
+  }, [cartContext])
   
 
   return <header>

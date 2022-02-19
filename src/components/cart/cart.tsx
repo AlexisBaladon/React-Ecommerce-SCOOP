@@ -11,30 +11,33 @@ const Cart: React.FC<{}> = () => {
   const items = cartContext.items;
 
   interface IBuyInfo {
+    itemAmount: number
     subtotal: number,
     discount: number,
     shipping: number,
     total: number,
   }
 
-  const [buyInfo, setBuyInfo] = useState<IBuyInfo>({subtotal: 0, discount: 0, shipping: 0, total: 0});
+  const [buyInfo, setBuyInfo] = useState<IBuyInfo>({itemAmount: 0, subtotal: 0, discount: 0, shipping: 0, total: 0});
   
   useEffect(() => {
-    const bi: IBuyInfo = {subtotal: cartContext.getTotalCost(),
+    const bi: IBuyInfo = {
+                          itemAmount: cartContext.getNumberOfProducts(),
+                          subtotal: cartContext.getTotalCost(),
                           discount: 0, 
                           shipping: 0,
                           total: cartContext.getTotalCost(),};
     setBuyInfo(bi);
   }, [cartContext])
 
-  const {subtotal, discount, shipping, total}: IBuyInfo = buyInfo;
+  const {itemAmount, subtotal, discount, shipping, total}: IBuyInfo = buyInfo;
   
   return (
     <Row className="justify-content-center">
       <Col md="7" sm="12" id="items-cart-container" >
         <Col id="items-inner-cart">
           {/* Conditional item render */}
-          {items.length > 0 ?
+          {itemAmount > 0 ?
           <>
             <Row id="footer-cart" className="py-3">
               <Col sm="4" id="go-back-cart" className=" justify-content-center px-5"> <Link to="/">Volver</Link> </Col>
@@ -84,7 +87,7 @@ const Cart: React.FC<{}> = () => {
           <Row id="column-names-cart">
             <Row className="buy-info-cart"> 
               <Col className="items-buy-info-cart"><p>Items:</p></Col>
-              <Col className="amount-items-buy-info-cart"><p>{items.length}</p> </Col> 
+              <Col className="amount-items-buy-info-cart"><p>{itemAmount}</p> </Col> 
             </Row>
             <Row className="buy-info-cart"> 
               <Col className="title-buy-info-cart"><p>Subtotal</p></Col>

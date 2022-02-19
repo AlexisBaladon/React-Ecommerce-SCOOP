@@ -2,6 +2,9 @@ import Item from "../dataTypes/item";
 import ItemCategory from "../dataTypes/category";
 import ItemTicket from "../dataTypes/itemTicket";
 import ProductDetail from "../dataTypes/ProductDetail";
+import Category from "../dataTypes/category";
+import ProductDetailRecipiente from "../dataTypes/ProductDetailRecipiente";
+import ProductDetailSimple from "../dataTypes/ProductDetailSimple";
 
 const createTicket = (item: Item, productDetail: ProductDetail, amount: number): ItemTicket => {
   let res: Item = item;
@@ -17,10 +20,24 @@ const createTicket = (item: Item, productDetail: ProductDetail, amount: number):
   }
 
   if (!(res instanceof ItemTicket)) {
-      throw new Error("The returned Item is not an ItemTicket!")
+    throw new Error("El item creado no es de tipo ItemTicket!")
   }  
 
   return res;
 }
+
+const createProductDetail = (category: Category): ProductDetail => {
+  let newProductDetail: ProductDetail;
   
-export {createTicket};
+  switch(category) {
+    case Category.Recipiente:
+      newProductDetail = new ProductDetailRecipiente([]);
+      break;
+    default: 
+      newProductDetail = new ProductDetailSimple();
+      break;
+  }
+
+  return newProductDetail;
+}
+export {createTicket, createProductDetail};

@@ -10,6 +10,7 @@ const CartContext = React.createContext<{
     deleteAllItems(): void, 
     isInCart(id: string, pd: ProductDetail): boolean,
     amountInCart(itemId: string): number,
+    getNumberOfProducts(): number,
     getTotalCost(): number,
   }>
 
@@ -20,6 +21,7 @@ const CartContext = React.createContext<{
     deleteAllItems: () => {},
     isInCart: (id: string, pd: ProductDetail) => false,
     amountInCart: (itemId: string) => 0,
+    getNumberOfProducts: () => 0,
     getTotalCost: () => 0,
   });
 
@@ -62,6 +64,12 @@ const CartProvider: React.FC<{}> = ({children}) => {
     return res;
   }
 
+  const getNumberOfProducts = (): number => {
+    let amountItems = 0;
+    cartItems.forEach(it => {amountItems += it.amount});
+    return amountItems;
+  }
+
   const getTotalCost = () => {
     let res = 0;
 
@@ -78,6 +86,7 @@ const CartProvider: React.FC<{}> = ({children}) => {
               deleteAllItems: deleteAllItems, 
               isInCart: isInCart,
               amountInCart: amountInCart,
+              getNumberOfProducts: getNumberOfProducts,
               getTotalCost: getTotalCost,
              }}>
       {children}

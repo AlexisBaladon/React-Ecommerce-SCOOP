@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getFlavors } from '../../../data/flavorHandler';
+import { getFlavors, getNumberOfFlavors } from '../../../data/flavorHandler';
 import Flavor from '../../../dataTypes/flavor';
 import ProductDetail from '../../../dataTypes/ProductDetail';
 import ProductDetailRecipiente from '../../../dataTypes/ProductDetailRecipiente';
@@ -13,16 +13,23 @@ interface IProps {
 const ItemChoserContainer: React.FC<IProps> = ({id, setProductDetail}) => {
   const [flavors, setFlavors] = useState<Flavor[]>([]);
   const [selectedFlavors, setSelectedFlavors] = useState<Flavor[]>([]);
-  
+  const [numberOfFlavors, setNumberOfFlavors] = useState<number>(0);
+
   useEffect(() => {
     let isMounted = true;
 
-    const setIfMounted = (flavors: Flavor[]) => {
+    const setFlavorsIfMounted = (flavors: Flavor[]) => {
       if (isMounted) setFlavors(flavors);
+    }
+
+    const setAmountIfMounted = (amount: number) => {
+      if (isMounted) setNumberOfFlavors(amount);
     }
     
     try {
-      getFlavors(setIfMounted);
+      console.log(id)
+      getNumberOfFlavors(setAmountIfMounted, id);
+      getFlavors(setFlavorsIfMounted);
     }
     catch(err: any) {
       if (err instanceof Error) {
@@ -31,24 +38,17 @@ const ItemChoserContainer: React.FC<IProps> = ({id, setProductDetail}) => {
     }
     
     return () => {isMounted = false}
-  }, [])
+  }, [id])
 
   //update details according to flavors showed on screen
   useEffect(() => {
     //slice passes the value by copy
     setProductDetail(new ProductDetailRecipiente(selectedFlavors.slice()));
   }, [selectedFlavors, setProductDetail])
-  
-  //Number of flavors according to item id
-  const numFlavorsById = new Map([
-    ["RzDoHkT1HVjWxrWWCoz6", 2], //1/2 Litre
-    ["d6UNi3yFX3kJoYWH5qkI", 3], //1   Litre
-    ["a5TdN0VbenQs6A9dlk1j", 4], //2   Litre
-  ])
 
   return (
     <ItemChooser 
-      maxFlavors={numFlavorsById.get(id) || 0}
+      maxFlavors={numberOfFlavors}
       imgWidth={500}
       imgHeight={500*2/3}
       itemId={id}

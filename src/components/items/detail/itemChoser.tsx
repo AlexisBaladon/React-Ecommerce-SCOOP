@@ -20,11 +20,6 @@ const ItemChooser: React.FC<IProps> = ({imgWidth, imgHeight, itemId, maxFlavors,
   const [show, setShow] = useState<boolean>(false);
   const [changedItemIndex, setChangedItemIndex] = useState<number>(0);
   
-  const magicNumberById = new Map([[2, 200], //1/2 Litre
-                                   [3, 150], //1   Litre
-                                   [4, 133], //2   Litre
-                                   ])
-
   //Prevents infinite loops inside useEffect
   const setSelectedFlavorsCallback = useCallback(() => {
     if (selectedFlavors.length === 0) setSelectedFlavors(flavors.slice(0,maxFlavors)) ;
@@ -57,15 +52,15 @@ const ItemChooser: React.FC<IProps> = ({imgWidth, imgHeight, itemId, maxFlavors,
       selectedFlavors.map((dtItem, i) => {
 
         //Item destructuring
-          const [magicNumber, pictureUrl, title]: [number , string, string] = 
-                [magicNumberById.get(maxFlavors) || 150, dtItem.pictureUrl, dtItem.title];
+          const [pictureUrl, title]: [string, string] = 
+                [dtItem.pictureUrl, dtItem.title];
 
           return (
           <div key={i} className="img-container-item-choser"style={{ width: 100/maxFlavors+"%",  left: `${i*100/maxFlavors}%`}} >
             <span onClick={() => {setShow(true); setChangedItemIndex(i);}}>
               <img 
                   className="img-item-choser"
-                  style={{ objectPosition:i*magicNumber/maxFlavors+"% 0"}}
+                  style={{ objectPosition:i*100/(maxFlavors-1)+"% 0"}}
                   src={pictureUrl}
                   alt={title}
               />
