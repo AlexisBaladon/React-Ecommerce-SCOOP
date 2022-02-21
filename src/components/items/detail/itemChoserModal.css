@@ -1,3 +1,13 @@
+#modal-choser-modal .modal-content {
+  border: none;
+}
+
+#header-choser-modal {
+  border: none;
+  color: white;
+  background-color: var(--main-color);
+}
+
 #contained-modal-title-vcenter {
   font-size:x-large;
 }

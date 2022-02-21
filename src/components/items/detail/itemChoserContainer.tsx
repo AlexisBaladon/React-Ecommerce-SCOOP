@@ -27,7 +27,6 @@ const ItemChoserContainer: React.FC<IProps> = ({id, setProductDetail}) => {
     }
     
     try {
-      console.log(id)
       getNumberOfFlavors(setAmountIfMounted, id);
       getFlavors(setFlavorsIfMounted);
     }

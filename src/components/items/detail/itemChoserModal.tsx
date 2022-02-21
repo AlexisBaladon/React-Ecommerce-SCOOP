@@ -1,4 +1,4 @@
-import { Card, Modal, Row } from "react-bootstrap";
+import { Card, CloseButton, Modal, Row } from "react-bootstrap";
 import Flavor from "../../../dataTypes/flavor";
 
 import './itemChoserModal.css'
@@ -13,16 +13,18 @@ interface IProps {
 const ModalRecipientes: React.FC<IProps> = ({items, show, onHide, selectItemById}) => {
     return (
       <Modal
+        id="modal-choser-modal"
         onHide={onHide}
         show={show}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
+        <Modal.Header id="header-choser-modal">
           <Modal.Title id="contained-modal-title-vcenter">
             Elige un sabor
           </Modal.Title>
+          <CloseButton variant="white" onClick={onHide}/>
         </Modal.Header>
         <Modal.Body>
           <Row className="item-container-choser-modal justify-content-center">

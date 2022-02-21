@@ -29,7 +29,7 @@ const ItemChooser: React.FC<IProps> = ({imgWidth, imgHeight, itemId, maxFlavors,
     setSelectedFlavorsCallback()
   }, [setSelectedFlavorsCallback])
 
-  const selectItemById = (newItemId: string) => {
+  const selectFlavorById = (newItemId: string) => {
     let newSelectedItems = selectedFlavors;
     const newItem = flavors.find(i => i.id === newItemId)
 
@@ -45,15 +45,14 @@ const ItemChooser: React.FC<IProps> = ({imgWidth, imgHeight, itemId, maxFlavors,
 
   return <>
     <ModalRecipientes items={flavors} show={show} onHide={() => setShow(false)}
-                      selectItemById={selectItemById}/>
+                      selectItemById={selectFlavorById}/>
     <div id="images-container-item-choser" style={{ width: imgWidth, height: imgHeight, maxHeight: imgHeight}}>
       
       {//Image mapping
       selectedFlavors.map((dtItem, i) => {
 
         //Item destructuring
-          const [pictureUrl, title]: [string, string] = 
-                [dtItem.pictureUrl, dtItem.title];
+          const [pictureUrl, title]: [string, string] = [dtItem.pictureUrl, dtItem.title];
 
           return (
           <div key={i} className="img-container-item-choser"style={{ width: 100/maxFlavors+"%",  left: `${i*100/maxFlavors}%`}} >

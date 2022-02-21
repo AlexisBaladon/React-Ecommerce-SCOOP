@@ -8,7 +8,6 @@
 #logo {
   margin: 0;
 
-  width: 120px;
   font-family: Arial;
   font-weight:bolder;
   font-size: xx-large;
@@ -73,8 +72,6 @@
 #cart {
   padding: 0;
   vertical-align:middle;
-  width: 45px;
-  height: 45px;
 }
 
 #link-cart-navbar {
