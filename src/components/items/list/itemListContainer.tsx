@@ -45,7 +45,7 @@ const ItemListContainer: React.FC<{}> = () => {
       </div>
       <div id="product-list">
         <div className= "row justify-content-center">
-          <h1 className="py-4">Tienda</h1>
+          <h1 className="py-5">Tienda</h1>
           {items.length?
           <ItemList items={items} />:
           <Loading />

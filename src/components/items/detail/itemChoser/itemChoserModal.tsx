@@ -1,5 +1,5 @@
 import { Card, CloseButton, Modal, Row } from "react-bootstrap";
-import Flavor from "../../../dataTypes/flavor";
+import Flavor from "../../../../dataTypes/flavor";
 
 import './itemChoserModal.css'
 
@@ -27,7 +27,7 @@ const ModalRecipientes: React.FC<IProps> = ({items, show, onHide, selectItemById
           <CloseButton variant="white" onClick={onHide}/>
         </Modal.Header>
         <Modal.Body>
-          <Row className="item-container-choser-modal justify-content-center">
+          <Row className="item-container-choser-modal justify-content-evenly">
             {items.map(i => {
                 return <div key={i.id} className="card-img-modal">
                   <Card className="item-card" >

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { CartContext } from '../../../context/cartContext';
 import { Button, Col, Row } from 'react-bootstrap';
 
-import ItemChoserContainer from './itemChoserContainer';
+import ItemChoserContainer from './itemChoser/itemChoserContainer';
 import ItemCount from './itemCount';
 
 import ItemTicket from '../../../dataTypes/itemTicket';
@@ -111,7 +111,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
                 <p id="stock-item-detail"><strong>Stock:</strong> {stock}</p>
                 <small id="in-cart-item-detail">({amountInCart} en carrito)</small>
               </div>
-              <Row className = "item-count-container ">
+              <Row className = "item-count-container">
                 {/* Dynamically selected component*/}
                 {inCart ?
                 <>

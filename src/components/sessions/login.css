@@ -6,3 +6,17 @@
 #modal-login .modal-content {
   border: none;
 }
+
+#modal-login span {
+  cursor:pointer;
+  color:#6B7DB3;
+}
+
+.button-login-modal {
+  background-color:#6B7DB3 !important;
+  border:0 !important;
+}
+
+.button-login-modal:hover {
+  background-color:rgb(123, 135, 175) !important;
+}

@@ -1,24 +1,22 @@
 import React, { useState, ReactChild, ReactChildren, useContext } from 'react'
 import { ModalContext } from '../../context/modalContext';
+import { SessionContext } from '../../context/sessionContext';
 import Login from './login';
 
-interface IProps {
-  initialShow: boolean;
-  children: ReactChild | ReactChildren;
-}
-
-const LoginContainer: React.FC<IProps> = ({initialShow, children}) => {
+const LoginContainer: React.FC<{}> = ({children}) => {
   const modalContext = useContext(ModalContext);
+  const sessionContext = useContext(SessionContext);
 
   const handleOpen = () => modalContext.openLoginModal();
   const handleClose = () => modalContext.closeLoginModal();
   const show = modalContext.isLoginOpened;
   const openRegister = modalContext.openRegisterModal;
+  const login = sessionContext.login;
 
   return <>
     {/* Children is needed to abstract the setShow hook from its parent */}
     <span onClick={handleOpen}>{children}</span>
-    <Login show={show} onHide={handleClose} openRegister={openRegister} />
+    <Login show={show} onHide={handleClose} login={login} openRegister={openRegister} />
   </>
 }
 

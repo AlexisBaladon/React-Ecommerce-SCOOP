@@ -1,24 +1,45 @@
 import React, { useRef, useState } from 'react'
-import { Button, Card, CloseButton, Form, Modal } from 'react-bootstrap';
+import { Alert, Button, Card, CloseButton, Form, Modal } from 'react-bootstrap';
 
 import './login.css'
 
 interface IProps {
   show: boolean;
   onHide: () => any;
+  login: (email: string, password: string) => Promise<any>;
   openRegister: () => any;
 }
-const Login: React.FC<IProps> = ({show, onHide, openRegister}) => {
 
-  const email = useRef<HTMLDivElement|null>(null);
-  const password = useRef<HTMLDivElement|null>(null);
-
-  const handleEmailRef = (ref: HTMLInputElement) => {
-    email.current = ref;
+const Login: React.FC<IProps> = ({show, onHide, login, openRegister}) => {
+  interface IAlert {
+    message: string;
+    variant: string;
   }
 
-  const handlePasswordRef = (ref: HTMLInputElement) => {
-    password.current = ref;
+  const [alertMessage, setAlertMessage] = useState<IAlert | null>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    //Prevents page reload
+    e.preventDefault();
+ 
+    try {
+      //Ref destructuring
+      const [email, password1]: [string | undefined, string | undefined] = 
+            [emailRef?.current?.value, passwordRef.current?.value];
+
+      if (password1 === undefined) throw new Error("El campo de contraseña debe ser completado");
+      if (email === undefined) throw new Error("El campo de email debe ser completado");
+      
+      login(email, password1);
+      onHide();
+    }
+    catch(err: any) {
+      if (err instanceof Error) {
+        setAlertMessage({message: err.message, variant: "danger"});
+      }
+    }
   }
 
   return <Modal id="modal-login"
@@ -30,18 +51,19 @@ const Login: React.FC<IProps> = ({show, onHide, openRegister}) => {
         <CloseButton variant="white" onClick={onHide} />
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Group>
             <Form.Label> Correo electrónico </Form.Label>
-            <Form.Control type="email" ref={handleEmailRef} required></Form.Control>
+            <Form.Control type="email" ref={emailRef} required></Form.Control>
           </Form.Group>
           <Form.Group>
             <Form.Label> Contraseña </Form.Label>
-            <Form.Control type="password" ref={handlePasswordRef} required></Form.Control>
+            <Form.Control type="password" ref={passwordRef} required></Form.Control>
           </Form.Group>
-          <Button className="w-100 my-4" type="submit">Iniciar Sesión</Button>
-          <Form.Label>No tienes cuenta? <span onClick={openRegister}>Registrate</span></Form.Label>
+          <Button className="button-login-modal w-100 my-4" type="submit">Iniciar Sesión</Button>
+          <Form.Label>No tienes cuenta? <span onClick={openRegister}>Regístrate</span></Form.Label>
         </Form>
+        {alertMessage && <Alert variant={alertMessage.variant}>{alertMessage.message}</Alert>}
       </Modal.Body>
   </Modal>
 }

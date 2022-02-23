@@ -13,8 +13,8 @@
 }
 
 .card-img-modal {
-  margin: 1% 1% 1% 1%;
-  width: 10rem;
+  margin: 1% 0% 1% 0%;
+  width: 10rem !important;
 }
 
 .card-img-modal:hover {
@@ -26,7 +26,7 @@
 }
 
 .item-container-choser-modal {
-  --bs-gutter-x: 0;
+  --bs-gutter-x: 0 !important;
 }
 
 /* Title */

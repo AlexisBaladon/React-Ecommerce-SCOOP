@@ -5,15 +5,18 @@ import { ModalProvider } from './context/modalContext';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { SessionProvider } from './context/sessionContext';
 
 function App() {
   
   return <div id="app">
-    <ModalProvider>
-      <CartProvider>
-        <Routes />
-      </CartProvider>
-    </ModalProvider>
+    <SessionProvider>
+      <ModalProvider>
+        <CartProvider>
+          <Routes />
+        </CartProvider>
+      </ModalProvider>
+    </SessionProvider>
   </div>
 }
 

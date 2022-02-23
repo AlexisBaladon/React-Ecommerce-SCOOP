@@ -2,8 +2,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Button, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/cartContext';
+import { ModalContext } from '../../context/modalContext';
+import { SessionContext } from '../../context/sessionContext';
 
 import './cart.css'
+import PurchaseModal from './purchaseModal';
 const deleteIcon = require('./delete.png')
 
 const Cart: React.FC<{}> = () => {
@@ -19,7 +22,21 @@ const Cart: React.FC<{}> = () => {
   }
 
   const [buyInfo, setBuyInfo] = useState<IBuyInfo>({itemAmount: 0, subtotal: 0, discount: 0, shipping: 0, total: 0});
-  
+
+  // Session context
+  const sessionContext = useContext(SessionContext);
+  //Modal context
+  const modalContext = useContext(ModalContext);
+
+  // Purchase modal
+  const [isPurchaseModalOpened, setPurchaseModalOpened] = useState<boolean>(false);
+  const onHide = () => setPurchaseModalOpened(false);
+
+  const handlePurchase = () => {
+    if (sessionContext.loggedUser) setPurchaseModalOpened(true);
+    else modalContext.openLoginModal();
+  }
+
   useEffect(() => {
     const bi: IBuyInfo = {
                           itemAmount: cartContext.getNumberOfProducts(),
@@ -32,7 +49,8 @@ const Cart: React.FC<{}> = () => {
 
   const {itemAmount, subtotal, discount, shipping, total}: IBuyInfo = buyInfo;
   
-  return (
+  return <>
+    <PurchaseModal show={isPurchaseModalOpened} onHide={onHide} confirmPurchase={()=>{}} />
     <Row className="justify-content-center">
       <Col md="7" sm="12" id="items-cart-container" >
         <Col id="items-inner-cart">
@@ -60,8 +78,8 @@ const Cart: React.FC<{}> = () => {
                       <Row className="col-item-cart"> <p className="item-amount-cart"> Cantidad: {amount} </p> </Row>
                       <Row className="col-item-cart"> <h5 className="item-price-cart">{price*amount}US$</h5></Row>
                     </Col>
-                    <Col md="1" className="delete-icon-col-cart">
-                      <Row className="col-item-cart justify-content-end"> <span className="delete-icon-cart" onClick={() => cartContext.deleteItem(it)}><img src={deleteIcon} alt="Borrar" /></span> </Row>
+                    <Col md="1" className="delete-icon-col-cart  justify-content-end">
+                      <Row className="col-item-cart"> <span className="delete-icon-cart" onClick={() => cartContext.deleteItem(it)}><img src={deleteIcon} alt="Borrar" /></span> </Row>
                     </Col>
                   </Row>
                   </div>
@@ -109,12 +127,12 @@ const Cart: React.FC<{}> = () => {
           </Row>
         </Row>
         <Row id="button-container-cart" className="justify-content-around">
-          <Col md="6" className="summary-button-cart"><Button className="button-cart" >Finalizar Compra</Button></Col>
+          <Col md="6" className="summary-button-cart"><Button className="button-cart" onClick={handlePurchase}>Finalizar Compra</Button></Col>
           <Col md="6" className="summary-button-cart"><Button className="button-cart" onClick={cartContext.deleteAllItems}>Borrar Todo</Button></Col>
         </Row>
       </Col>
     </Row>
-  )
+  </>
 }
 
 export default Cart;

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
-import Flavor from '../../../dataTypes/flavor';
+import Flavor from '../../../../dataTypes/flavor';
 import ModalRecipientes from './itemChoserModal';
 
 import './itemChoser.css'

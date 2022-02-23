@@ -12,6 +12,8 @@ import LogoutWidget from './loginWidget/loginWidget';
 import './navbar.css';
 import Login from '../sessions/login';
 import LoginContainer from '../sessions/loginContainer';
+import SignupContainer from '../sessions/signupContainer';
+import { SessionContext } from '../../context/sessionContext';
 
 const NavBar: React.FC<{}> = () => {
   const widgetsColor = "white";
@@ -19,8 +21,9 @@ const NavBar: React.FC<{}> = () => {
   //Enum destructuring
   const {Paleta, Recipiente, Postre} = ItemCategory;
 
-  //loggedUser context
-  const [isLogged, setIsLogged] = useState(false);
+  //Sessions context
+  const sessionContext = useContext(SessionContext);
+  const loggedUser = sessionContext.loggedUser;
 
   //Cart context
   const cartContext = useContext(CartContext);
@@ -45,19 +48,19 @@ const NavBar: React.FC<{}> = () => {
                 <NavDropdown.Item as={Link} to={"/category/"+Recipiente}>Recipientes</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to={"/category/"+Postre}>Postres</NavDropdown.Item>
               </NavDropdown>
-              {!isLogged &&
+              {!loggedUser &&
                 <>
-                  <LoginContainer initialShow={false}>
+                  <SignupContainer>
                     <Nav.Link> Registrarse </Nav.Link>
-                  </ LoginContainer>
-                  <LoginContainer initialShow={false}>
+                  </ SignupContainer>
+                  <LoginContainer>
                     <Nav.Link> Iniciar Sesión </Nav.Link>
                   </ LoginContainer>
                 </>
                 }
             </Nav>
-            { isLogged &&
-              <Link onClick={()=>setIsLogged(!isLogged)} to="profile" id="profile-navbar">
+            { loggedUser &&
+              <Link onClick={sessionContext.logout} to="/" id="profile-navbar">
                 {/* {<AccountWidget color={widgetsColor} width="37.5px" height="37.5px"/>} */}
                 <LogoutWidget color={widgetsColor} width="35.5px" height="35.5px" />
               </Link>

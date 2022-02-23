@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { getFlavors, getNumberOfFlavors } from '../../../data/flavorHandler';
-import Flavor from '../../../dataTypes/flavor';
-import ProductDetail from '../../../dataTypes/ProductDetail';
-import ProductDetailRecipiente from '../../../dataTypes/ProductDetailRecipiente';
+import { getFlavors, getNumberOfFlavors } from '../../../../data/flavorHandler';
+import Flavor from '../../../../dataTypes/flavor';
+import ProductDetail from '../../../../dataTypes/ProductDetail';
+import ProductDetailRecipiente from '../../../../dataTypes/ProductDetailRecipiente';
 import ItemChooser from './itemChoser'
 
 interface IProps {
