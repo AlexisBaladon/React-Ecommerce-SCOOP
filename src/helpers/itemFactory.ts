@@ -1,27 +1,21 @@
-import Item from "../dataTypes/item";
-import ItemCategory from "../dataTypes/category";
-import ItemTicket from "../dataTypes/itemTicket";
-import ProductDetail from "../dataTypes/ProductDetail";
-import Category from "../dataTypes/category";
-import ProductDetailRecipiente from "../dataTypes/ProductDetailRecipiente";
-import ProductDetailSimple from "../dataTypes/ProductDetailSimple";
+import Item from "../dataTypes/items/item";
+import ItemCategory from "../dataTypes/items/category";
+import ItemTicket from "../dataTypes/items/itemTicket";
+import ProductDetail from "../dataTypes/items/ProductDetail";
+import Category from "../dataTypes/items/category";
+import ProductDetailRecipiente from "../dataTypes/items/ProductDetailRecipiente";
+import ProductDetailSimple from "../dataTypes/items/ProductDetailSimple";
+import ItemShowcase from "../dataTypes/items/itemShowcase";
 
-const createTicket = (item: Item, productDetail: ProductDetail, amount: number): ItemTicket => {
-  let res: Item = item;
+const createTicket = (item: ItemShowcase, productDetail: ProductDetail, amount: number): ItemTicket => {
+  let res: ItemTicket;
     
-  if (!(item instanceof ItemTicket)) {
+  //item destructuring
+  const [id, title, price, pictureUrl]: 
+  [string, string, number, string] =
+  [item.id, item.title, item.price, item.pictureUrl];
 
-    //item destructuring
-    const [id, title, price, pictureUrl, category]: 
-    [string, string, number, string, ItemCategory] =
-    [item.id, item.title, item.price, item.pictureUrl, item.category];
-
-    res = new ItemTicket(id, productDetail.getTicketTitle(title), price, pictureUrl, category, productDetail, amount);
-  }
-
-  if (!(res instanceof ItemTicket)) {
-    throw new Error("El item creado no es de tipo ItemTicket!")
-  }  
+  res = new ItemTicket(id, productDetail.getTicketTitle(title), price, pictureUrl, productDetail, amount);
 
   return res;
 }

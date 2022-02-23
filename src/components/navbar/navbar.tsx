@@ -1,7 +1,7 @@
 import {Navbar as BTNavBar, Nav, Container, NavDropdown} from 'react-bootstrap';
 import CartWidget from './cartWidget/cartWidget';
 import { Link } from 'react-router-dom';
-import ItemCategory from '../../dataTypes/category';
+import ItemCategory from '../../dataTypes/items/category';
 
 import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../../context/cartContext';
@@ -59,11 +59,14 @@ const NavBar: React.FC<{}> = () => {
                 </>
                 }
             </Nav>
-            { loggedUser &&
+            { loggedUser && <>
+              <Link to="/history">
+                <AccountWidget color={widgetsColor} width="32.5px" height="37.5px"/>
+              </Link>
               <Link onClick={sessionContext.logout} to="/" id="profile-navbar">
-                {/* {<AccountWidget color={widgetsColor} width="37.5px" height="37.5px"/>} */}
                 <LogoutWidget color={widgetsColor} width="35.5px" height="35.5px" />
               </Link>
+            </>
             }
             { numItemsCart > 0 &&
              <Link to="/cart" id="link-cart-navbar">

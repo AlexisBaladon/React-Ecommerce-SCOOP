@@ -1,5 +1,5 @@
 import {collection, DocumentData, DocumentSnapshot, getDocs, getFirestore, limit, query, where} from 'firebase/firestore';
-import Flavor from '../dataTypes/flavor';
+import Flavor from '../dataTypes/items/flavor';
 
 const createItemAux = (document: DocumentSnapshot<DocumentData>): Flavor => {
   let newFlavor = null;

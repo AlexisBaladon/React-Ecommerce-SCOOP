@@ -1,5 +1,5 @@
 import { Card, CloseButton, Modal, Row } from "react-bootstrap";
-import Flavor from "../../../../dataTypes/flavor";
+import Flavor from "../../../../dataTypes/items/flavor";
 
 import './itemChoserModal.css'
 

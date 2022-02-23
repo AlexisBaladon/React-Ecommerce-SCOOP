@@ -1,5 +1,5 @@
 import Item from './item';
-import ItemShowcase from '../../../dataTypes/itemShowcase';
+import ItemShowcase from '../../../dataTypes/items/itemShowcase';
 
 interface IProps {
   items: ItemShowcase[];

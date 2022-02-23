@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import { CartContext } from '../../context/cartContext';
 import { ModalContext } from '../../context/modalContext';
 import { SessionContext } from '../../context/sessionContext';
+import { purchaseItems } from '../../data/purchaseHandler';
+import Order from '../../dataTypes/purchase/order';
+import PurchaseInfo from '../../dataTypes/purchase/purchaseInfo';
+import User from '../../dataTypes/user/user';
 
 import './cart.css'
 import PurchaseModal from './purchaseModal';
@@ -37,6 +41,22 @@ const Cart: React.FC<{}> = () => {
     else modalContext.openLoginModal();
   }
 
+  const confirmPurchase = (purchaseInfo: PurchaseInfo) => {
+    if (sessionContext.loggedUser && sessionContext.loggedUser.email) {
+      purchaseItems(new Order(
+        purchaseInfo.phoneNumber + purchaseInfo.date.toString(),
+        new User(sessionContext.loggedUser.email),
+        purchaseInfo,
+        items
+      ))
+      cartContext.deleteAllItems();
+    }
+    else {
+      throw new Error("El usuario debe haber iniciado sesión para registrar su compra.");
+    }
+    
+  }
+
   useEffect(() => {
     const bi: IBuyInfo = {
                           itemAmount: cartContext.getNumberOfProducts(),
@@ -50,7 +70,7 @@ const Cart: React.FC<{}> = () => {
   const {itemAmount, subtotal, discount, shipping, total}: IBuyInfo = buyInfo;
   
   return <>
-    <PurchaseModal show={isPurchaseModalOpened} onHide={onHide} confirmPurchase={()=>{}} />
+    <PurchaseModal show={isPurchaseModalOpened} onHide={onHide} confirmPurchase={confirmPurchase} />
     <Row className="justify-content-center">
       <Col md="7" sm="12" id="items-cart-container" >
         <Col id="items-inner-cart">

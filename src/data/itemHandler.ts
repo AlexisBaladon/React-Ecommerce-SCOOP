@@ -1,6 +1,6 @@
 import {collection, doc, DocumentData, DocumentSnapshot, getDoc, getDocs, getFirestore, orderBy, query, where} from 'firebase/firestore';
-import Category from '../dataTypes/category';
-import ItemShowcase from '../dataTypes/itemShowcase';
+import Category from '../dataTypes/items/category';
+import ItemShowcase from '../dataTypes/items/itemShowcase';
 
 const createItemAux = (document: DocumentSnapshot<DocumentData>): ItemShowcase => {
   let newItem = null;
@@ -38,7 +38,7 @@ const getItem = (itemId: string, setItem: (item: ItemShowcase) => void): void =>
 
 const getItems = (setItems: (item: ItemShowcase[]) => void): void => {
   const db = getFirestore()
-  const itemCollection = query(collection(db,"items"),orderBy("type"),orderBy("title"));
+  const itemCollection = query(collection(db,"items"),orderBy("type"),orderBy("price"));
 
   getDocs(itemCollection).then(snapshot => {
     const newItems = snapshot.docs.map(doc => {

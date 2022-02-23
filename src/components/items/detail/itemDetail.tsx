@@ -6,10 +6,10 @@ import { Button, Col, Row } from 'react-bootstrap';
 import ItemChoserContainer from './itemChoser/itemChoserContainer';
 import ItemCount from './itemCount';
 
-import ItemTicket from '../../../dataTypes/itemTicket';
-import ItemShowCase from '../../../dataTypes/itemShowcase';
-import ItemCategory from '../../../dataTypes/category';
-import ProductDetail from '../../../dataTypes/ProductDetail';
+import ItemTicket from '../../../dataTypes/items/itemTicket';
+import ItemShowCase from '../../../dataTypes/items/itemShowcase';
+import ItemCategory from '../../../dataTypes/items/category';
+import ProductDetail from '../../../dataTypes/items/ProductDetail';
 import { createProductDetail, createTicket } from '../../../helpers/itemFactory';
 
 import './itemDetail.css';

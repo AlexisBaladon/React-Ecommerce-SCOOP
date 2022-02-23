@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { auth } from '../index'
 import fireBase from "firebase/compat/app";
+import Loading from '../components/loading/loading';
 
 const SessionContext = React.createContext<{
     loggedUser: fireBase.User | null,
@@ -20,10 +21,12 @@ const SessionContext = React.createContext<{
 //Doesn't let more than one modal to be opened at once
 const SessionProvider: React.FC<{}> = ({children}) => {
   const [loggedUser, setLoggedUser] = useState<fireBase.User | null>(null)
-  
+  const [isLoading, setLoading] = useState<boolean>(true);
+
   useEffect(() => {
     const unsuscribe = auth.onAuthStateChanged(user => {
         setLoggedUser(user);
+        setLoading(false);
     })
 
     return unsuscribe;
@@ -49,7 +52,7 @@ const SessionProvider: React.FC<{}> = ({children}) => {
               login,
               logout,
              }}>
-      {children}
+      {isLoading? <Loading />: children}
     </SessionContext.Provider>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-import ItemTicket from '../dataTypes/itemTicket';
-import ProductDetail from '../dataTypes/ProductDetail';
+import ItemTicket from '../dataTypes/items/itemTicket';
+import ProductDetail from '../dataTypes/items/ProductDetail';
 
 const CartContext = React.createContext<{
     items: ItemTicket[],

@@ -1,13 +1,15 @@
 import React, { useRef, useState, useContext } from 'react'
 import { Alert, Button, CloseButton, Form, ListGroup, Modal, Row } from 'react-bootstrap';
 import { CartContext } from '../../context/cartContext';
+import PaymentMethod from '../../dataTypes/purchase/paymentMethod';
+import PurchaseInfo from '../../dataTypes/purchase/purchaseInfo';
 
 import './purchaseModal.css'
 
 interface IProps {
   show: boolean;
   onHide: () => any;
-  confirmPurchase: () => any;
+  confirmPurchase: (purchaseInfo: PurchaseInfo) => any;
 }
 
 const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase}) => {
@@ -17,12 +19,17 @@ const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase}) => {
     variant: string;
   }
 
+  // UseRefs
   const [alertMessage, setAlertMessage] = useState<IAlert | null>(null);
   const phoneRef         = useRef<HTMLInputElement>(null);
   const countryRef       = useRef<HTMLInputElement>(null);
   const cityRef          = useRef<HTMLInputElement>(null);
   const postalCodeRef    = useRef<HTMLInputElement>(null);
   const paymentMethodRef = useRef<HTMLInputElement>(null);
+
+  // Cart Context
+  const cartContext = useContext(CartContext);
+  const items = cartContext.items;
 
   // Handlers
   const handleHide = () => {
@@ -31,22 +38,25 @@ const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase}) => {
   }
 
   const handleSubmit = (e: React.FormEvent) => {
-    //Prevents page reload
+    // Prevents page reload
     e.preventDefault();
  
     try {
-      //Ref destructuring
+      // Ref destructuring
       const [phone, country, city, postalCode, paymentMethod]: 
-            [string | undefined, string | undefined, string | undefined, string | undefined, string | undefined] = 
-            [phoneRef?.current?.value, countryRef.current?.value, cityRef.current?.value, postalCodeRef.current?.value, paymentMethodRef.current?.value];
+            [string | undefined, string | undefined, string | undefined, number | undefined, string | undefined] = 
+            [phoneRef?.current?.value, countryRef.current?.value, cityRef.current?.value, Number(postalCodeRef.current?.value),  paymentMethodRef.current?.value];
 
       if (phone          === undefined) throw new Error("El campo de Teléfono debe ser completado.");
       if (country        === undefined) throw new Error("El campo de País debe ser completado.");
       if (city           === undefined) throw new Error("El campo de Ciudad debe ser completado.");
       if (postalCode     === undefined) throw new Error("El campo de Código Postal debe ser completado.");
       if (paymentMethod  === undefined) throw new Error("El campo de Método de pago debe ser completado.");
+      if (!Number(phone)) throw new Error("El teléfono ingresado debe ser un número");
+      // Checks if the string is an instance of PaymentMethod 
+      if (Object.values(PaymentMethod).every((pm => pm !== paymentMethod))) throw new Error("El campo de Método de pago ingresado es inválido.");
 
-      //signup(email, password1);
+      confirmPurchase(new PurchaseInfo(Number(phone), country, city, postalCode, (paymentMethod as PaymentMethod), new Date(), cartContext.getTotalCost()))
       setAlertMessage({message: "Compra realizada! Su pedido llegará en menos de 30 minutos a la direción indicada.", 
                        variant: "success"});
     }
@@ -56,9 +66,6 @@ const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase}) => {
       }
     }
   }
-
-  const cartContext = useContext(CartContext);
-  const items = cartContext.items;
 
   return <Modal id="modal-purchase"
                 show={show}
@@ -106,7 +113,7 @@ const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase}) => {
             </Form.Label>
           </Form.Group>
           {alertMessage && <Alert variant={alertMessage.variant}>{alertMessage.message}</Alert>}
-          <Button className="button-purchase-modal w-100" type="submit" onClick={confirmPurchase}>Confirmar compra</Button>
+          <Button className="button-purchase-modal w-100" type="submit" onClick={handleSubmit}>Confirmar compra</Button>
         </Form>
       </Modal.Body>
   </Modal>

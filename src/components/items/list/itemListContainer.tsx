@@ -3,11 +3,11 @@ import { useParams } from 'react-router-dom';
 import ItemList from './itemList'
 import Loading from '../../loading/loading';
 
-import ItemShowcase from '../../../dataTypes/itemShowcase'
+import ItemShowcase from '../../../dataTypes/items/itemShowcase'
 
 import './itemListContainer.css';
 import { getItems, getItemsByCategory } from '../../../data/itemHandler';
-import Category from '../../../dataTypes/category';
+import Category from '../../../dataTypes/items/category';
 
 const ItemListContainer: React.FC<{}> = () => {
 

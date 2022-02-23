@@ -1,7 +1,7 @@
 import {Card} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import ItemShowcase from '../../../dataTypes/itemShowcase';
+import ItemShowcase from '../../../dataTypes/items/itemShowcase';
 
 import './item.css';
 
