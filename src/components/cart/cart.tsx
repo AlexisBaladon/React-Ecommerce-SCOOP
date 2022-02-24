@@ -42,6 +42,8 @@ const Cart: React.FC<{}> = () => {
   }
 
   const confirmPurchase = (purchaseInfo: PurchaseInfo) => {
+    if (items.length < 1) throw new Error("Para realizar una compra debe tener más de un producto en el carro.");
+
     if (sessionContext.loggedUser && sessionContext.loggedUser.email) {
       purchaseItems(new Order(
         purchaseInfo.phoneNumber + purchaseInfo.date.toString(),
