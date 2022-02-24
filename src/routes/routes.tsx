@@ -6,7 +6,6 @@ import ItemDetailContainer from "../components/items/detail/itemDetailContainer"
 import ItemListContainer from "../components/items/list/itemListContainer";
 import Error404 from "../components/errors/error404/error404";
 import CartContainer from "../components/cart/cartContainer";
-import PurchaseHistory from "../components/account/purchaseHistory";
 import PurchaseHistoryContainer from "../components/account/purchaseHistoryContainer";
 
 const Routes = () => {
@@ -20,7 +19,6 @@ const Routes = () => {
   return <div>
       <BrowserRouter>
         {hasNavbar? <NavBar /> : null }
-
         <Switch>
           <Route path="/"             element={<ItemListContainer                    /> } />
           <Route path="/category/:id" element={<ItemListContainer                    /> } />

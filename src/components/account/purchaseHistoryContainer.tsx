@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import { SessionContext } from '../../context/sessionContext';
 import { getOrdersByEmail } from '../../data/purchaseHandler';
 import Order from '../../dataTypes/purchase/order';
@@ -29,8 +30,12 @@ const PurchaseHistoryContainer = () => {
   
 
   return <>
-    <div>Volver</div>
-    <PurchaseHistory orders={orders} />
+    <div className="py-5">
+      <Link to="/">Volver</Link>
+    </div>
+    <div className="py-2">
+      <PurchaseHistory orders={orders} />
+    </div>
   </>
 }
 

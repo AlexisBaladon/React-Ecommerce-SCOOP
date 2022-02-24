@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap';
 import ItemPurchase from '../../dataTypes/items/itemPurchase';
 import Order from '../../dataTypes/purchase/order';
 import PaymentMethod from '../../dataTypes/purchase/paymentMethod';
 import PurchaseInfo from '../../dataTypes/purchase/purchaseInfo';
+import createPDF from '../../helpers/pdf';
 
 import './purchaseHistory.css'
 
@@ -11,7 +12,32 @@ interface IProps {
   orders: Order[];
 }
 
-const PurchaseHistory: React.FC<IProps> = ({orders}) => {
+const PurchaseHistory: React.FC<IProps> = ({orders}) => {  
+  const [pdfsData, setPdfsData] = useState<Uint8Array[]>([]);
+  const [urls, setUrls] = useState<string[]>([]);
+  
+  useEffect(() => {
+    //FALTA IS MOUNTED
+    orders.forEach((ord, i) => {
+      const setPdfData = (pdfDt: Uint8Array) => {
+        let pdfsDataAux = pdfsData;
+        pdfsDataAux[i] = pdfDt;
+        setPdfsData(pdfsDataAux);
+      }
+      createPDF(setPdfData);
+    })
+  }, [])
+
+  useEffect(() => {
+    orders.forEach((ord, i) => {
+      const urlBlob = window.URL.createObjectURL(new Blob([pdfsData[i]], {type: 'application/pdf'}));
+      let urlsAux = urls;
+      urlsAux[i] = urlBlob;
+      setUrls(urlsAux);
+      console.log(i)
+    });
+  }, [pdfsData])
+    
   return <div id="purchase-history" className="">
     <Table id="table-purchase-history" responsive striped bordered hover>
       <thead>
@@ -42,7 +68,7 @@ const PurchaseHistory: React.FC<IProps> = ({orders}) => {
               <td>{paymentMethod}</td>
               <td>{phoneNumber}</td>
               <td>{cost}US$</td>
-              <td>PDF</td>
+              <td><a download href={urls[i]}>PDF</a></td>
           </tr>
         })}
       </tbody>
