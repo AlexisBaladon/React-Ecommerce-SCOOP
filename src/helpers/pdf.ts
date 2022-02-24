@@ -72,30 +72,32 @@ const createPDF = async (ord: Order, setlink: (pdf: Uint8Array) => any) => {
             //Center side
             items.forEach((it, i) => {
               if (i < 25) { //Page overflow
+                //Title
                 firstPage.drawText(it.title, {
-                      x: 180,
-                      y: height / 2 - i*17.5 + 252.5,
-                      size: 7,
-                      font: helveticaFont,
-                      color: rgb(0, 0, 0),
-                    })
-  
-                  const itemPrice = it.amount*it.price;
-                  firstPage.drawText(itemPrice.toString() + "US$", {
-                    x: 443.5,
+                    x: 180,
                     y: height / 2 - i*17.5 + 252.5,
-                    size: 8,
+                    size: 7,
                     font: helveticaFont,
-                    color: rgb(0.858, 0.419, 0.592),
+                    color: rgb(0, 0, 0),
                   })
-  
-                  firstPage.drawText(it.amount.toString(), {
-                      x: 515,
-                      y: height / 2 - i*17.5 + 252.5,
-                      size: 8,
-                      font: helveticaFont,
-                      color: rgb(0, 0, 0),
-                  })
+
+                //Price
+                firstPage.drawText(it.price.toString() + "US$", {
+                  x: 443.5,
+                  y: height / 2 - i*17.5 + 252.5,
+                  size: 8,
+                  font: helveticaFont,
+                  color: rgb(0.858, 0.419, 0.592),
+                })
+
+                //amount
+                firstPage.drawText(it.amount.toString(), {
+                  x: 515,
+                  y: height / 2 - i*17.5 + 252.5,
+                  size: 8,
+                  font: helveticaFont,
+                  color: rgb(0, 0, 0),
+                })
               }
               else if (i === 25) {
                 firstPage.drawText('Cantidad máxima de productos excedida. Para consultar todos sus productos contáctese con Scoop', {
@@ -111,8 +113,8 @@ const createPDF = async (ord: Order, setlink: (pdf: Uint8Array) => any) => {
             //Bottom side
             //Total price
             let totalPrice = 0;
-            items.forEach(it => totalPrice += it.amount*it.price);
-            firstPage.drawText(totalPrice.toString()+"US$", {
+            items.forEach(it => totalPrice += it.price*it.amount);
+            firstPage.drawText(totalPrice.toString() +"US$", {
               x: 460,
               y: height / 2 - 202,
               size: 8,
@@ -130,7 +132,6 @@ const createPDF = async (ord: Order, setlink: (pdf: Uint8Array) => any) => {
               font: helveticaFont,
               color: rgb(0, 0, 0),
             })
-
 
             const pdfBytes = await (await pdfDoc).save();
             setlink(pdfBytes);
