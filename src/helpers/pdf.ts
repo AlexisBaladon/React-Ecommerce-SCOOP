@@ -80,7 +80,8 @@ const createPDF = async (ord: Order, setlink: (pdf: Uint8Array) => any) => {
                       color: rgb(0, 0, 0),
                     })
   
-                  firstPage.drawText(it.price.toString() + "US$", {
+                  const itemPrice = it.amount*it.price;
+                  firstPage.drawText(itemPrice.toString() + "US$", {
                     x: 443.5,
                     y: height / 2 - i*17.5 + 252.5,
                     size: 8,
@@ -108,11 +109,22 @@ const createPDF = async (ord: Order, setlink: (pdf: Uint8Array) => any) => {
             })
 
             //Bottom side
-            //Total
-            let total = 0;
-            items.forEach(it => total += it.amount);
-            firstPage.drawText(total.toString(), {
+            //Total price
+            let totalPrice = 0;
+            items.forEach(it => totalPrice += it.amount*it.price);
+            firstPage.drawText(totalPrice.toString()+"US$", {
               x: 460,
+              y: height / 2 - 202,
+              size: 8,
+              font: helveticaFont,
+              color: rgb(0.858, 0.419, 0.592),
+            })
+
+            //Total amount
+            let totalAmount = 0;
+            items.forEach(it => totalAmount += it.amount);
+            firstPage.drawText(totalAmount.toString(), {
+              x: 515,
               y: height / 2 - 202,
               size: 8,
               font: helveticaFont,
