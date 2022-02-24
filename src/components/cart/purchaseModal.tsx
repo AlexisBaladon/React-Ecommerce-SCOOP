@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from 'react'
+import React, { useRef, useState, useContext, useEffect } from 'react'
 import { Alert, Button, CloseButton, Form, ListGroup, Modal, Row } from 'react-bootstrap';
 import { CartContext } from '../../context/cartContext';
 import PaymentMethod from '../../dataTypes/purchase/paymentMethod';
@@ -10,9 +10,10 @@ interface IProps {
   show: boolean;
   onHide: () => any;
   confirmPurchase: (purchaseInfo: PurchaseInfo) => any;
+  orderId: string;
 }
 
-const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase}) => {
+const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase, orderId}) => {
 
   interface IAlert {
     message: string;
@@ -57,8 +58,6 @@ const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase}) => {
       if (Object.values(PaymentMethod).every((pm => pm !== paymentMethod))) throw new Error("El campo de Método de pago ingresado es inválido.");
 
       confirmPurchase(new PurchaseInfo(Number(phone), country, city, postalCode, (paymentMethod as PaymentMethod), new Date(), cartContext.getTotalCost()))
-      setAlertMessage({message: "Compra realizada! Su pedido llegará en menos de 30 minutos a la direción indicada.", 
-                       variant: "success"});
     }
     catch(err: any) {
       if (err instanceof Error) {
@@ -66,6 +65,15 @@ const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase}) => {
       }
     }
   }
+
+  useEffect(() => {
+    if (orderId) {
+      console.log(orderId)
+      setAlertMessage({message: `Compra realizada! Su pedido llegará en menos de 30 minutos a la direción indicada. Su código de orden es: ${orderId}`, 
+                       variant: "success"});
+    }
+  }, [orderId])
+  
 
   return <Modal id="modal-purchase"
                 show={show}

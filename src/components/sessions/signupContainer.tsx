@@ -14,7 +14,7 @@ const SignupContainer: React.FC<{}> = ({children}) => {
   const signup = (email: string, password: string): Promise<any> => sessionContext.signup(email, password);
 
   return <>
-    {/* Children is needed to abstract the setShow hook from its parent */}
+    {/* Children is needed to abstract modalContext from its parent */}
     <span onClick={handleOpen}>{children}</span>
     <Signup show={show} onHide={handleClose} openLogin={openLogin} signup = {signup}/>
   </>

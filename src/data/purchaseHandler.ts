@@ -59,7 +59,7 @@ const getOrdersByEmail = (email: string, setOrders: (orders: Order[]) => void): 
 }
 
 //Write function
-const purchaseItems = (order: Order): void => {
+const purchaseItems =  async (order: Order, setOrderId: (id: string) => any) => {
   const db = getFirestore()
   const newOrder = collection(db,"orders");
 
@@ -86,6 +86,8 @@ const purchaseItems = (order: Order): void => {
       totalCost: purchaseInfo.totalCost,
     },
     items: notClassItems,
+  }).then(response => {
+    setOrderId(response.id);
   })
   
 }

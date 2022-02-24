@@ -14,6 +14,7 @@ import PurchaseModal from './purchaseModal';
 const deleteIcon = require('./delete.png')
 
 const Cart: React.FC<{}> = () => {
+  //Cart context
   const cartContext = useContext(CartContext);
   const items = cartContext.items;
 
@@ -33,6 +34,7 @@ const Cart: React.FC<{}> = () => {
   const modalContext = useContext(ModalContext);
 
   // Purchase modal
+  const [orderId, setOrderId] = useState<string>("");
   const [isPurchaseModalOpened, setPurchaseModalOpened] = useState<boolean>(false);
   const onHide = () => setPurchaseModalOpened(false);
 
@@ -50,7 +52,8 @@ const Cart: React.FC<{}> = () => {
         new User(sessionContext.loggedUser.email),
         purchaseInfo,
         items
-      ))
+      ), setOrderId)
+      //Otherwise the user could mistakenly buy his order twice
       cartContext.deleteAllItems();
     }
     else {
@@ -60,19 +63,19 @@ const Cart: React.FC<{}> = () => {
   }
 
   useEffect(() => {
-    const bi: IBuyInfo = {
-                          itemAmount: cartContext.getNumberOfProducts(),
-                          subtotal: cartContext.getTotalCost(),
-                          discount: 0, 
-                          shipping: 0,
-                          total: cartContext.getTotalCost(),};
+    const bi: IBuyInfo = { itemAmount: cartContext.getNumberOfProducts(),
+                           subtotal: cartContext.getTotalCost(),
+                           discount: 0, 
+                           shipping: 0,
+                           total: cartContext.getTotalCost(),
+                          };
     setBuyInfo(bi);
   }, [cartContext])
 
   const {itemAmount, subtotal, discount, shipping, total}: IBuyInfo = buyInfo;
   
   return <>
-    <PurchaseModal show={isPurchaseModalOpened} onHide={onHide} confirmPurchase={confirmPurchase} />
+    <PurchaseModal show={isPurchaseModalOpened} onHide={onHide} confirmPurchase={confirmPurchase} orderId={orderId} />
     <Row className="justify-content-center">
       <Col md="7" sm="12" id="items-cart-container" >
         <Col id="items-inner-cart">
