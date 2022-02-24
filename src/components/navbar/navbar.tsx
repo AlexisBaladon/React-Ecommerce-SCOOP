@@ -1,26 +1,37 @@
 import {Navbar as BTNavBar, Nav, Container, NavDropdown} from 'react-bootstrap';
-import CartWidget from '../cartWidget/cartWidget';
+import CartWidget from './cartWidget/cartWidget';
 import { Link } from 'react-router-dom';
-import ItemCategory from '../../dataTypes/category';
+import ItemCategory from '../../dataTypes/items/category';
 
-import './navbar.css';
 import { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../../context/cartContext';
+import LoginWidget from './loginWidget/loginWidget';
+import AccountWidget from './accountWidget/accountWidget';
+import LogoutWidget from './loginWidget/loginWidget';
+
+import './navbar.css';
+import Login from '../sessions/login';
+import LoginContainer from '../sessions/loginContainer';
+import SignupContainer from '../sessions/signupContainer';
+import { SessionContext } from '../../context/sessionContext';
 
 const NavBar: React.FC<{}> = () => {
+  const widgetsColor = "white";
+
   //Enum destructuring
   const {Paleta, Recipiente, Postre} = ItemCategory;
 
+  //Sessions context
+  const sessionContext = useContext(SessionContext);
+  const loggedUser = sessionContext.loggedUser;
+
   //Cart context
   const cartContext = useContext(CartContext);
-
   const [numItemsCart, setNumItemsCart] = useState<number>(0);
 
   useEffect(() => {
-    let amountItems = 0;
-    cartContext.items.forEach(it => {amountItems += it.amount});
-    setNumItemsCart(amountItems);
-  }, [cartContext.items])
+    setNumItemsCart(cartContext.getNumberOfProducts());
+  }, [cartContext])
   
 
   return <header>
@@ -37,11 +48,29 @@ const NavBar: React.FC<{}> = () => {
                 <NavDropdown.Item as={Link} to={"/category/"+Recipiente}>Recipientes</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to={"/category/"+Postre}>Postres</NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
+              {!loggedUser &&
+                <>
+                  <SignupContainer>
+                    <Nav.Link> Registrarse </Nav.Link>
+                  </ SignupContainer>
+                  <LoginContainer>
+                    <Nav.Link> Iniciar Sesión </Nav.Link>
+                  </ LoginContainer>
+                </>
+                }
             </Nav>
+            { loggedUser && <>
+              <Link to="/history">
+                <AccountWidget color={widgetsColor} width="32.5px" height="37.5px"/>
+              </Link>
+              <Link onClick={sessionContext.logout} to="/" id="profile-navbar">
+                <LogoutWidget color={widgetsColor} width="35.5px" height="35.5px" />
+              </Link>
+            </>
+            }
             { numItemsCart > 0 &&
              <Link to="/cart" id="link-cart-navbar">
-               <CartWidget id="cart" alt="Tienda" />
+               <CartWidget id="cart" color={widgetsColor} width="40px" height="40px" />
               <h1 id="cant-items-navbar">{numItemsCart}</h1>
              </Link> 
              }

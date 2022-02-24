@@ -1,5 +1,5 @@
 .item-count {
-  padding: 0;
+  padding: 0 !important;
   margin: -1px;
   border: 1px solid black;
   border-radius: 2px;
@@ -9,12 +9,12 @@
 
 .item-count-element {
   text-align: center;
-  border-radius: 0;
-  border: 0;
+  border-radius: 0 !important;
+  border: 0 !important;
   background-color: white !important;
   color: black !important;
   
-  transition: 0.3s;
+  transition: 0.3s !important;
 }
 
 .item-count-element:hover, .item-count-element:focus {

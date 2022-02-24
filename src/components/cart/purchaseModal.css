@@ -1,0 +1,42 @@
+#header-purchase {
+  background-color: var(--main-color);
+  color: white;
+}
+  
+#modal-purchase .modal-content {
+  border: none;
+}
+
+.product-list-purchase-modal {
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1);
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.item-purchase-modal {
+  display: inline-flex !important;
+}
+
+.item-price-purchase-modal {
+  color: var(--main-color);
+  font-weight: 600;
+}
+
+#total-cost-purchase-modal {
+  color: var(--main-color);
+  font-weight: 600;
+}
+
+#modal-purchase span {
+  cursor:pointer;
+  color:#6B7DB3;
+}
+
+.button-purchase-modal {
+  background-color:#6B7DB3 !important;
+  border:0 !important;
+}
+
+.button-purchase-modal:hover {
+  background-color:rgb(123, 135, 175) !important;
+}

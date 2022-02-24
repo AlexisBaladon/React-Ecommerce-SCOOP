@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import ItemDetail from "./itemDetail";
 import Loading from '../../loading/loading';
 
-import ItemShowcase from '../../../dataTypes/itemShowcase';
+import ItemShowcase from '../../../dataTypes/items/itemShowcase';
 
 import './itemDetailContainer.css'
 import { getItem } from '../../../data/itemHandler';

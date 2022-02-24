@@ -1,0 +1,12 @@
+#purchase-history {
+  overflow: auto;
+  display: inline-block;
+  margin: 0 5vw 0 5vw;
+  width: 80vw;
+  height: 80vh;
+}
+
+#table-purchase-history {
+    max-width: 80vw;
+    max-height: 80vh;
+}

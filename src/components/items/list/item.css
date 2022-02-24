@@ -1,15 +1,16 @@
 .item-card {
-  border-width: 1px;
+  --bs-gutter-x: 0;
+  border-width: 1px !important;
   box-sizing: content-box;
   overflow: hidden;
-  background-color: rgb(250,250,250);
+  background-color: rgb(250,250,250) !important;
   padding: 0;
   margin: 2.5% 2% 2.5% 2%;
-  width: 20%;
-  min-width: 10rem;
+  width: 20% !important;
+  min-width: 10rem !important;
   color:#212529;
-  
-  display: flex;
+  position: relative !important;
+  display: flex !important;
   justify-content: space-between;
   
   transition: 0.3s;
@@ -28,13 +29,13 @@
 /* Text */
 
 .item-text {
-  margin: 5% 0 0 0;
+  margin: 5% 0 22.5% 0;
 }
 
 .item-title {
-  padding: 0;
+  padding: 0 !important;
   margin: 0 0 3px 0;
-  font-size: large;
+  font-size: large !important;
 }
 
 .item-desc {
@@ -42,6 +43,10 @@
 }
 
 .item-price {
+  position: absolute;
+  top: 86%;
+  left: 50%;
+  transform: translateX(-50%);
   font-size:larger;
   color: var(--main-dark-color);
 }

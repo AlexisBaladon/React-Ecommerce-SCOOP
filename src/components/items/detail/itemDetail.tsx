@@ -3,15 +3,14 @@ import { Link } from 'react-router-dom';
 import { CartContext } from '../../../context/cartContext';
 import { Button, Col, Row } from 'react-bootstrap';
 
-import ItemChoserContainer from './itemChoserContainer';
+import ItemChoserContainer from './itemChoser/itemChoserContainer';
 import ItemCount from './itemCount';
 
-import ItemTicket from '../../../dataTypes/itemTicket';
-import ItemShowCase from '../../../dataTypes/itemShowcase';
-import ItemCategory from '../../../dataTypes/category';
-import ProductDetail from '../../../dataTypes/ProductDetail';
-import { createTicket } from '../../../helpers/itemFactory';
-import ProductDetailSimple from '../../../dataTypes/ProductDetailSimple';
+import ItemTicket from '../../../dataTypes/items/itemTicket';
+import ItemShowCase from '../../../dataTypes/items/itemShowcase';
+import ItemCategory from '../../../dataTypes/items/category';
+import ProductDetail from '../../../dataTypes/items/ProductDetail';
+import { createProductDetail, createTicket } from '../../../helpers/itemFactory';
 
 import './itemDetail.css';
 
@@ -30,7 +29,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
         [item.id, item.title, item.description, item.price, item.pictureUrl, item.stock, item.category];
 
   //Product details (different categories have different details)
-  const [productDetail, setProductDetail] = useState<ProductDetail>(new ProductDetailSimple());
+  const [productDetail, setProductDetail] = useState<ProductDetail>(createProductDetail(category));
   const [inCart, setInCart] = useState<boolean>(false);
   const [amountInCart, setAmountInCart] = useState<number>(cartContext.amountInCart(itemId));
   const [inCartMessage, setInCartMessage] = useState("Producto agregado al carrito!");
@@ -41,7 +40,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
       setInCart(true);
       setInCartMessage("No queda stock para este producto!");
     }
-  }, [productDetail, amountInCart,   cartContext, itemId, stock])
+  }, [productDetail, amountInCart, cartContext, itemId, stock])
 
   //ItemCount
   const initial: number = 0;
@@ -112,7 +111,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
                 <p id="stock-item-detail"><strong>Stock:</strong> {stock}</p>
                 <small id="in-cart-item-detail">({amountInCart} en carrito)</small>
               </div>
-              <Row className = "item-count-container ">
+              <Row className = "item-count-container">
                 {/* Dynamically selected component*/}
                 {inCart ?
                 <>

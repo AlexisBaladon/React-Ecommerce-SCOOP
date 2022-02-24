@@ -1,5 +1,6 @@
 {
   "files": {
+<<<<<<< HEAD
     "main.css": "/static/css/main.ee62831b.css",
     "main.js": "/static/js/main.e2d6c7a8.js",
     "static/js/787.2e72c78b.chunk.js": "/static/js/787.2e72c78b.chunk.js",
@@ -11,5 +12,18 @@
   "entrypoints": [
     "static/css/main.ee62831b.css",
     "static/js/main.e2d6c7a8.js"
+=======
+    "main.css": "/static/css/main.43e14c88.css",
+    "main.js": "/static/js/main.1e9dd7bd.js",
+    "static/js/787.2e72c78b.chunk.js": "/static/js/787.2e72c78b.chunk.js",
+    "index.html": "/index.html",
+    "main.43e14c88.css.map": "/static/css/main.43e14c88.css.map",
+    "main.1e9dd7bd.js.map": "/static/js/main.1e9dd7bd.js.map",
+    "787.2e72c78b.chunk.js.map": "/static/js/787.2e72c78b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.43e14c88.css",
+    "static/js/main.1e9dd7bd.js"
+>>>>>>> Entrega11
   ]
 }

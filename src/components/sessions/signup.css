@@ -1,0 +1,22 @@
+#header-signup {
+    background-color: var(--main-color);
+    color: white;
+  }
+  
+  #modal-signup .modal-content {
+    border: none;
+  }
+
+  #modal-signup span {
+    cursor:pointer;
+    color:#6B7DB3;
+  }
+  
+  .button-signup-modal {
+    background-color:#6B7DB3 !important;
+    border:0 !important;
+  }
+  
+  .button-signup-modal:hover {
+    background-color:rgb(123, 135, 175) !important;
+  }
