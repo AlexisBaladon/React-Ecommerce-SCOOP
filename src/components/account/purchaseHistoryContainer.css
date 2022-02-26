@@ -1,0 +1,24 @@
+#header-history-container {
+  align-items: center;
+  color: var(--main-color);
+}
+
+#header-history-container a {
+  color: var(--main-color);
+  text-decoration: none;
+}
+
+#no-orders-history {
+  padding: 125px 0 125px 0;
+}
+
+#button-history {
+  border-color: transparent !important;
+  background-color: var(--main-color);
+  color: white;
+}
+
+#button-history:hover, #button-history:focus{
+  box-shadow: none !important;
+  background-color: var(--main-dark-color) !important;
+}

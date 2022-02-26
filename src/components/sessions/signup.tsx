@@ -21,6 +21,11 @@ const Signup: React.FC<IProps> = ({show, onHide, openLogin, signup}) => {
   const password1Ref = useRef<HTMLInputElement>(null);
   const password2Ref = useRef<HTMLInputElement>(null);
 
+  const handleHide = () => {
+    setAlertMessage(null);
+    onHide();
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     //Prevents page reload
     e.preventDefault();
@@ -35,8 +40,27 @@ const Signup: React.FC<IProps> = ({show, onHide, openLogin, signup}) => {
       if (password1 !== password2) throw new Error("Las contraseñas no coinciden");
       if (password1.length < 6) throw new Error("La contraseña debe tener más de 6 dígitos");
       
-      signup(email, password1);
-      setAlertMessage({message: "Cuenta creada satisfactoriamente!", variant: "success"});
+      signup(email, password1).then(() => {
+        setAlertMessage({message: "Cuenta creada satisfactoriamente!", variant: "success"});
+      })
+      .catch(error => {
+        let errorMessage = "";
+        switch(error.code) {
+          case "auth/email-already-in-use":
+            errorMessage = "El correo seleccionado ya está en uso.";
+            break;
+          case "auth/weak-password":
+            errorMessage = "La contraseña ingresada es demasiado débil. Intente con más de 5 dígitos.";
+          break;
+          case "auth/invalid-email":
+            errorMessage = "El correo ingresado no es una dirección válida.";
+          break;
+          default:
+            errorMessage = "Ha habido un error en el registro de la cuenta";
+          break;
+        }
+        setAlertMessage({message: errorMessage, variant: "danger"});
+      });
     }
     catch(err: any) {
       if (err instanceof Error) {
@@ -51,7 +75,7 @@ const Signup: React.FC<IProps> = ({show, onHide, openLogin, signup}) => {
                 centered>
       <Modal.Header id="header-signup">
         <Modal.Title> Registro </Modal.Title>
-        <CloseButton variant="white" onClick={onHide} />
+        <CloseButton variant="white" onClick={handleHide} />
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>

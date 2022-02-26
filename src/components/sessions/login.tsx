@@ -20,20 +20,42 @@ const Login: React.FC<IProps> = ({show, onHide, login, openRegister}) => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
+  const handleHide = () => {
+    setAlertMessage(null);
+    onHide();
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
-    //Prevents page reload
     e.preventDefault();
  
     try {
-      //Ref destructuring
       const [email, password1]: [string | undefined, string | undefined] = 
             [emailRef?.current?.value, passwordRef.current?.value];
 
       if (password1 === undefined) throw new Error("El campo de contraseña debe ser completado");
       if (email === undefined) throw new Error("El campo de email debe ser completado");
       
-      login(email, password1);
-      onHide();
+      login(email, password1).then(() => {
+        setAlertMessage(null);
+        handleHide();
+      })
+      .catch(error => {
+        let errorMessage = "";
+        switch (error.code) {
+          case "auth/invalid-email":
+            errorMessage = "El mail ingresado no es correcto.";
+            break;
+          case "auth/wrong-password":
+            errorMessage = "La contraseña ingresada no es correcta.";
+            break;
+          case "auth/user-not-found":
+            errorMessage = "El usuario ingresado no existe.";
+            break;
+          default:
+            errorMessage = "Ha ocurrido un error al iniciar sesión.";
+        }
+        setAlertMessage({message: errorMessage, variant: "danger"});
+      });
     }
     catch(err: any) {
       if (err instanceof Error) {
@@ -48,7 +70,7 @@ const Login: React.FC<IProps> = ({show, onHide, login, openRegister}) => {
                 centered>
       <Modal.Header id="header-login">
         <Modal.Title> Iniciar sesion </Modal.Title>
-        <CloseButton variant="white" onClick={onHide} />
+        <CloseButton variant="white" onClick={handleHide} />
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
@@ -66,6 +88,7 @@ const Login: React.FC<IProps> = ({show, onHide, login, openRegister}) => {
         {alertMessage && <Alert variant={alertMessage.variant}>{alertMessage.message}</Alert>}
       </Modal.Body>
   </Modal>
+  
 }
 
 export default Login;

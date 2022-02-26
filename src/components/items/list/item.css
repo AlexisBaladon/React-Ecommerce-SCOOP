@@ -4,8 +4,7 @@
   box-sizing: content-box;
   overflow: hidden;
   background-color: rgb(250,250,250) !important;
-  padding: 0;
-  margin: 2.5% 2% 2.5% 2%;
+  margin: 2% 2% 2% 2% !important;
   width: 20% !important;
   min-width: 10rem !important;
   color:#212529;

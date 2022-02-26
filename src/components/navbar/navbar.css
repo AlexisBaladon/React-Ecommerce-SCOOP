@@ -82,6 +82,11 @@
   opacity: 80%;
 }
 
+#link-profile-navbar:hover,
+#link-account-navbar:hover {
+  opacity: 75%;;
+}
+
 #cant-items-navbar {
   position: absolute;
   font-size: 16.5px;

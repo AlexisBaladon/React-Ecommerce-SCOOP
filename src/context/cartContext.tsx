@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import ItemTicket from '../dataTypes/items/itemTicket';
 import ProductDetail from '../dataTypes/items/ProductDetail';
+import { reconstructItems } from '../helpers/itemFactory';
 
 const CartContext = React.createContext<{
     items: ItemTicket[],
@@ -27,7 +28,25 @@ const CartContext = React.createContext<{
 
 
 const CartProvider: React.FC<{}> = ({children}) => {
+  const localStorageKey = "cart-storage";
   const [cartItems, setCartItems] = useState<ItemTicket[]>([]);
+
+  //Auxiliar local storage routines
+  const setItemsLocalStorage = (items: ItemTicket[]) => {
+    window.localStorage.setItem(localStorageKey, JSON.stringify(items));
+  }
+
+  const getItemsLocalStorage = (): ItemTicket[] => {
+    const retrievedItems: ItemTicket[] = JSON.parse(window.localStorage.getItem(localStorageKey)|| "[]");
+    const resurrectedItems: ItemTicket[] = reconstructItems(retrievedItems);
+    return resurrectedItems;
+  }
+
+  useEffect(() => {
+    //Retrieves stored items from local storage
+    const storedItems: ItemTicket[] = getItemsLocalStorage();
+    setCartItems(storedItems);
+  }, [])
 
   const addItem = (newItem: ItemTicket): void => {
     if (cartItems.some(it => it.sameProductAs(newItem))) {
@@ -35,19 +54,23 @@ const CartProvider: React.FC<{}> = ({children}) => {
     }
     else {
       let cartItemsAux = cartItems;
-      cartItemsAux.push(newItem)
+      cartItemsAux.push(newItem);
       setCartItems(cartItemsAux.slice());
+      setItemsLocalStorage(cartItemsAux);
     }
   }
 
   const deleteItem = (deletedItem: ItemTicket): void => {
-    setCartItems(cartItems.filter((it: ItemTicket) => {
+    const newCartItems = cartItems.filter((it: ItemTicket) => {
       return !(it.equals(deletedItem) && it.sameProductAs(deletedItem));
-    }));
+    })
+    setCartItems(newCartItems);
+    setItemsLocalStorage(newCartItems);
   }
 
   const deleteAllItems = (): void => {
     setCartItems([]);
+    setItemsLocalStorage([]);
   }
 
   const isInCart = (itemId: string, productDetail: ProductDetail): boolean => {
@@ -56,11 +79,9 @@ const CartProvider: React.FC<{}> = ({children}) => {
 
   const amountInCart = (itemId: string): number => {
     let res = 0;
-
     cartItems.forEach(it => {
       if (it.id === itemId) res += it.amount;
     })
-
     return res;
   }
 
@@ -72,9 +93,7 @@ const CartProvider: React.FC<{}> = ({children}) => {
 
   const getTotalCost = () => {
     let res = 0;
-
     cartItems.forEach((ci) => res += ci.amount*ci.price);
-
     return res;
   }
 

@@ -38,15 +38,16 @@ const PurchaseHistory: React.FC<IProps> = ({orders}) => {
   }, [orders, pdfsData])
 
   useEffect(() => {
-    if (!(urls.length === orders.length))
-    orders.forEach((ord, i) => {
-      if (pdfsData[i] && !urls[i]) {
-        const urlBlob = window.URL.createObjectURL(new Blob([pdfsData[i]], {type: 'application/pdf'}));
-        let urlsAux = urls;
-        urlsAux[i] = urlBlob;
-        setUrls(urlsAux.slice());
-      }
-    });
+    if (urls.length < orders.length) {
+      orders.forEach((ord, i) => {
+        if (pdfsData[i] && !urls[i]) {
+          const urlBlob = window.URL.createObjectURL(new Blob([pdfsData[i]], {type: 'application/pdf'}));
+          let urlsAux = urls;
+          urlsAux[i] = urlBlob;
+          setUrls(urlsAux.slice());
+        }
+      });
+    }
   }, [orders, pdfsData, urls])
     
   return <div id="purchase-history" className="">
@@ -55,18 +56,16 @@ const PurchaseHistory: React.FC<IProps> = ({orders}) => {
         <tr>
         <th>ID de compra</th>
         <th>Ciudad</th>
-        <th>Código Postal</th>
+        <th>CP</th>
         <th>Fecha</th>
         <th>Medio</th>
         <th>Teléfono</th>
         <th>Costo</th>
-        <th>Productos</th>
+        <th>Recibo</th>
         </tr>
       </thead>
       <tbody>
         {orders.map((ord, i) => {
-          
-          // PurchaseInfo destructuring
           const [purchaseInfo]: [PurchaseInfo, ItemPurchase[]] = [ord.purchaseInfo, ord.items];
           const [city, postalCode, date, paymentMethod, phoneNumber, cost]: [string, number, Date, PaymentMethod, number, number] =
                 [purchaseInfo.city, purchaseInfo.postalCode, purchaseInfo.date, purchaseInfo.paymentMethod, purchaseInfo.phoneNumber, purchaseInfo.totalCost]

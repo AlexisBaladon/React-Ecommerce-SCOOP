@@ -17,9 +17,14 @@ import './cart.css'
 const deleteIcon = require('./delete.png')
 
 const Cart: React.FC<{}> = () => {
-  //Cart context
+  const sessionContext = useContext(SessionContext);
+  const modalContext = useContext(ModalContext);
   const cartContext = useContext(CartContext);
-  const items = cartContext.items;
+
+  const { loggedUser } = sessionContext;
+  const { openLoginModal, } = modalContext;
+  const { items, getNumberOfProducts, getTotalCost, deleteItem, deleteAllItems } = cartContext;
+
 
   interface IBuyInfo {
     itemAmount: number
@@ -30,34 +35,28 @@ const Cart: React.FC<{}> = () => {
   }
 
   const [buyInfo, setBuyInfo] = useState<IBuyInfo>({itemAmount: 0, subtotal: 0, discount: 0, shipping: 0, total: 0});
-
-  // Session context
-  const sessionContext = useContext(SessionContext);
-  //Modal context
-  const modalContext = useContext(ModalContext);
-
-  // Purchase modal
   const [orderId, setOrderId] = useState<string>("");
   const [isPurchaseModalOpened, setPurchaseModalOpened] = useState<boolean>(false);
+  
   const onHide = () => setPurchaseModalOpened(false);
 
   const handlePurchase = () => {
-    if (sessionContext.loggedUser) setPurchaseModalOpened(true);
-    else modalContext.openLoginModal();
+    if (loggedUser) setPurchaseModalOpened(true);
+    else openLoginModal();
   }
 
   const confirmPurchase = (purchaseInfo: PurchaseInfo) => {
-    if (items.length < 1) throw new Error("Para realizar una compra debe tener más de un producto en el carro.");
+    if (items.length < 1) throw new Error("Para realizar una compra debe tener al menos un producto en el carrito.");
 
-    if (sessionContext.loggedUser && sessionContext.loggedUser.email) {
+    if (loggedUser && loggedUser.email) {
       purchaseItems(new Order(
         purchaseInfo.phoneNumber + purchaseInfo.date.toString(),
-        new User(sessionContext.loggedUser.email),
+        new User(loggedUser.email),
         purchaseInfo,
         items
       ), setOrderId)
-      //Otherwise the user could mistakenly buy his order twice
-      cartContext.deleteAllItems();
+
+      deleteAllItems();
     }
     else {
       throw new Error("El usuario debe haber iniciado sesión para registrar su compra.");
@@ -66,33 +65,33 @@ const Cart: React.FC<{}> = () => {
   }
 
   useEffect(() => {
-    const bi: IBuyInfo = { itemAmount: cartContext.getNumberOfProducts(),
-                           subtotal: cartContext.getTotalCost(),
-                           discount: 0, 
-                           shipping: 0,
-                           total: cartContext.getTotalCost(),
+    const bi: IBuyInfo = { itemAmount: getNumberOfProducts(),
+                           subtotal  : getTotalCost(),
+                           discount  : 0, 
+                           shipping  : 0,
+                           total     : getTotalCost(),
                           };
     setBuyInfo(bi);
-  }, [cartContext])
+  }, [getNumberOfProducts, getTotalCost])
 
   const {itemAmount, subtotal, discount, shipping, total}: IBuyInfo = buyInfo;
   
   return <>
-    <PurchaseModal show={isPurchaseModalOpened} onHide={onHide} confirmPurchase={confirmPurchase} orderId={orderId} />
+    {loggedUser?.email &&
+      <PurchaseModal show={isPurchaseModalOpened} onHide={onHide} confirmPurchase={confirmPurchase} orderId={orderId} userEmail={loggedUser.email} />
+    }
     <Row className="justify-content-center">
       <Col md="7" sm="12" id="items-cart-container" >
         <Col id="items-inner-cart">
-          {/* Conditional item render */}
           {itemAmount > 0 ?
           <>
-            <Row id="footer-cart" className="py-3">
+            <Row id="footer-cart" className="py-4">
               <Col sm="4" id="go-back-cart" className=" justify-content-center px-5"> <Link to="/">Volver</Link> </Col>
               <Col sm="4" className="d-flex justify-content-center px-5"><h2>Carrito</h2></Col>
 
             </Row>
             <Row id="items-row-cart" className="d-flex justify-content-center">
               {items.map((it) => {
-                //item destructuring
                 const [id, title, pictureUrl, price, amount] : 
                 [string, string, string, number, number] =
                 [it.id, it.title, it.pictureUrl, it.price, it.amount];
@@ -107,7 +106,7 @@ const Cart: React.FC<{}> = () => {
                       <Row className="col-item-cart"> <h5 className="item-price-cart">{price*amount}US$</h5></Row>
                     </Col>
                     <Col md="1" className="delete-icon-col-cart  justify-content-end">
-                      <Row className="col-item-cart"> <span className="delete-icon-cart" onClick={() => cartContext.deleteItem(it)}><img src={deleteIcon} alt="Borrar" /></span> </Row>
+                      <Row className="col-item-cart"> <span className="delete-icon-cart" onClick={() => deleteItem(it)}><img src={deleteIcon} alt="Borrar" /></span> </Row>
                     </Col>
                   </Row>
                   </div>
@@ -119,10 +118,10 @@ const Cart: React.FC<{}> = () => {
           <>
             <div id="no-items-cart">
               <h1>No hay items en tu carrito!</h1>
-              <Link to="/"><Button className="button-cart">Compra un item</Button></Link>
+              <Link to="/"><Button className="button-cart">Ir a la tienda</Button></Link>
             </div>
           </>
-         } {/* End of conditional render*/}
+         }
         </Col>
       </Col>
       <Col md="5" sm="12" id="container-cart">
@@ -156,7 +155,7 @@ const Cart: React.FC<{}> = () => {
         </Row>
         <Row id="button-container-cart" className="justify-content-around">
           <Col md="6" className="summary-button-cart"><Button className="button-cart" onClick={handlePurchase}>Finalizar Compra</Button></Col>
-          <Col md="6" className="summary-button-cart"><Button className="button-cart" onClick={cartContext.deleteAllItems}>Borrar Todo</Button></Col>
+          <Col md="6" className="summary-button-cart"><Button className="button-cart" onClick={deleteAllItems}>Borrar Todo</Button></Col>
         </Row>
       </Col>
     </Row>

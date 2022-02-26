@@ -22,7 +22,7 @@
 }
  /* Body */
 .body-choser-modal {
-  padding: 0 0 15px 0;
+  padding: 0 0 12.5px 0 !important;
 }
 
 .item-container-choser-modal {

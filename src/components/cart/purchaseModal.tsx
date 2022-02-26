@@ -13,39 +13,36 @@ interface IProps {
   onHide: () => any;
   confirmPurchase: (purchaseInfo: PurchaseInfo) => any;
   orderId: string;
+  userEmail: string;
 }
 
-const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase, orderId}) => {
+const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase, orderId, userEmail}) => {
 
   interface IAlert {
     message: string;
     variant: string;
   }
 
-  // UseRefs
   const [alertMessage, setAlertMessage] = useState<IAlert | null>(null);
+
+  const cartContext = useContext(CartContext);
+  const {items, getTotalCost} = cartContext;
+
   const phoneRef         = useRef<HTMLInputElement>(null);
   const countryRef       = useRef<HTMLInputElement>(null);
   const cityRef          = useRef<HTMLInputElement>(null);
   const postalCodeRef    = useRef<HTMLInputElement>(null);
   const paymentMethodRef = useRef<HTMLInputElement>(null);
 
-  // Cart Context
-  const cartContext = useContext(CartContext);
-  const items = cartContext.items;
-
-  // Handlers
   const handleHide = () => {
     setAlertMessage(null);
     onHide();
   }
 
   const handleSubmit = (e: React.FormEvent) => {
-    // Prevents page reload
     e.preventDefault();
  
     try {
-      // Ref destructuring
       const [phone, country, city, postalCode, paymentMethod]: 
             [string | undefined, string | undefined, string | undefined, number | undefined, string | undefined] = 
             [phoneRef?.current?.value, countryRef.current?.value, cityRef.current?.value, Number(postalCodeRef.current?.value),  paymentMethodRef.current?.value];
@@ -59,7 +56,7 @@ const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase, orderId
       // Checks if the string is an instance of PaymentMethod 
       if (Object.values(PaymentMethod).every((pm => pm !== paymentMethod))) throw new Error("El campo de Método de pago ingresado es inválido.");
 
-      confirmPurchase(new PurchaseInfo(Number(phone), country, city, postalCode, (paymentMethod as PaymentMethod), new Date(), cartContext.getTotalCost()))
+      confirmPurchase(new PurchaseInfo(Number(phone), country, city, postalCode, (paymentMethod as PaymentMethod), new Date(), getTotalCost()))
     }
     catch(err: any) {
       if (err instanceof Error) {
@@ -75,7 +72,6 @@ const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase, orderId
     }
   }, [orderId])
   
-
   return <Modal id="modal-purchase"
                 show={show}
                 aria-labelledby="contained-modal-title-vcenter"
@@ -122,7 +118,7 @@ const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase, orderId
             </Form.Label>
           </Form.Group>
           {alertMessage && <Alert variant={alertMessage.variant}>{alertMessage.message}</Alert>}
-          <Button className="button-purchase-modal w-100" type="submit" onClick={handleSubmit}>Confirmar compra</Button>
+          <Button className="button-purchase-modal w-100" type="submit" onClick={handleSubmit}>Confirmar compra ({userEmail})</Button>
         </Form>
       </Modal.Body>
   </Modal>

@@ -1,4 +1,4 @@
-import {collection, doc, DocumentData, DocumentSnapshot, getDoc, getDocs, getFirestore, orderBy, query, where} from 'firebase/firestore';
+import {collection, doc, DocumentData, DocumentSnapshot, getDoc, getDocs, getFirestore, orderBy, query, QuerySnapshot, where} from 'firebase/firestore';
 import Category from '../dataTypes/items/category';
 import ItemShowcase from '../dataTypes/items/itemShowcase';
 
@@ -21,11 +21,11 @@ const createItemAux = (document: DocumentSnapshot<DocumentData>): ItemShowcase =
   return newItem;
 }
 
-const getItem = (itemId: string, setItem: (item: ItemShowcase) => void): void => {
+const getItem = async (itemId: string, setItem: (item: ItemShowcase) => void): Promise<void | DocumentSnapshot<DocumentData>> => {
   const db = getFirestore()
   const itemRef = doc(db, "items", itemId);
 
-  getDoc(itemRef).then(snapshot => {
+  await getDoc(itemRef).then(snapshot => {
     if (snapshot.exists()) {
       const item = createItemAux(snapshot);
       setItem(item);
@@ -36,27 +36,37 @@ const getItem = (itemId: string, setItem: (item: ItemShowcase) => void): void =>
   })
 }
 
-const getItems = (setItems: (item: ItemShowcase[]) => void): void => {
+const getItems = async (setItems: (item: ItemShowcase[]) => void): Promise<void | QuerySnapshot<DocumentData>> => {
   const db = getFirestore()
   const itemCollection = query(collection(db,"items"),orderBy("type"),orderBy("price"));
 
-  getDocs(itemCollection).then(snapshot => {
-    const newItems = snapshot.docs.map(doc => {
-      return createItemAux(doc);
-    })
-    setItems(newItems);
+  await getDocs(itemCollection).then(snapshot => {
+    if (snapshot.empty) {
+      throw new Error("No se han encontrado items en la base de datos!")
+    }
+    else {
+      const newItems = snapshot.docs.map(doc => {
+        return createItemAux(doc);
+      })
+      setItems(newItems);
+    }
   })
 }
 
-const getItemsByCategory = (category: Category, setItems: (item: ItemShowcase[]) => void): void => {
+const getItemsByCategory = async (category: Category, setItems: (item: ItemShowcase[]) => void): Promise<void | QuerySnapshot<DocumentData>> => {
   const db = getFirestore()
   const itemCollection = query(collection(db,"items"),where("type","==",category),orderBy("price"));
 
-  getDocs(itemCollection).then(snapshot => {
-    const newItems = snapshot.docs.map(doc => {
-      return createItemAux(doc);
-    })
-    setItems(newItems);
+  await getDocs(itemCollection).then(snapshot => {
+    if (snapshot.empty) {
+      throw new Error("No se han encontrado items en la base de datos!")
+    }
+    else {
+      const newItems = snapshot.docs.map(doc => {
+        return createItemAux(doc);
+      })
+      setItems(newItems);
+    } 
   })
 }
 
