@@ -38,17 +38,6 @@ const ModalProvider: React.FC<{}> = ({children}) => {
     setOpenedParam(true);
     setOpenedCollection([...openedCollection, setOpenedParam])
   }
-/*
-  const closeModal = (setOpenedParam: React.Dispatch<React.SetStateAction<boolean>>) => {
-    const setOpened = openedCollection.find(set => set === setOpenedParam);
-    if (setOpened !== undefined) {
-      setOpened(false);
-
-      let openedCol = openedCollection.slice();
-      openedCol.filter(set => set !== setOpened);
-      setOpenedCollection(openedCol);
-    }
-  }*/
   
   // Sent functions
   const openLoginModal = () => openModal(setLoginOpened);

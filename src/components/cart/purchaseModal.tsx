@@ -1,6 +1,8 @@
 import React, { useRef, useState, useContext, useEffect } from 'react'
-import { Alert, Button, CloseButton, Form, ListGroup, Modal, Row } from 'react-bootstrap';
+import { Alert, Button, CloseButton, Form, ListGroup, Modal } from 'react-bootstrap';
+
 import { CartContext } from '../../context/cartContext';
+
 import PaymentMethod from '../../dataTypes/purchase/paymentMethod';
 import PurchaseInfo from '../../dataTypes/purchase/purchaseInfo';
 
@@ -68,7 +70,6 @@ const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase, orderId
 
   useEffect(() => {
     if (orderId) {
-      console.log(orderId)
       setAlertMessage({message: `Compra realizada! Su pedido llegará en menos de 30 minutos a la direción indicada. Su código de orden es: ${orderId}`, 
                        variant: "success"});
     }

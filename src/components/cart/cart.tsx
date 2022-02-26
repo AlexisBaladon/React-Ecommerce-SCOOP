@@ -1,16 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Button, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
 import { CartContext } from '../../context/cartContext';
 import { ModalContext } from '../../context/modalContext';
 import { SessionContext } from '../../context/sessionContext';
+import PurchaseModal from './purchaseModal';
+
 import { purchaseItems } from '../../data/purchaseHandler';
 import Order from '../../dataTypes/purchase/order';
 import PurchaseInfo from '../../dataTypes/purchase/purchaseInfo';
 import User from '../../dataTypes/user/user';
 
 import './cart.css'
-import PurchaseModal from './purchaseModal';
+
 const deleteIcon = require('./delete.png')
 
 const Cart: React.FC<{}> = () => {

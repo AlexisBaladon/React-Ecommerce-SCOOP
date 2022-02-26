@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+
+import PurchaseHistory from './purchaseHistory';
 import { SessionContext } from '../../context/sessionContext';
+
 import { getOrdersByEmail } from '../../data/purchaseHandler';
 import Order from '../../dataTypes/purchase/order';
-import PurchaseHistory from './purchaseHistory';
 
 const PurchaseHistoryContainer = () => {
   //session context
@@ -26,7 +28,7 @@ const PurchaseHistoryContainer = () => {
     }
   
     return () => {isMounted = true;}
-  }, [])
+  }, [loggedUser])
   
 
   return <>

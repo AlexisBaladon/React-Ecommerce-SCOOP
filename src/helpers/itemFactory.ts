@@ -1,5 +1,3 @@
-import Item from "../dataTypes/items/item";
-import ItemCategory from "../dataTypes/items/category";
 import ItemTicket from "../dataTypes/items/itemTicket";
 import ProductDetail from "../dataTypes/items/ProductDetail";
 import Category from "../dataTypes/items/category";

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap';
+
 import ItemPurchase from '../../dataTypes/items/itemPurchase';
 import Order from '../../dataTypes/purchase/order';
 import PaymentMethod from '../../dataTypes/purchase/paymentMethod';
@@ -19,25 +20,34 @@ const PurchaseHistory: React.FC<IProps> = ({orders}) => {
   const [urls, setUrls] = useState<string[]>([]);
 
   useEffect(() => {
-    //FALTA IS MOUNTED
+    let isMounted = true;
+    const setIfMounted = (pdfs: Uint8Array[]) => {
+      if (isMounted) setPdfsData(pdfs);
+    }
+
     orders.forEach((ord, i) => {
       const setPdfData = (pdfDt: Uint8Array) => {
         let pdfsDataAux = pdfsData;
         pdfsDataAux[i] = pdfDt;
-        setPdfsData(pdfsDataAux.slice());
+        setIfMounted(pdfsDataAux.slice());
       }
-      createPDF(ord, setPdfData);
+      if (!pdfsData[i]) createPDF(ord, setPdfData);
     })
-  }, [orders])
+
+    return () => {isMounted = false};
+  }, [orders, pdfsData])
 
   useEffect(() => {
+    if (!(urls.length === orders.length))
     orders.forEach((ord, i) => {
-      const urlBlob = window.URL.createObjectURL(new Blob([pdfsData[i]], {type: 'application/pdf'}));
-      let urlsAux = urls;
-      urlsAux[i] = urlBlob;
-      setUrls(urlsAux.slice());
+      if (pdfsData[i] && !urls[i]) {
+        const urlBlob = window.URL.createObjectURL(new Blob([pdfsData[i]], {type: 'application/pdf'}));
+        let urlsAux = urls;
+        urlsAux[i] = urlBlob;
+        setUrls(urlsAux.slice());
+      }
     });
-  }, [pdfsData])
+  }, [orders, pdfsData, urls])
     
   return <div id="purchase-history" className="">
     <Table id="table-purchase-history" responsive striped bordered hover>
@@ -57,7 +67,7 @@ const PurchaseHistory: React.FC<IProps> = ({orders}) => {
         {orders.map((ord, i) => {
           
           // PurchaseInfo destructuring
-          const [purchaseInfo, items]: [PurchaseInfo, ItemPurchase[]] = [ord.purchaseInfo, ord.items];
+          const [purchaseInfo]: [PurchaseInfo, ItemPurchase[]] = [ord.purchaseInfo, ord.items];
           const [city, postalCode, date, paymentMethod, phoneNumber, cost]: [string, number, Date, PaymentMethod, number, number] =
                 [purchaseInfo.city, purchaseInfo.postalCode, purchaseInfo.date, purchaseInfo.paymentMethod, purchaseInfo.phoneNumber, purchaseInfo.totalCost]
 
@@ -69,7 +79,7 @@ const PurchaseHistory: React.FC<IProps> = ({orders}) => {
               <td>{paymentMethod}</td>
               <td>{phoneNumber}</td>
               <td>{cost}US$</td>
-              <td><a download={"Recibo - " + ord.id} href={urls[i]}><img width="45px" src={pdfIcon} /></a></td>
+              <td><a download={"Recibo - " + ord.id} href={urls[i]}><img width="45px" src={pdfIcon} alt="PDF"/></a></td>
           </tr>
         })}
       </tbody>

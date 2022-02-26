@@ -1,4 +1,4 @@
-import { degrees, PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import Order from '../dataTypes/purchase/order';
 const pdf = require('./scoop-pdf.pdf');
 
@@ -16,7 +16,7 @@ const createPDF = async (ord: Order, setlink: (pdf: Uint8Array) => any) => {
             const pdfDoc = PDFDocument.load(responseAB);
             const pages = (await pdfDoc).getPages()
             const firstPage = pages[0];
-            const { width, height } = firstPage.getSize();
+            const { height } = firstPage.getSize();
             const helveticaFont = await (await pdfDoc).embedFont(StandardFonts.Helvetica)
             //Auxiliar function
             setMetadata(await pdfDoc);

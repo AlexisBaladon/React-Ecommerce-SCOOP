@@ -10,15 +10,12 @@ import PurchaseHistoryContainer from "../components/account/purchaseHistoryConta
 
 const Routes = () => {
 
-  /*
-   * Allows the use of NavBar in most of the pages
-   * without unnecessary rendering
-   */
+  //Prevents unnecessary renderings
   const [hasNavbar, setHasNavbar] = useState(true);
 
   return <div>
       <BrowserRouter>
-        {hasNavbar? <NavBar /> : null }
+        {hasNavbar && <NavBar />}
         <Switch>
           <Route path="/"             element={<ItemListContainer                    /> } />
           <Route path="/category/:id" element={<ItemListContainer                    /> } />

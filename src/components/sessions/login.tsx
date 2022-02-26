@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Alert, Button, Card, CloseButton, Form, Modal } from 'react-bootstrap';
+import { Alert, Button, CloseButton, Form, Modal } from 'react-bootstrap';
 
 import './login.css'
 

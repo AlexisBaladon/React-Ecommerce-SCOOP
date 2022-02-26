@@ -6,9 +6,9 @@ import ItemDetail from "./itemDetail";
 import Loading from '../../loading/loading';
 
 import ItemShowcase from '../../../dataTypes/items/itemShowcase';
+import { getItem } from '../../../data/itemHandler';
 
 import './itemDetailContainer.css'
-import { getItem } from '../../../data/itemHandler';
 
 const ItemDetailContainer: React.FC<{}> = () => {
   const { id } = useParams<{id?: string}>();

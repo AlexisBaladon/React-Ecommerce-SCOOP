@@ -1,19 +1,18 @@
 import {Navbar as BTNavBar, Nav, Container, NavDropdown} from 'react-bootstrap';
-import CartWidget from './cartWidget/cartWidget';
 import { Link } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+
+import { SessionContext } from '../../context/sessionContext';
+import { CartContext } from '../../context/cartContext';
+import AccountWidget from './accountWidget/accountWidget';
+import CartWidget from './cartWidget/cartWidget';
+import LogoutWidget from './loginWidget/loginWidget';
+import LoginContainer from '../sessions/loginContainer';
+
+import SignupContainer from '../sessions/signupContainer';
 import ItemCategory from '../../dataTypes/items/category';
 
-import { useContext, useEffect, useState } from 'react';
-import { CartContext } from '../../context/cartContext';
-import LoginWidget from './loginWidget/loginWidget';
-import AccountWidget from './accountWidget/accountWidget';
-import LogoutWidget from './loginWidget/loginWidget';
-
 import './navbar.css';
-import Login from '../sessions/login';
-import LoginContainer from '../sessions/loginContainer';
-import SignupContainer from '../sessions/signupContainer';
-import { SessionContext } from '../../context/sessionContext';
 
 const NavBar: React.FC<{}> = () => {
   const widgetsColor = "white";

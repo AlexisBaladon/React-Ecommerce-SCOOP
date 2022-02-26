@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 import ItemList from './itemList'
 import Loading from '../../loading/loading';
 
 import ItemShowcase from '../../../dataTypes/items/itemShowcase'
-
-import './itemListContainer.css';
 import { getItems, getItemsByCategory } from '../../../data/itemHandler';
 import Category from '../../../dataTypes/items/category';
+
+import './itemListContainer.css';
 
 const ItemListContainer: React.FC<{}> = () => {
 
@@ -28,8 +29,8 @@ const ItemListContainer: React.FC<{}> = () => {
     //Filters items in case of defining category 
     try {
       (id !== undefined) ? 
-      getItemsByCategory(id,setIfMounted)://(setIfMounted);
-      getItems(setIfMounted);//getPromiseFilteredItems(catFilter, setIfMounted) :
+      getItemsByCategory(id,setIfMounted):
+      getItems(setIfMounted);
     } 
     catch (err: any) {
       console.warn('No se ha podido encontrar el item');

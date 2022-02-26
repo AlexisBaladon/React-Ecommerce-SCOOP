@@ -1,7 +1,5 @@
 import {addDoc, collection, DocumentData, DocumentSnapshot, getDocs, getFirestore, orderBy, query, Timestamp, where} from 'firebase/firestore';
-import Item from '../dataTypes/items/item';
 import ItemPurchase from '../dataTypes/items/itemPurchase';
-import ItemTicket from '../dataTypes/items/itemTicket';
 import Order from '../dataTypes/purchase/order';
 import PaymentMethod from '../dataTypes/purchase/paymentMethod';
 import PurchaseInfo from '../dataTypes/purchase/purchaseInfo';
