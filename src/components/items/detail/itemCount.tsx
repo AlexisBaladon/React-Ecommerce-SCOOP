@@ -19,13 +19,13 @@ const ItemCount: React.FC<IProps> = ({stock, initial, increase, decrease, onAdd}
 
   return <> <div className="item-count input-group">
               <span className="item-count-span" onClick={decreaseHandler}>
-                  <Button className="item-count-btn item-count-element">-</Button>
+                  <Button className="item-count-btn item-count-element dec">-</Button>
               </span>
               <input type="text" name="cantItems" 
                      className="item-count-element form-control input-number" 
                      readOnly value={productCount} min="0" max={stock} />
                 <span className="item-count-span" onClick={increaseHandler}>
-                  <Button className="item-count-btn item-count-element">+</Button>
+                  <Button className="item-count-btn item-count-element add">+</Button>
                 </span>
             </div>
             <div className ="add-cart-container input-group py-2 display-content-center">

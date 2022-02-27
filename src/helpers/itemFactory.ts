@@ -10,11 +10,11 @@ const createTicket = (item: ItemShowcase, productDetail: ProductDetail, amount: 
   let res: ItemTicket;
     
   //item destructuring
-  const [id, title, price, pictureUrl]: 
-  [string, string, number, string] =
-  [item.id, item.title, item.price, item.pictureUrl];
+  const [id, title, price, pictureUrl, stock]: 
+  [string, string, number, string, number] =
+  [item.id, item.title, item.price, item.pictureUrl, item.stock];
 
-  res = new ItemTicket(id, productDetail.getTicketTitle(title), price, pictureUrl, productDetail, amount);
+  res = new ItemTicket(id, productDetail.getTicketTitle(title), price, pictureUrl, stock, productDetail, amount);
 
   return res;
 }
@@ -60,7 +60,7 @@ const reconstructItems = (deadItems: ItemTicket[]) => {
     productDetail = new ProductDetailSimple();
   }
 
-  reconstructedItems.push(new ItemTicket(it.id, it.title, it.price, it.pictureUrl, productDetail, it.amount));
+  reconstructedItems.push(new ItemTicket(it.id, it.title, it.price, it.pictureUrl, it.stock, productDetail, it.amount));
   })
 
   return reconstructedItems;

@@ -120,8 +120,11 @@
 }
 
 .item-amount-cart {
+  font-size: large;
+  font-weight: 600;
   position: absolute;
   transform: translateY(50%);
+  color: gray;
 }
 
 .item-price-cart {

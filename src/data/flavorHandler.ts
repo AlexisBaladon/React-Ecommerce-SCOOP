@@ -1,4 +1,4 @@
-import {collection, DocumentData, DocumentSnapshot, getDocs, getFirestore, limit, orderBy, query, where} from 'firebase/firestore';
+import {collection, DocumentData, DocumentSnapshot, getDocs, getFirestore, limit, query, where} from 'firebase/firestore';
 import Flavor from '../dataTypes/items/flavor';
 
 const createItemAux = (document: DocumentSnapshot<DocumentData>): Flavor => {
@@ -22,7 +22,7 @@ const createItemAux = (document: DocumentSnapshot<DocumentData>): Flavor => {
 
 const getFlavors = (setFlavors: (item: Flavor[]) => void): void => {
   const db = getFirestore()
-  const itemCollection = query(collection(db,"flavors"), orderBy("title"));
+  const itemCollection = query(collection(db,"flavors"));
 
   getDocs(itemCollection).then(snapshot => {
     const newFlavor = snapshot.docs.map(doc => {

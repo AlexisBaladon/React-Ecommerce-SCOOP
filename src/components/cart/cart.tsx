@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Button, Col, Row } from 'react-bootstrap';
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import { CartContext } from '../../context/cartContext';
@@ -13,19 +13,12 @@ import PurchaseInfo from '../../dataTypes/purchase/purchaseInfo';
 import User from '../../dataTypes/user/user';
 
 import './cart.css'
+import Item from '../../dataTypes/items/item';
+import Loading from '../loading/loading';
 
 const deleteIcon = require('./delete.png')
 
 const Cart: React.FC<{}> = () => {
-  const sessionContext = useContext(SessionContext);
-  const modalContext = useContext(ModalContext);
-  const cartContext = useContext(CartContext);
-
-  const { loggedUser } = sessionContext;
-  const { openLoginModal, } = modalContext;
-  const { items, getNumberOfProducts, getTotalCost, deleteItem, deleteAllItems } = cartContext;
-
-
   interface IBuyInfo {
     itemAmount: number
     subtotal: number,
@@ -34,9 +27,40 @@ const Cart: React.FC<{}> = () => {
     total: number,
   }
 
+  const sessionContext = useContext(SessionContext);
+  const modalContext = useContext(ModalContext);
+  const cartContext = useContext(CartContext);
+
+  const { loggedUser } = sessionContext;
+  const { openLoginModal, } = modalContext;
+  const { items, getNumberOfProducts, getTotalCost, updateAmount, deleteItem, deleteAllItems } = cartContext;
+
+  const [amounts, setAmounts] = useState<number[]>([]);
+  const [itemsPrice, setItemsPrice] = useState<number[]>([]);
   const [buyInfo, setBuyInfo] = useState<IBuyInfo>({itemAmount: 0, subtotal: 0, discount: 0, shipping: 0, total: 0});
   const [orderId, setOrderId] = useState<string>("");
   const [isPurchaseModalOpened, setPurchaseModalOpened] = useState<boolean>(false);
+
+  useEffect(() => {
+    items.forEach((it, i) => {
+      let amountsAux = amounts;
+      amountsAux[i] = it.amount;
+      setAmounts(amountsAux);
+
+      let itemsPriceAux = itemsPrice;
+      itemsPriceAux[i] = it.price*it.amount;
+      setItemsPrice(itemsPriceAux);
+    })
+
+    const bi: IBuyInfo = { itemAmount: getNumberOfProducts(),
+      subtotal  : getTotalCost(),
+      discount  : 0, 
+      shipping  : 0,
+      total     : getTotalCost(),
+    };
+
+    setBuyInfo(bi);
+  },[items, getNumberOfProducts, getTotalCost]);
   
   const onHide = () => setPurchaseModalOpened(false);
 
@@ -61,18 +85,43 @@ const Cart: React.FC<{}> = () => {
     else {
       throw new Error("El usuario debe haber iniciado sesión para registrar su compra.");
     }
-    
   }
 
-  useEffect(() => {
+  const handleRefChange = (e: React.ChangeEvent<HTMLInputElement>, i: number) => {
+    const newAmount = Number(e.target.value);
+
+    if (0 < newAmount) {
+      let sumOfAmounts = 0;
+      items.forEach((it) => {
+        if (it.id === items[i].id) {
+          sumOfAmounts += it.amount;
+        }
+      })
+
+      sumOfAmounts -= amounts[i];
+      sumOfAmounts += Number(e.target.value);
+      if (sumOfAmounts > items[i].stock) {
+        e.target.value = amounts[i].toString();
+        console.log(amounts[i])
+      }
+    }
+    else {
+      e.target.value = (0 < newAmount)? amounts[i].toString():"1";
+    }
+
+    let amountsAux = amounts;
+    amountsAux[i] = Number(e.target.value);
+    setAmounts(amountsAux);
+    updateAmount(items[i], Number(e.target.value));
+
     const bi: IBuyInfo = { itemAmount: getNumberOfProducts(),
                            subtotal  : getTotalCost(),
                            discount  : 0, 
                            shipping  : 0,
                            total     : getTotalCost(),
-                          };
+                         };
     setBuyInfo(bi);
-  }, [getNumberOfProducts, getTotalCost])
+  }
 
   const {itemAmount, subtotal, discount, shipping, total}: IBuyInfo = buyInfo;
   
@@ -91,22 +140,36 @@ const Cart: React.FC<{}> = () => {
 
             </Row>
             <Row id="items-row-cart" className="d-flex justify-content-center">
-              {items.map((it) => {
-                const [id, title, pictureUrl, price, amount] : 
-                [string, string, string, number, number] =
-                [it.id, it.title, it.pictureUrl, it.price, it.amount];
-                
+              {items.map((it, i) => {
+                let [id, title, pictureUrl, price, amount, stock] : 
+                [string, string, string, number, number, number] =
+                [it.id, it.title, it.pictureUrl, itemsPrice[i], it.amount, it.stock];
+
                 return (
                   <div className="item-container-cart" key={id + title}>
                   <Row className="item-cart justify-content-start">
                     <Col md="6" className="col-item-cart col-item-img-cart justify-content-center"> <Link to={"/item/"+id}><img className="img-item-cart" src={pictureUrl} alt="Item" /></Link> </Col>
                     <Col md="5" className="item-info-container-cart">
                       <Row className="col-item-cart"> <h5 className="item-title-cart"> {title} </h5></Row>
-                      <Row className="col-item-cart"> <p className="item-amount-cart"> Cantidad: {amount} </p> </Row>
+                      <Row className="col-item-cart"> 
+                        <Form>
+                          <span className="item-amount-cart">
+                            <input type="number" min="1" max={stock} 
+                                    onChange={e => handleRefChange(e,i)}
+                                    defaultValue={amount} step="1" required />
+                            ㅤ/ {stock}
+                          </span>
+                          
+                        </Form> 
+                      </Row>
                       <Row className="col-item-cart"> <h5 className="item-price-cart">{price*amount}US$</h5></Row>
                     </Col>
                     <Col md="1" className="delete-icon-col-cart  justify-content-end">
-                      <Row className="col-item-cart"> <span className="delete-icon-cart" onClick={() => deleteItem(it)}><img src={deleteIcon} alt="Borrar" /></span> </Row>
+                      <Row className="col-item-cart">
+                        <span className="delete-icon-cart" onClick={() => deleteItem(it)}>
+                          <img src={deleteIcon} alt="Borrar" />
+                        </span> 
+                      </Row>
                     </Col>
                   </Row>
                   </div>

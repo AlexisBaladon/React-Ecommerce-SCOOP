@@ -2,6 +2,7 @@
   background-color: var(--main-color);
   color: white !important;
   font-family: sans-serif, Arial, Helvetica;
+  min-height: 30vh;
 }
 
 #social-footer {

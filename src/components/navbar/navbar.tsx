@@ -23,13 +23,13 @@ const NavBar: React.FC<{}> = () => {
   const cartContext = useContext(CartContext);
 
   const { loggedUser, logout } = sessionContext;
-  const { getNumberOfProducts } = cartContext;
+  const { items, getNumberOfProducts } = cartContext;
 
   const [numItemsCart, setNumItemsCart] = useState<number>(0);
 
   useEffect(() => {
     setNumItemsCart(getNumberOfProducts());
-  }, [getNumberOfProducts])
+  }, [items, getNumberOfProducts])
   
   return <header>
     <BTNavBar id="navigator" className="top-0" expand="lg" variant="dark" >

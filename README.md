@@ -11,6 +11,24 @@
 - Ver tu historial de compras
 
 
+# Tech
+
+
+Scoop usa algunas de las tecnologías más populares dentro de la programación web:
+
+
+- [ReactJS] - Utilizado para el front end de la aplicación
+- [Typescript] - Lenguaje de fuerte tipado para trabajar con React de forma más organizada y segura.
+- [Firebase] - Base de datos no relacional y serverless proveída por Google.
+- [CSS] - Utilizado para dar estilos a los componentes de la página.
+
+
+![ReactJS_Image](./readme/React-icon.png)
+![Typescript_Image](./readme/typescript-icon.png)
+![Firebase_Image](./readme/firebase-icon.png)
+![CSS_Image](./readme/css-icon.png)
+
+
 # Features
 
 
@@ -37,24 +55,6 @@ personalizar el producto como se muestra en la siguiente imagen:
 
 
 ![FEATURES_1](./readme/pdf.png)
-
-
-# Tech
-
-
-Scoop usa algunas de las tecnologías más populares dentro de la programación web:
-
-
-- [ReactJS] - Utilizado para el front end de la aplicación
-- [Typescript] - Lenguaje de fuerte tipado para trabajar con React de forma más organizada y segura.
-- [Firebase] - Base de datos no relacional y serverless proveída por Google.
-- [CSS] - Utilizado para dar estilos a los componentes de la página.
-
-
-![ReactJS_Image](./readme/React-icon.png)
-![Typescript_Image](./readme/typescript-icon.png)
-![Firebase_Image](./readme/firebase-icon.png)
-![CSS_Image](./readme/css-icon.png)
 
 
 # Libraries

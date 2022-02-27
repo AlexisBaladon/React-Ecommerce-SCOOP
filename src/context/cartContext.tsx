@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import ItemShowcase from '../dataTypes/items/itemShowcase';
 
 import ItemTicket from '../dataTypes/items/itemTicket';
 import ProductDetail from '../dataTypes/items/ProductDetail';
@@ -11,6 +12,7 @@ const CartContext = React.createContext<{
     deleteAllItems(): void, 
     isInCart(id: string, pd: ProductDetail): boolean,
     amountInCart(itemId: string): number,
+    updateAmount(item: ItemTicket, newAmount: number): void,
     getNumberOfProducts(): number,
     getTotalCost(): number,
   }>
@@ -22,6 +24,7 @@ const CartContext = React.createContext<{
     deleteAllItems: () => {},
     isInCart: (id: string, pd: ProductDetail) => false,
     amountInCart: (itemId: string) => 0,
+    updateAmount: (item: ItemTicket, newAmount: number) => 0,
     getNumberOfProducts: () => 0,
     getTotalCost: () => 0,
   });
@@ -31,7 +34,6 @@ const CartProvider: React.FC<{}> = ({children}) => {
   const localStorageKey = "cart-storage";
   const [cartItems, setCartItems] = useState<ItemTicket[]>([]);
 
-  //Auxiliar local storage routines
   const setItemsLocalStorage = (items: ItemTicket[]) => {
     window.localStorage.setItem(localStorageKey, JSON.stringify(items));
   }
@@ -43,7 +45,6 @@ const CartProvider: React.FC<{}> = ({children}) => {
   }
 
   useEffect(() => {
-    //Retrieves stored items from local storage
     const storedItems: ItemTicket[] = getItemsLocalStorage();
     setCartItems(storedItems);
   }, [])
@@ -85,6 +86,12 @@ const CartProvider: React.FC<{}> = ({children}) => {
     return res;
   }
 
+  const updateAmount = (item: ItemTicket, newAmount: number) => {
+    item.updateAmount(newAmount);
+    setCartItems(cartItems.slice());
+    setItemsLocalStorage(cartItems);
+  }
+
   const getNumberOfProducts = (): number => {
     let amountItems = 0;
     cartItems.forEach(it => {amountItems += it.amount});
@@ -105,6 +112,7 @@ const CartProvider: React.FC<{}> = ({children}) => {
               deleteAllItems: deleteAllItems, 
               isInCart: isInCart,
               amountInCart: amountInCart,
+              updateAmount: updateAmount,
               getNumberOfProducts: getNumberOfProducts,
               getTotalCost: getTotalCost,
              }}>
