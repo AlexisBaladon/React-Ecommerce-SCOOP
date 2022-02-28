@@ -45,7 +45,7 @@ Gracias al virtual DOM que maneja React, es posible renderizar una única vez la
 personalizar el producto como se muestra en la siguiente imagen:
 
 
-![FEATURES_1](./readme/choserModal.png)
+![FEATURES_1](./readme/item-choser.gif)
 
 
 **[3]** Se podrá agregar productos al carrito, los cuales pueden ser adquiridos solo al iniciar sesión y llenar un formulario. Estos además son guardados en el local storage del navegador.
