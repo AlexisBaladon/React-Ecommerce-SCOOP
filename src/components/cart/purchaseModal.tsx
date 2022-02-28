@@ -67,7 +67,7 @@ const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase, orderId
 
   useEffect(() => {
     if (orderId) {
-      setAlertMessage({message: `Compra realizada! Su pedido llegará en menos de 30 minutos a la direción indicada. Su código de orden es: ${orderId}`, 
+      setAlertMessage({message: `Compra realizada! Será informado a la brevedad sobre el estado de su envío. Su código de orden es: ${orderId}`, 
                        variant: "success"});
     }
   }, [orderId])
@@ -109,7 +109,7 @@ const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase, orderId
                   <ListGroup.Item key={it.id + it.title} className="item-purchase-modal justify-content-between">
                     <p >{it.amount} x</p>  
                     <h6 >{it.title}</h6> 
-                    <p className="item-price-purchase-modal">{it.price}US$</p>
+                    <p className="item-price-purchase-modal">{it.price * it.amount}US$</p>
                   </ListGroup.Item>
                 )}
               </ListGroup>

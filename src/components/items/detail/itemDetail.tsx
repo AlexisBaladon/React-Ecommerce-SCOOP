@@ -30,7 +30,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
   const [inCart, setInCart] = useState<boolean>(false);
   const [amountInCart, setAmountInCart] = useState<number>(cartContext.amountInCart(itemId));
   const [inCartMessage, setInCartMessage] = useState<string>("Producto agregado al carrito!");
-  const [priceState, setPriceState] = useState<number>(price);
+  
 
   useEffect(() => {
     setInCart(cartContext.isInCart(itemId, productDetail));
@@ -45,14 +45,12 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
   const increase = (productCount: number, setProductCount:(pc: number) => any): void => {
     if ((productCount < stock) && (amountInCart + productCount < stock)) {
       setProductCount(productCount + 1);
-      setPriceState((productCount + 1)*price);
     }
   }
   
   const decrease = (productCount: number, setProductCount:(pc: number) => any): void => {
     if (productCount > 1) {
       setProductCount(productCount - 1);
-      setPriceState((productCount - 1)*price);
     }
   }
 
@@ -103,7 +101,7 @@ const ItemDetail: React.FC<IProps> = ({item}: IProps) => {
               <h3>{title}</h3>
             </div>
             <p id="description-item-detail">{description}</p>
-            <h1 id="price-item-detail">{priceState} US$</h1>
+            <h1 id="price-item-detail">{price} US$</h1>
             <div id="bottom-info-item-detail">
               <div id="cart-stock-item-detail">
                 <p id="stock-item-detail"><strong>Stock:</strong> {stock}</p>

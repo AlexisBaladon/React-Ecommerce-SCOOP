@@ -13,8 +13,7 @@ import PurchaseInfo from '../../dataTypes/purchase/purchaseInfo';
 import User from '../../dataTypes/user/user';
 
 import './cart.css'
-import Item from '../../dataTypes/items/item';
-import Loading from '../loading/loading';
+import './purchaseModalEffects.css'
 
 const deleteIcon = require('./delete.png')
 
@@ -40,6 +39,7 @@ const Cart: React.FC<{}> = () => {
   const [buyInfo, setBuyInfo] = useState<IBuyInfo>({itemAmount: 0, subtotal: 0, discount: 0, shipping: 0, total: 0});
   const [orderId, setOrderId] = useState<string>("");
   const [isPurchaseModalOpened, setPurchaseModalOpened] = useState<boolean>(false);
+  const [notAllowedChange, setNotAllowedChange] = useState<string[]>([]);
 
   useEffect(() => {
     items.forEach((it, i) => {
@@ -87,6 +87,27 @@ const Cart: React.FC<{}> = () => {
     }
   }
 
+  const handleNotAllowed = (itemId: string) => {
+    let notAllowedChangeAux = notAllowedChange;
+    items.forEach((it, i) => {
+      if (it.id === itemId) {
+        notAllowedChangeAux[i] = "not-allowed";
+      }
+    })
+    
+    setNotAllowedChange(notAllowedChangeAux.slice());
+
+    items.forEach((it, i) => {
+      if (it.id === itemId) {
+        notAllowedChangeAux[i] = "";
+      }
+    })
+
+    setTimeout(() => {
+      setNotAllowedChange(notAllowedChangeAux.slice());
+    }, 2000)
+  }
+
   const handleRefChange = (e: React.ChangeEvent<HTMLInputElement>, i: number) => {
     const newAmount = Number(e.target.value);
 
@@ -102,7 +123,7 @@ const Cart: React.FC<{}> = () => {
       sumOfAmounts += Number(e.target.value);
       if (sumOfAmounts > items[i].stock) {
         e.target.value = amounts[i].toString();
-        console.log(amounts[i])
+        handleNotAllowed(items[i].id);
       }
     }
     else {
@@ -143,7 +164,7 @@ const Cart: React.FC<{}> = () => {
               {items.map((it, i) => {
                 let [id, title, pictureUrl, price, amount, stock] : 
                 [string, string, string, number, number, number] =
-                [it.id, it.title, it.pictureUrl, itemsPrice[i], it.amount, it.stock];
+                [it.id, it.title, it.pictureUrl, it.price, it.amount, it.stock];
 
                 return (
                   <div className="item-container-cart" key={id + title}>
@@ -153,7 +174,7 @@ const Cart: React.FC<{}> = () => {
                       <Row className="col-item-cart"> <h5 className="item-title-cart"> {title} </h5></Row>
                       <Row className="col-item-cart"> 
                         <Form>
-                          <span className="item-amount-cart">
+                          <span className={"item-amount-cart " + notAllowedChange[i]}>
                             <input type="number" min="1" max={stock} 
                                     onChange={e => handleRefChange(e,i)}
                                     defaultValue={amount} step="1" required />
@@ -162,7 +183,7 @@ const Cart: React.FC<{}> = () => {
                           
                         </Form> 
                       </Row>
-                      <Row className="col-item-cart"> <h5 className="item-price-cart">{price*amount}US$</h5></Row>
+                      <Row className="col-item-cart"> <h5 className="item-price-cart">{price*amounts[i]}US$</h5></Row>
                     </Col>
                     <Col md="1" className="delete-icon-col-cart  justify-content-end">
                       <Row className="col-item-cart">
