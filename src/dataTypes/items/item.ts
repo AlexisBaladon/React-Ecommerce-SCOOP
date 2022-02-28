@@ -1,5 +1,3 @@
-import Category from "./category";
-
 abstract class Item {
   id: string;
   title: string;

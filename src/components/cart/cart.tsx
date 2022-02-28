@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -42,16 +42,21 @@ const Cart: React.FC<{}> = () => {
   const [notAllowedChange, setNotAllowedChange] = useState<string[]>([]);
 
   useEffect(() => {
-    items.forEach((it, i) => {
+    if (amounts.length < items.length) {
       let amountsAux = amounts;
-      amountsAux[i] = it.amount;
-      setAmounts(amountsAux);
-
       let itemsPriceAux = itemsPrice;
-      itemsPriceAux[i] = it.price*it.amount;
-      setItemsPrice(itemsPriceAux);
-    })
+  
+      items.forEach((it, i) => {
+        amountsAux[i] = it.amount;
+        itemsPriceAux[i] = it.price*it.amount;
+      })
 
+      setItemsPrice(itemsPriceAux.slice());
+      setAmounts(amountsAux.slice());
+    }
+  },[items, amounts, itemsPrice]);
+
+  useEffect(() => {
     const bi: IBuyInfo = { itemAmount: getNumberOfProducts(),
       subtotal  : getTotalCost(),
       discount  : 0, 
@@ -60,7 +65,7 @@ const Cart: React.FC<{}> = () => {
     };
 
     setBuyInfo(bi);
-  },[items, getNumberOfProducts, getTotalCost]);
+  }, [items, getNumberOfProducts, getTotalCost])
   
   const onHide = () => setPurchaseModalOpened(false);
 
