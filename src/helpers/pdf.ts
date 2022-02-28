@@ -82,11 +82,7 @@ const createPDF = async (ord: Order, setlink: (pdf: Uint8Array) => any) => {
                   })
 
                 //Price
-<<<<<<< HEAD
-                firstPage.drawText(it.price.toString() + "US$", {
-=======
                 firstPage.drawText((it.price*it.amount).toString() + "US$", {
->>>>>>> EntregaFinal
                   x: 443.5,
                   y: height / 2 - i*17.5 + 252.5,
                   size: 8,
