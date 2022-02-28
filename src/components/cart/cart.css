@@ -127,6 +127,10 @@
   color: gray;
 }
 
+.item-amount-cart input {
+  width: 45px;
+}
+
 .item-price-cart {
   position: absolute !important;
   transform: translateY(250%) !important;
@@ -258,6 +262,10 @@
     transform: translateX(2vw)  !important;
     top: 40%;
     font-size: 2vw  !important;
+  }
+
+  .item-amount-cart input {
+    width: 6vw;
   }
 
   .item-price-cart {

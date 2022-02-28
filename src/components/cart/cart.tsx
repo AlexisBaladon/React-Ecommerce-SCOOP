@@ -127,7 +127,7 @@ const Cart: React.FC<{}> = () => {
       }
     }
     else {
-      e.target.value = (0 < newAmount)? amounts[i].toString():"1";
+      e.target.value = "1";
     }
 
     let amountsAux = amounts;
@@ -177,6 +177,7 @@ const Cart: React.FC<{}> = () => {
                           <span className={"item-amount-cart " + notAllowedChange[i]}>
                             <input type="number" min="1" max={stock} 
                                     onChange={e => handleRefChange(e,i)}
+                                    onClick={e => (e.currentTarget as HTMLInputElement).select()}
                                     defaultValue={amount} step="1" required />
                             ㅤ/ {stock}
                           </span>
