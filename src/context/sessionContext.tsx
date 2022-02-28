@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { auth } from '../index'
 import fireBase from "firebase/compat/app";
+
 import Loading from '../components/loading/loading';
 
 const SessionContext = React.createContext<{
@@ -8,9 +9,7 @@ const SessionContext = React.createContext<{
     signup(email: string, password: string): Promise<any>;
     login(email: string, password: string): Promise<any>;
     logout(): Promise<any>,
-  }>
-
-  //default values                                    
+  }>                                  
   ({
     loggedUser: null,
     signup: (email: string, password: string) => new Promise(r => {}),
@@ -18,7 +17,6 @@ const SessionContext = React.createContext<{
     logout: () => new Promise(r => {}),
   });
 
-//Doesn't let more than one modal to be opened at once
 const SessionProvider: React.FC<{}> = ({children}) => {
   const [loggedUser, setLoggedUser] = useState<fireBase.User | null>(null)
   const [isLoading, setLoading] = useState<boolean>(true);
@@ -33,16 +31,16 @@ const SessionProvider: React.FC<{}> = ({children}) => {
   }, [])
   
 
-  const signup = (email: string, password: string): Promise<any> => {
-    return auth.createUserWithEmailAndPassword(email,password);
+  const signup = async (email: string, password: string): Promise<any> => {
+    return await auth.createUserWithEmailAndPassword(email,password);
   }
 
-  const login = (email: string, password: string) => {
-    return auth.signInWithEmailAndPassword(email, password);
+  const login = async (email: string, password: string): Promise<any> => {
+    return await auth.signInWithEmailAndPassword(email, password).catch(err=>{throw err});
   }
 
-  const logout = () => {
-    return auth.signOut();
+  const logout = async (): Promise<any> => {
+    return await auth.signOut();
   }
 
   return (

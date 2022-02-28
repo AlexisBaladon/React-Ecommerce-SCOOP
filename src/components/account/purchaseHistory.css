@@ -9,4 +9,5 @@
 #table-purchase-history {
     max-width: 80vw;
     max-height: 80vh;
+    min-width: 1000px;
 }

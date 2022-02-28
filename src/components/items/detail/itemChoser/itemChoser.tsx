@@ -5,7 +5,6 @@ import ModalRecipientes from './itemChoserModal';
 
 import './itemChoser.css'
 
-
 interface IProps {
   imgWidth: number;
   imgHeight: number;
@@ -20,7 +19,6 @@ const ItemChooser: React.FC<IProps> = ({imgWidth, imgHeight, itemId, maxFlavors,
   const [show, setShow] = useState<boolean>(false);
   const [changedItemIndex, setChangedItemIndex] = useState<number>(0);
   
-  //Prevents infinite loops inside useEffect
   const setSelectedFlavorsCallback = useCallback(() => {
     if (selectedFlavors.length === 0) setSelectedFlavors(flavors.slice(0,maxFlavors)) ;
   },[selectedFlavors.length, setSelectedFlavors, flavors, maxFlavors]);
@@ -35,7 +33,6 @@ const ItemChooser: React.FC<IProps> = ({imgWidth, imgHeight, itemId, maxFlavors,
 
     if (newItem instanceof Flavor) {
       newSelectedItems[changedItemIndex] = newItem;
-      //Slice makes a copy of the item, otherwise it will have the same reference
       setSelectedFlavors(newSelectedItems.slice());
     }
     else {
@@ -48,10 +45,8 @@ const ItemChooser: React.FC<IProps> = ({imgWidth, imgHeight, itemId, maxFlavors,
                       selectItemById={selectFlavorById}/>
     <div id="images-container-item-choser" style={{ width: imgWidth, height: imgHeight, maxHeight: imgHeight}}>
       
-      {//Image mapping
+      {
       selectedFlavors.map((dtItem, i) => {
-
-        //Item destructuring
           const [pictureUrl, title]: [string, string] = [dtItem.pictureUrl, dtItem.title];
 
           return (

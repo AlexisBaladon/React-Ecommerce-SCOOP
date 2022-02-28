@@ -1,6 +1,7 @@
 #navigator {
   background-color:var(--main-color);
   margin:0;
+  min-height: 10vh;
 }
 
 /* Logo */
@@ -80,6 +81,11 @@
 
 #link-cart-navbar:hover {
   opacity: 80%;
+}
+
+#link-profile-navbar:hover,
+#link-account-navbar:hover {
+  opacity: 75%;;
 }
 
 #cant-items-navbar {

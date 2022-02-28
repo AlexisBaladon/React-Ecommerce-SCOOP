@@ -1,7 +1,5 @@
 import {addDoc, collection, DocumentData, DocumentSnapshot, getDocs, getFirestore, orderBy, query, Timestamp, where} from 'firebase/firestore';
-import Item from '../dataTypes/items/item';
 import ItemPurchase from '../dataTypes/items/itemPurchase';
-import ItemTicket from '../dataTypes/items/itemTicket';
 import Order from '../dataTypes/purchase/order';
 import PaymentMethod from '../dataTypes/purchase/paymentMethod';
 import PurchaseInfo from '../dataTypes/purchase/purchaseInfo';
@@ -10,7 +8,6 @@ import User from '../dataTypes/user/user';
 const createOrderAux = (document: DocumentSnapshot<DocumentData>): Order => {
   let newOrder = null;
 
-  //Destructuring
   const [id, buyer, items, purchaseInfo]: 
   [string, 
    {email: string},
@@ -19,12 +16,10 @@ const createOrderAux = (document: DocumentSnapshot<DocumentData>): Order => {
   ] =
   [document.id, document.get("buyer"), document.get("items"), document.get("purchaseInfo")]
 
-  //If items are well defined
   if (buyer === undefined || items === undefined || purchaseInfo === undefined) {
     throw new Error("Parámetros de orden de compra de base de datos erróneos");
   }
   else {
-    //deconstruction
     const [email] = [buyer.email];
     const [city, country, date, paymentMethod, phone, postalCode, totalCost] = [purchaseInfo.city, purchaseInfo.country, purchaseInfo.date, purchaseInfo.paymentMethod, purchaseInfo.phone, purchaseInfo.postalCode, purchaseInfo.totalCost];
 
@@ -45,7 +40,6 @@ const createOrderAux = (document: DocumentSnapshot<DocumentData>): Order => {
   return newOrder;
 }
 
-//Read Function
 const getOrdersByEmail = (email: string, setOrders: (orders: Order[]) => void): void => {
   const db = getFirestore()
   const orderCollection = query(collection(db,"orders"),where("buyer.email","==",email),orderBy("purchaseInfo.date"));
@@ -58,12 +52,10 @@ const getOrdersByEmail = (email: string, setOrders: (orders: Order[]) => void): 
   })
 }
 
-//Write function
 const purchaseItems =  async (order: Order, setOrderId: (id: string) => any) => {
   const db = getFirestore()
   const newOrder = collection(db,"orders");
 
-  //Order destructuring
   const [buyer, purchaseInfo, items] = [order.buyer, order.purchaseInfo, order.items];
   
   //Convert array of classes (prevents firebase exception)

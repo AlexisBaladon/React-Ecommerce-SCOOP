@@ -1,0 +1,13 @@
+@-o-keyframes fadeIt {
+  0%   { color: red; }
+  100% { color: gray; }
+}
+@keyframes fadeIt {
+  0%   { color: red; }
+  100% { color: gray; }
+}
+
+.not-allowed {
+  -o-animation: fadeIt 2s ease-in-out; 
+  animation: fadeIt 2s ease-in-out; 
+}

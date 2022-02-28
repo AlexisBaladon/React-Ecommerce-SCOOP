@@ -1,6 +1,8 @@
 import React, { useRef, useState, useContext, useEffect } from 'react'
-import { Alert, Button, CloseButton, Form, ListGroup, Modal, Row } from 'react-bootstrap';
+import { Alert, Button, CloseButton, Form, ListGroup, Modal } from 'react-bootstrap';
+
 import { CartContext } from '../../context/cartContext';
+
 import PaymentMethod from '../../dataTypes/purchase/paymentMethod';
 import PurchaseInfo from '../../dataTypes/purchase/purchaseInfo';
 
@@ -11,39 +13,36 @@ interface IProps {
   onHide: () => any;
   confirmPurchase: (purchaseInfo: PurchaseInfo) => any;
   orderId: string;
+  userEmail: string;
 }
 
-const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase, orderId}) => {
+const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase, orderId, userEmail}) => {
 
   interface IAlert {
     message: string;
     variant: string;
   }
 
-  // UseRefs
   const [alertMessage, setAlertMessage] = useState<IAlert | null>(null);
+
+  const cartContext = useContext(CartContext);
+  const {items, getTotalCost} = cartContext;
+
   const phoneRef         = useRef<HTMLInputElement>(null);
   const countryRef       = useRef<HTMLInputElement>(null);
   const cityRef          = useRef<HTMLInputElement>(null);
   const postalCodeRef    = useRef<HTMLInputElement>(null);
   const paymentMethodRef = useRef<HTMLInputElement>(null);
 
-  // Cart Context
-  const cartContext = useContext(CartContext);
-  const items = cartContext.items;
-
-  // Handlers
   const handleHide = () => {
     setAlertMessage(null);
     onHide();
   }
 
   const handleSubmit = (e: React.FormEvent) => {
-    // Prevents page reload
     e.preventDefault();
  
     try {
-      // Ref destructuring
       const [phone, country, city, postalCode, paymentMethod]: 
             [string | undefined, string | undefined, string | undefined, number | undefined, string | undefined] = 
             [phoneRef?.current?.value, countryRef.current?.value, cityRef.current?.value, Number(postalCodeRef.current?.value),  paymentMethodRef.current?.value];
@@ -57,7 +56,7 @@ const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase, orderId
       // Checks if the string is an instance of PaymentMethod 
       if (Object.values(PaymentMethod).every((pm => pm !== paymentMethod))) throw new Error("El campo de Método de pago ingresado es inválido.");
 
-      confirmPurchase(new PurchaseInfo(Number(phone), country, city, postalCode, (paymentMethod as PaymentMethod), new Date(), cartContext.getTotalCost()))
+      confirmPurchase(new PurchaseInfo(Number(phone), country, city, postalCode, (paymentMethod as PaymentMethod), new Date(), getTotalCost()))
     }
     catch(err: any) {
       if (err instanceof Error) {
@@ -68,13 +67,11 @@ const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase, orderId
 
   useEffect(() => {
     if (orderId) {
-      console.log(orderId)
-      setAlertMessage({message: `Compra realizada! Su pedido llegará en menos de 30 minutos a la direción indicada. Su código de orden es: ${orderId}`, 
+      setAlertMessage({message: `Compra realizada! Será informado a la brevedad sobre el estado de su envío. Su código de orden es: ${orderId}`, 
                        variant: "success"});
     }
   }, [orderId])
   
-
   return <Modal id="modal-purchase"
                 show={show}
                 aria-labelledby="contained-modal-title-vcenter"
@@ -112,7 +109,7 @@ const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase, orderId
                   <ListGroup.Item key={it.id + it.title} className="item-purchase-modal justify-content-between">
                     <p >{it.amount} x</p>  
                     <h6 >{it.title}</h6> 
-                    <p className="item-price-purchase-modal">{it.price}US$</p>
+                    <p className="item-price-purchase-modal">{it.price * it.amount}US$</p>
                   </ListGroup.Item>
                 )}
               </ListGroup>
@@ -121,7 +118,7 @@ const PurchaseModal: React.FC<IProps> = ({show, onHide, confirmPurchase, orderId
             </Form.Label>
           </Form.Group>
           {alertMessage && <Alert variant={alertMessage.variant}>{alertMessage.message}</Alert>}
-          <Button className="button-purchase-modal w-100" type="submit" onClick={handleSubmit}>Confirmar compra</Button>
+          <Button className="button-purchase-modal w-100" type="submit" onClick={handleSubmit}>Confirmar compra ({userEmail})</Button>
         </Form>
       </Modal.Body>
   </Modal>

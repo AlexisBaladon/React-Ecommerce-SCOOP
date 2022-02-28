@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
+
+import ItemChooser from './itemChoser'
+
 import { getFlavors, getNumberOfFlavors } from '../../../../data/flavorHandler';
 import Flavor from '../../../../dataTypes/items/flavor';
 import ProductDetail from '../../../../dataTypes/items/ProductDetail';
 import ProductDetailRecipiente from '../../../../dataTypes/items/ProductDetailRecipiente';
-import ItemChooser from './itemChoser'
 
 interface IProps {
   id: string;
@@ -39,9 +41,7 @@ const ItemChoserContainer: React.FC<IProps> = ({id, setProductDetail}) => {
     return () => {isMounted = false}
   }, [id])
 
-  //update details according to flavors showed on screen
   useEffect(() => {
-    //slice passes the value by copy
     setProductDetail(new ProductDetailRecipiente(selectedFlavors.slice()));
   }, [selectedFlavors, setProductDetail])
 

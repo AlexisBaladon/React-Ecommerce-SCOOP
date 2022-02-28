@@ -1,0 +1,18 @@
+#footer {
+  background-color: var(--main-color);
+  color: white !important;
+  font-family: sans-serif, Arial, Helvetica;
+  min-height: 30vh;
+}
+
+#social-footer {
+  display: inline-flex;
+}
+
+#social-footer svg:hover {
+  opacity: 85%;
+}
+
+#instagram-footer {
+  margin-left: 25px;
+}
