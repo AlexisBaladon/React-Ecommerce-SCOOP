@@ -1,5 +1,6 @@
 import Routes from './routes/routes';
 
+import { DatabaseProvider } from './context/databaseContext';
 import { SessionProvider } from './context/sessionContext';
 import { CartProvider } from './context/cartContext';
 import { ModalProvider } from './context/modalContext';
@@ -9,13 +10,15 @@ import './App.css';
 
 function App() {
   return <div id="app">
-    <SessionProvider>
-      <ModalProvider>
-        <CartProvider>
-          <Routes />
-        </CartProvider>
-      </ModalProvider>
-    </SessionProvider>
+    <DatabaseProvider>
+      <SessionProvider>
+        <ModalProvider>
+          <CartProvider>
+            <Routes />
+          </CartProvider>
+        </ModalProvider>
+      </SessionProvider>
+    </DatabaseProvider>
   </div>
 }
 

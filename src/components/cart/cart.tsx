@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import { DatabaseContext } from '../../context/databaseContext';
 import { CartContext } from '../../context/cartContext';
 import { ModalContext } from '../../context/modalContext';
 import { SessionContext } from '../../context/sessionContext';
 import PurchaseModal from './purchaseModal';
 
-import { purchaseItems } from '../../data/purchaseHandler';
 import Order from '../../dataTypes/purchase/order';
 import PurchaseInfo from '../../dataTypes/purchase/purchaseInfo';
 import User from '../../dataTypes/user/user';
@@ -26,10 +26,12 @@ const Cart: React.FC<{}> = () => {
     total: number,
   }
 
+  const databaseContext = useContext(DatabaseContext);
   const sessionContext = useContext(SessionContext);
   const modalContext = useContext(ModalContext);
   const cartContext = useContext(CartContext);
 
+  const { purchaseItems } = databaseContext;
   const { loggedUser } = sessionContext;
   const { openLoginModal, } = modalContext;
   const { items, getNumberOfProducts, getTotalCost, updateAmount, deleteItem, deleteAllItems } = cartContext;
@@ -94,13 +96,6 @@ const Cart: React.FC<{}> = () => {
 
   const handleNotAllowed = (itemId: string) => {
     let notAllowedChangeAux = notAllowedChange;
-    items.forEach((it, i) => {
-      if (it.id === itemId) {
-        notAllowedChangeAux[i] = "not-allowed";
-      }
-    })
-    
-    setNotAllowedChange(notAllowedChangeAux.slice());
 
     items.forEach((it, i) => {
       if (it.id === itemId) {
@@ -108,9 +103,17 @@ const Cart: React.FC<{}> = () => {
       }
     })
 
+    setNotAllowedChange(notAllowedChangeAux.slice());
+
     setTimeout(() => {
+      items.forEach((it, i) => {
+        if (it.id === itemId) {
+          notAllowedChangeAux[i] = "not-allowed";
+        }
+      })
       setNotAllowedChange(notAllowedChangeAux.slice());
-    }, 2000)
+    },1)
+
   }
 
   const handleRefChange = (e: React.ChangeEvent<HTMLInputElement>, i: number) => {

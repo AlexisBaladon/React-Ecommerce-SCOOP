@@ -1,18 +1,22 @@
 import { Container, Nav, Navbar, Row } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 
+import { DatabaseContext } from '../../../context/databaseContext';
 import ItemDetail from "./itemDetail";
 import Loading from '../../loading/loading';
 import NotFound from "../../errors/error";
 
 import ItemShowcase from '../../../dataTypes/items/itemShowcase';
-import { getItem } from '../../../data/itemHandler';
 
 import './itemDetailContainer.css'
 
 const ItemDetailContainer: React.FC<{}> = () => {
   const { id } = useParams<{id?: string}>();
+
+  const databaseContext = useContext(DatabaseContext);
+  const { getItem } = databaseContext;
+
   const [item,setItem] = useState<ItemShowcase | null>(null);
   const [notFoundMessage, setNotFoundMessage] = useState<{title: string, description: string} | null>(null)
 
@@ -34,7 +38,7 @@ const ItemDetailContainer: React.FC<{}> = () => {
     });
     
     return () => {isMounted = false};
-  }, [id]);
+  }, [id, getItem]);
 
   return <>
     <div>

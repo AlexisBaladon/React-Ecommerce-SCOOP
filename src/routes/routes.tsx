@@ -23,23 +23,23 @@ const Routes = () => {
   const e404 = {title: "Error 404", description: "Página no encontrada."}
 
   return <div>
-      <BrowserRouter>
-        {/* Global modals */}
-        <Signup show={isRegisterOpened} onHide={closeRegisterModal} openLogin={openLoginModal} signup = {signup}/>
-        <Login  show={isLoginOpened}    onHide={closeLoginModal} login={login} openRegister={openRegisterModal} />
+    <BrowserRouter>
+      {/* Global modals */}
+      <Signup show={isRegisterOpened} onHide={closeRegisterModal} openLogin={openLoginModal} signup = {signup}/>
+      <Login  show={isLoginOpened}    onHide={closeLoginModal} login={login} openRegister={openRegisterModal} />
 
-        {/* Main app */}
-        {hasNavbar && <NavBar />}
-        <Switch>
-          <Route path="/"             element={<ItemListContainer                           /> } />
-          <Route path="/category/:id" element={<ItemListContainer                           /> } />
-          <Route path="/item/:id"     element={<ItemDetailContainer                         /> } />
-          <Route path="/cart"         element={<Cart                                        /> } />
-          <Route path="/history"      element={<PurchaseHistoryContainer                    /> } />
-          <Route path="*"             element={<Error {...e404} setHasNavbar={setHasNavbar} /> } />
-        </Switch>
-        <Footer />
-      </BrowserRouter>
+      {/* Main app */}
+      {hasNavbar && <NavBar />}
+      <Switch>
+        <Route path="/"             element={<ItemListContainer                           /> } />
+        <Route path="/category/:id" element={<ItemListContainer                           /> } />
+        <Route path="/item/:id"     element={<ItemDetailContainer                         /> } />
+        <Route path="/cart"         element={<Cart                                        /> } />
+        <Route path="/history"      element={<PurchaseHistoryContainer                    /> } />
+        <Route path="*"             element={<Error {...e404} setHasNavbar={setHasNavbar} /> } />
+      </Switch>
+      <Footer />
+    </BrowserRouter>
   </div>;
 }
 

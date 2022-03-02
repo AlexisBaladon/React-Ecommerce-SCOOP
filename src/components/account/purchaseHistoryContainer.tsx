@@ -2,18 +2,21 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Button, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import { DatabaseContext } from '../../context/databaseContext';
 import { SessionContext } from '../../context/sessionContext';
 import PurchaseHistory from './purchaseHistory';
 import Error from '../errors/error';
 import Loading from '../loading/loading';
 
-import { getOrdersByEmail } from '../../data/purchaseHandler';
 import Order from '../../dataTypes/purchase/order';
 
 import './purchaseHistoryContainer.css'
 
 const PurchaseHistoryContainer = () => {
+  const databaseContext = useContext(DatabaseContext);
   const sessionContext = useContext(SessionContext);
+  
+  const { getOrdersByEmail } = databaseContext;
   const { loggedUser } = sessionContext;
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -34,7 +37,7 @@ const PurchaseHistoryContainer = () => {
     }
   
     return () => {isMounted = true;}
-  }, [loggedUser])
+  }, [loggedUser, getOrdersByEmail])
   
 
   return <>

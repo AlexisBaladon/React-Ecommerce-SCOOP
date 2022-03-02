@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { DatabaseContext } from '../../../context/databaseContext';
 import ItemList from './itemList'
 import Loading from '../../loading/loading';
 import NotFound from '../../errors/error'
 
-import ItemShowcase from '../../../dataTypes/items/itemShowcase'
-import { getItems, getItemsByCategory } from '../../../data/itemHandler';
+import ItemShowcase from '../../../dataTypes/items/itemShowcase';
 import Category from '../../../dataTypes/items/category';
 
 import './itemListContainer.css';
 
 const ItemListContainer: React.FC<{}> = () => {
-  const [notFoundMessage, setNotFoundMessage] = useState<null | {title: string, description: string}>(null);
-
   const { id } = useParams<{id?: Category}>();
 
+  const databaseContext = useContext(DatabaseContext);
+  const { getItems, getItemsByCategory } = databaseContext;
+
   const [items,setItems] = useState<ItemShowcase[]>([]);
+  const [notFoundMessage, setNotFoundMessage] = useState<null | {title: string, description: string}>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -37,7 +39,7 @@ const ItemListContainer: React.FC<{}> = () => {
     })
     
     return () => {isMounted = false};
-  }, [id]);
+  }, [id, getItems, getItemsByCategory]);
   
   return <>
     {notFoundMessage?

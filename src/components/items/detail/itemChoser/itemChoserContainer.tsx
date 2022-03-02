@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 
 import ItemChooser from './itemChoser'
 
-import { getFlavors, getNumberOfFlavors } from '../../../../data/flavorHandler';
 import Flavor from '../../../../dataTypes/items/flavor';
 import ProductDetail from '../../../../dataTypes/items/ProductDetail';
 import ProductDetailRecipiente from '../../../../dataTypes/items/ProductDetailRecipiente';
+import { DatabaseContext } from '../../../../context/databaseContext';
 
 interface IProps {
   id: string;
@@ -13,6 +13,9 @@ interface IProps {
 }
 
 const ItemChoserContainer: React.FC<IProps> = ({id, setProductDetail}) => {
+  const databaseContext = useContext(DatabaseContext);
+  const { getFlavors, getNumberOfFlavors } = databaseContext;
+
   const [flavors, setFlavors] = useState<Flavor[]>([]);
   const [selectedFlavors, setSelectedFlavors] = useState<Flavor[]>([]);
   const [numberOfFlavors, setNumberOfFlavors] = useState<number>(0);
@@ -39,7 +42,7 @@ const ItemChoserContainer: React.FC<IProps> = ({id, setProductDetail}) => {
     }
     
     return () => {isMounted = false}
-  }, [id])
+  }, [id, getFlavors, getNumberOfFlavors])
 
   useEffect(() => {
     setProductDetail(new ProductDetailRecipiente(selectedFlavors.slice()));
