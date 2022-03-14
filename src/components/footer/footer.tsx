@@ -12,8 +12,8 @@ const Footer = () => {
   const widgetColor = "white";
 
   return <>
-    <div id="footer" className="font-small pt-4 mt-4">
-      <Container fluid className="text-center text-md-left">
+    <div id="footer" className="font-small pt-4">
+      <Container fluid className="text-center text-md-left pt-4">
         <Row>
           <Col md="6">
             <h3>Acerca de Scoop</h3>
