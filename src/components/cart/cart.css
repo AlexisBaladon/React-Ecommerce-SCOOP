@@ -246,8 +246,8 @@
   }
 
   .img-item-cart {
-    height: 100% !important;
-    width: 26vw !important;
+    max-height: 21vw !important;
+    min-width: 22vw !important;
   }
 
   .item-title-cart {
