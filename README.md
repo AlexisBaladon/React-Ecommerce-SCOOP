@@ -65,6 +65,6 @@ Dentro de React, son utilizadas las siguientes librerías:
 
 - [[React-Bootrstrap]](https://react-bootstrap.github.io/) - Librería de React utilizada para facilitar componentes prediseñados.
 - [[React-Router-Dom]](https://v5.reactrouter.com/web/api/Redirect) - Fundamental para la selección de vistas de la aplicación sin necesidad de recargar la página.
-- [[Typescript]](https://www.typescriptlang.org/docs/handbook/react.html) - Utilizada para hacer posible el uso de typescript dentro del framework, además de servir como aprendizaje durante la realización del proyecto.
+- [[Typescript]](https://www.typescriptlang.org/docs/handbook/react.html) - Utilizada para hacer posible el uso de typescript dentro de la librería, además de servir como aprendizaje durante la realización del proyecto.
 - [[Firebase]](https://firebaseopensource.com/projects/rakannimer/react-firebase/) - Utilizada para comunicar la base de datos con React. Además, facilita la implementación del sistema de autenticación.
 - [[PDF-Lib]](https://pdf-lib.js.org/) - Utilizado para generar los recibos de compras. No es una librería indispensable, aunque se usa con el fin de darle un toque creativo a la página.
